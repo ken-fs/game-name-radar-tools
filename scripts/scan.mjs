@@ -8,6 +8,7 @@ import { verifyGameKeyword, cleanGameName, estimateNameRisk } from '../lib/seo-v
 import { verifyTrendDemand } from '../lib/trend-verifier.mjs';
 import { calculateFastSignals, verifyYoutubeSignals, FAST_MODEL_VERSION } from '../lib/fast-signals.mjs';
 import { applyFinalRecommendation } from '../lib/opportunity-finalizer.mjs';
+import { steamGate } from '../lib/steam-gate.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourcesPath=path.join(root,'config','sources.json');
@@ -269,6 +270,25 @@ for(const candidate of verifyQueue){
   await sleep(850);
 }
 
+// Steam 闸门（2026-09-25）：Steam 来源的候选额外跑工具需求 + wiki 覆盖检查
+const STEAM_GATE_LIMIT=Math.max(0,Math.min(12,Number(process.env.STEAM_GATE_LIMIT??6)));
+const steamQueue=candidates.filter(c=>{
+  const kinds=new Set((c.sources||[]).map(s=>s.kind));
+  return kinds.has('steam-popular-new')||kinds.has('steam-new')||kinds.has('steam-top-wishlist');
+}).filter(c=>!c.steamGate||Date.parse(c.steamGate.checkedAt||0)<now-7*86400000)
+  .sort((a,b)=>(b.fast?.score||0)-(a.fast?.score||0)).slice(0,STEAM_GATE_LIMIT);
+let steamGateRan=0;
+for(const candidate of steamQueue){
+  try{
+    console.log(`Steam gate: ${candidate.gameName}`);
+    candidate.steamGate=await steamGate(candidate.gameName);
+    steamGateRan+=1;
+  }catch(error){
+    candidate.steamGate={checkedAt:new Date().toISOString(),verdict:'error',error:String(error.message).slice(0,80)};
+  }
+  await sleep(1200);
+}
+
 for(const candidate of candidates){
   if(!candidate.seo)candidate.seo={modelVersion:SEO_MODEL_VERSION,status:'pending',classification:'pending',score:0,reasons:['等待自动搜索意图验证']};
   if(hasCurrentSeo(candidate)&&['independent','page','reject','watch'].includes(candidate.seo.classification))candidate.fast=calculateFastSignals(candidate,previousFastById.get(candidate.id)||{});
@@ -332,5 +352,5 @@ const globalRisingCount=candidates.filter(candidate=>['rising','breakout'].inclu
 radarState.lastScan=now;
 await fs.writeFile(statePath,JSON.stringify(radarState,null,2)+'\n');
 await fs.writeFile(candidatesPath,JSON.stringify({updatedAt:now,candidates},null,2)+'\n');
-await fs.writeFile(reportPath,JSON.stringify({scannedAt:now,targetMarket:TARGET_MARKET,primaryMarket:'US',referenceMarket:'WORLDWIDE',totalAdded,sources:logs,seoVerified,seoErrors,fastModelVersion:FAST_MODEL_VERSION,fastPassedCount,fastWatchCount,fastRejectedCount,youtubeEnabled:Boolean(YOUTUBE_API_KEY),youtubeConfigured:Boolean(YOUTUBE_API_KEY),youtubeVerified,youtubeErrors,trendsVerified,trendErrors,trendBatchRan,trendQueueSize,risingDiscoveryRan,seoModelVersion:SEO_MODEL_VERSION,trendModelVersion:TREND_MODEL_VERSION,seoPassedCount,trendEligibleCount,trendPendingCount,trendValidatedCount,risingCount,globalRisingCount,recommendationCounts},null,2)+'\n');
+await fs.writeFile(reportPath,JSON.stringify({scannedAt:now,targetMarket:TARGET_MARKET,primaryMarket:'US',referenceMarket:'WORLDWIDE',totalAdded,sources:logs,seoVerified,seoErrors,fastModelVersion:FAST_MODEL_VERSION,fastPassedCount,fastWatchCount,fastRejectedCount,youtubeEnabled:Boolean(YOUTUBE_API_KEY),youtubeConfigured:Boolean(YOUTUBE_API_KEY),youtubeVerified,youtubeErrors,trendsVerified,trendErrors,trendBatchRan,trendQueueSize,risingDiscoveryRan,seoModelVersion:SEO_MODEL_VERSION,trendModelVersion:TREND_MODEL_VERSION,seoPassedCount,trendEligibleCount,trendPendingCount,trendValidatedCount,risingCount,globalRisingCount,recommendationCounts,steamGateRan},null,2)+'\n');
 console.log(`Scan complete. Market ${TARGET_MARKET}; YouTube ${YOUTUBE_API_KEY?'enabled':'disabled'}; ${totalAdded} names added; ${seoVerified} SEO checks; ${fastPassedCount} fast-pass; ${trendsVerified} Trends checks; ${trendPendingCount} trend candidates pending.`);
