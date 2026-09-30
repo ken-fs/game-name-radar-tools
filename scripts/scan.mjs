@@ -9,6 +9,7 @@ import { verifyTrendDemand } from '../lib/trend-verifier.mjs';
 import { calculateFastSignals, verifyYoutubeSignals, FAST_MODEL_VERSION } from '../lib/fast-signals.mjs';
 import { applyFinalRecommendation } from '../lib/opportunity-finalizer.mjs';
 import { steamGate } from '../lib/steam-gate.mjs';
+import { investScore, appIdFromCandidate, renderInvestReport, VERDICT_LABEL } from '../lib/invest-score.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourcesPath=path.join(root,'config','sources.json');
@@ -98,6 +99,7 @@ function dedupeCandidates(items){
     if(!existing.wikiPrelaunch&&item.wikiPrelaunch)existing.wikiPrelaunch=item.wikiPrelaunch;
     if(!existing.marketFreshness&&item.marketFreshness)existing.marketFreshness=item.marketFreshness;
     if(!existing.opportunity&&item.opportunity)existing.opportunity=item.opportunity;
+    if(!existing.invest&&item.invest)existing.invest=item.invest;
   }
   return [...map.values()];
 }
@@ -293,6 +295,34 @@ for(const candidate of steamQueue){
   await sleep(1200);
 }
 
+// 投入价值评分（2026-09-30）：Steam 候选的「值不值得做 + 能不能靠广告赚钱」，零搜索额度
+// 复查节奏：没评过的优先；🟢/🔔/🟡 每 20h 复查（累积 CCU 样本算衰减）；❌ 7 天一次
+const INVEST_LIMIT=Math.max(0,Math.min(40,Number(process.env.INVEST_LIMIT??15)));
+const investDue=c=>{
+  if(!c.invest)return true;
+  const age=Date.now()-Date.parse(c.invest.checkedAt||0);
+  return c.invest.verdict==='skip'?age>7*86400000:age>20*3600000;
+};
+const investQueue=candidates.filter(c=>(c.sources||[]).some(s=>STEAM_SOURCE_KINDS.has(s.kind))&&appIdFromCandidate(c)&&investDue(c))
+  .sort((a,b)=>Number(Boolean(a.invest))-Number(Boolean(b.invest))||Date.parse(a.invest?.checkedAt||0)-Date.parse(b.invest?.checkedAt||0))
+  .slice(0,INVEST_LIMIT);
+let investRan=0;
+for(const candidate of investQueue){
+  try{
+    const r=await investScore(candidate.gameName,appIdFromCandidate(candidate),candidate.invest||{});
+    const {facts,...rest}=r;
+    candidate.invest={...rest,releaseDate:facts.releaseDate,ccu:facts.ccu,longTail:facts.longTail.slice(0,10)};
+    console.log(`Invest: ${candidate.gameName} → ${VERDICT_LABEL[r.verdict]} ${r.score}`);
+    investRan+=1;
+  }catch(error){console.error(`Invest failed: ${candidate.gameName}: ${error.message}`)}
+  await sleep(800);
+}
+const investRows=candidates.filter(c=>c.invest&&Date.now()-Date.parse(c.invest.checkedAt||0)<7*86400000).map(c=>({game:c.gameName,...c.invest}));
+if(investRows.length){
+  const date=now.slice(0,10);
+  await fs.writeFile(path.join(root,'..',`RADAR-INVEST-${date}.md`),renderInvestReport(investRows,date));
+}
+
 for(const candidate of candidates){
   if(!candidate.seo)candidate.seo={modelVersion:SEO_MODEL_VERSION,status:'pending',classification:'pending',score:0,reasons:['等待自动搜索意图验证']};
   if(hasCurrentSeo(candidate)&&['independent','page','reject','watch'].includes(candidate.seo.classification))candidate.fast=calculateFastSignals(candidate,previousFastById.get(candidate.id)||{});
@@ -365,5 +395,5 @@ const globalRisingCount=candidates.filter(candidate=>['rising','breakout'].inclu
 radarState.lastScan=now;
 await fs.writeFile(statePath,JSON.stringify(radarState,null,2)+'\n');
 await fs.writeFile(candidatesPath,JSON.stringify({updatedAt:now,candidates},null,2)+'\n');
-await fs.writeFile(reportPath,JSON.stringify({scannedAt:now,targetMarket:TARGET_MARKET,primaryMarket:'US',referenceMarket:'WORLDWIDE',totalAdded,sources:logs,seoVerified,seoErrors,fastModelVersion:FAST_MODEL_VERSION,fastPassedCount,fastWatchCount,fastRejectedCount,youtubeEnabled:Boolean(YOUTUBE_API_KEY),youtubeConfigured:Boolean(YOUTUBE_API_KEY),youtubeVerified,youtubeErrors,trendsVerified,trendErrors,trendBatchRan,trendQueueSize,risingDiscoveryRan,seoModelVersion:SEO_MODEL_VERSION,trendModelVersion:TREND_MODEL_VERSION,seoPassedCount,trendEligibleCount,trendPendingCount,trendValidatedCount,risingCount,globalRisingCount,recommendationCounts,steamGateRan},null,2)+'\n');
+await fs.writeFile(reportPath,JSON.stringify({scannedAt:now,targetMarket:TARGET_MARKET,primaryMarket:'US',referenceMarket:'WORLDWIDE',totalAdded,sources:logs,seoVerified,seoErrors,fastModelVersion:FAST_MODEL_VERSION,fastPassedCount,fastWatchCount,fastRejectedCount,youtubeEnabled:Boolean(YOUTUBE_API_KEY),youtubeConfigured:Boolean(YOUTUBE_API_KEY),youtubeVerified,youtubeErrors,trendsVerified,trendErrors,trendBatchRan,trendQueueSize,risingDiscoveryRan,seoModelVersion:SEO_MODEL_VERSION,trendModelVersion:TREND_MODEL_VERSION,seoPassedCount,trendEligibleCount,trendPendingCount,trendValidatedCount,risingCount,globalRisingCount,recommendationCounts,steamGateRan,investRan,investCounts:Object.fromEntries(['go','prelaunch','watch','skip'].map(v=>[v,investRows.filter(r=>r.verdict===v).length]))},null,2)+'\n');
 console.log(`Scan complete. Market ${TARGET_MARKET}; YouTube ${YOUTUBE_API_KEY?'enabled':'disabled'}; ${totalAdded} names added; ${seoVerified} SEO checks; ${fastPassedCount} fast-pass; ${trendsVerified} Trends checks; ${trendPendingCount} trend candidates pending.`);
