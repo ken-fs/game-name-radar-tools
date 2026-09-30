@@ -31,6 +31,7 @@ const TREND_MODEL_VERSION=4;
 const sleep=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
 
 async function readJson(file,fallback){try{return JSON.parse(await fs.readFile(file,'utf8'))}catch{return fallback}}
+const STEAM_SOURCE_KINDS=new Set(['steam-top-wishlist','steam-popular-new','steam-new']);
 function sourceKinds(candidate){return new Set((candidate.sources||[]).map(source=>source.kind))}
 function hasCurrentSeo(candidate){return candidate.seo?.modelVersion===SEO_MODEL_VERSION}
 
@@ -40,6 +41,9 @@ function updateDiscovery(candidate){
   if(kinds.has('trends-rising-7d'))score+=8;
   if(kinds.has('trends-rising-30d'))score+=6;
   if(kinds.has('steam-popular-new'))score+=4;
+  // 心愿单榜 = 发售前抢 wiki 位的唯一信号源；不加分会排在 itch 的上千条 pending 后面被 3000 上限截掉
+  if(kinds.has('steam-top-wishlist'))score+=6;
+  if(kinds.has('steam-new'))score+=2;
   if(kinds.has('itch-jam-popular'))score+=4;
   if(kinds.has('itch-jam-new'))score+=2;
   if(kinds.has('newgrounds-top'))score+=2;
@@ -275,7 +279,7 @@ const STEAM_GATE_LIMIT=Math.max(0,Math.min(12,Number(process.env.STEAM_GATE_LIMI
 const steamQueue=candidates.filter(c=>{
   const kinds=new Set((c.sources||[]).map(s=>s.kind));
   return kinds.has('steam-popular-new')||kinds.has('steam-new')||kinds.has('steam-top-wishlist');
-}).filter(c=>!c.steamGate||Date.parse(c.steamGate.checkedAt||0)<now-7*86400000)
+}).filter(c=>!c.steamGate||Date.parse(c.steamGate.checkedAt||0)<Date.now()-7*86400000)
   .sort((a,b)=>(b.fast?.score||0)-(a.fast?.score||0)).slice(0,STEAM_GATE_LIMIT);
 let steamGateRan=0;
 for(const candidate of steamQueue){
@@ -336,7 +340,16 @@ for(const candidate of candidates){
 }
 
 candidates.sort((a,b)=>recommendationRank(b)-recommendationRank(a)||(b.finalScore||0)-(a.finalScore||0)||(b.fast?.score||0)-(a.fast?.score||0)||(b.trend?.score||0)-(a.trend?.score||0)||(b.seo?.score||0)-(a.seo?.score||0)||(b.discoveryScore||0)-(a.discoveryScore||0)||Date.parse(b.firstSeen)-Date.parse(a.firstSeen));
-if(candidates.length>3000)candidates.length=3000;
+// Steam 源每轮只有几十条，全局排序截断时会被 itch 的上千条 pending 挤光
+// （2026-09-30：心愿单榜 49 个只剩 2 个，Nivalis Nights 从没进过候选池）→ Steam 候选按最近出现保底留位
+const CANDIDATE_CAP=3000,STEAM_RESERVE=600;
+if(candidates.length>CANDIDATE_CAP){
+  const reserved=candidates.filter(c=>(c.sources||[]).some(s=>STEAM_SOURCE_KINDS.has(s.kind)))
+    .sort((a,b)=>Date.parse(b.lastSeen||0)-Date.parse(a.lastSeen||0)).slice(0,STEAM_RESERVE);
+  const keep=new Set(reserved);
+  for(const c of candidates){if(keep.size>=CANDIDATE_CAP)break;keep.add(c)}
+  candidates=candidates.filter(c=>keep.has(c));
+}
 
 const recommendationCounts={independent:0,'test-now':0,page:0,watch:0,reject:0,pending:0,error:0};
 for(const candidate of candidates)recommendationCounts[candidate.recommendation||'pending']=(recommendationCounts[candidate.recommendation||'pending']||0)+1;
