@@ -10,6 +10,7 @@ import { calculateFastSignals, verifyYoutubeSignals, FAST_MODEL_VERSION } from '
 import { applyFinalRecommendation } from '../lib/opportunity-finalizer.mjs';
 import { steamGate } from '../lib/steam-gate.mjs';
 import { investScore, appIdFromCandidate, renderInvestReport, VERDICT_LABEL } from '../lib/invest-score.mjs';
+import { runMemeWatch } from '../lib/meme-game-watch.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourcesPath=path.join(root,'config','sources.json');
@@ -323,6 +324,14 @@ if(investRows.length){
   await fs.writeFile(path.join(root,'..',`RADAR-INVEST-${date}.md`),renderInvestReport(investRows,date));
 }
 
+// 梗游戏雷达（2026-10-02）：「<梗名> game」联想冒头 → 换皮游戏站窗口；独立状态，失败不影响主管线
+let memeAlerts=[];
+try{
+  const meme=await runMemeWatch();
+  memeAlerts=meme.alerts.map(r=>r.name);
+  console.log(`Meme watch: ${meme.rows.length} tracked, ${memeAlerts.length} alert${memeAlerts.length?` → ${memeAlerts.join(' / ')}`:''}${meme.errors.length?`; feed errors: ${meme.errors.join('; ')}`:''}`);
+}catch(error){console.error(`Meme watch failed: ${error.message}`)}
+
 for(const candidate of candidates){
   if(!candidate.seo)candidate.seo={modelVersion:SEO_MODEL_VERSION,status:'pending',classification:'pending',score:0,reasons:['等待自动搜索意图验证']};
   if(hasCurrentSeo(candidate)&&['independent','page','reject','watch'].includes(candidate.seo.classification))candidate.fast=calculateFastSignals(candidate,previousFastById.get(candidate.id)||{});
@@ -395,5 +404,5 @@ const globalRisingCount=candidates.filter(candidate=>['rising','breakout'].inclu
 radarState.lastScan=now;
 await fs.writeFile(statePath,JSON.stringify(radarState,null,2)+'\n');
 await fs.writeFile(candidatesPath,JSON.stringify({updatedAt:now,candidates},null,2)+'\n');
-await fs.writeFile(reportPath,JSON.stringify({scannedAt:now,targetMarket:TARGET_MARKET,primaryMarket:'US',referenceMarket:'WORLDWIDE',totalAdded,sources:logs,seoVerified,seoErrors,fastModelVersion:FAST_MODEL_VERSION,fastPassedCount,fastWatchCount,fastRejectedCount,youtubeEnabled:Boolean(YOUTUBE_API_KEY),youtubeConfigured:Boolean(YOUTUBE_API_KEY),youtubeVerified,youtubeErrors,trendsVerified,trendErrors,trendBatchRan,trendQueueSize,risingDiscoveryRan,seoModelVersion:SEO_MODEL_VERSION,trendModelVersion:TREND_MODEL_VERSION,seoPassedCount,trendEligibleCount,trendPendingCount,trendValidatedCount,risingCount,globalRisingCount,recommendationCounts,steamGateRan,investRan,investCounts:Object.fromEntries(['go','prelaunch','watch','skip'].map(v=>[v,investRows.filter(r=>r.verdict===v).length]))},null,2)+'\n');
+await fs.writeFile(reportPath,JSON.stringify({scannedAt:now,targetMarket:TARGET_MARKET,primaryMarket:'US',referenceMarket:'WORLDWIDE',totalAdded,sources:logs,seoVerified,seoErrors,fastModelVersion:FAST_MODEL_VERSION,fastPassedCount,fastWatchCount,fastRejectedCount,youtubeEnabled:Boolean(YOUTUBE_API_KEY),youtubeConfigured:Boolean(YOUTUBE_API_KEY),youtubeVerified,youtubeErrors,trendsVerified,trendErrors,trendBatchRan,trendQueueSize,risingDiscoveryRan,seoModelVersion:SEO_MODEL_VERSION,trendModelVersion:TREND_MODEL_VERSION,seoPassedCount,trendEligibleCount,trendPendingCount,trendValidatedCount,risingCount,globalRisingCount,recommendationCounts,steamGateRan,investRan,memeAlerts,investCounts:Object.fromEntries(['go','prelaunch','watch','skip'].map(v=>[v,investRows.filter(r=>r.verdict===v).length]))},null,2)+'\n');
 console.log(`Scan complete. Market ${TARGET_MARKET}; YouTube ${YOUTUBE_API_KEY?'enabled':'disabled'}; ${totalAdded} names added; ${seoVerified} SEO checks; ${fastPassedCount} fast-pass; ${trendsVerified} Trends checks; ${trendPendingCount} trend candidates pending.`);

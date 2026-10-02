@@ -8,3 +8,4 @@ node_modules
 
 # 工具自动生成的缓存（每次扫描重写），不进 git
 data/yt-mismatch-cache.json
+data/meme-watch-state.json
