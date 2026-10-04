@@ -299,7 +299,11 @@ for(const candidate of steamQueue){
 
 // 投入价值评分（2026-09-30）：Steam 候选的「值不值得做 + 能不能靠广告赚钱」，零搜索额度
 // 复查节奏：没评过的优先；🟢/🔔/🟡 每 20h 复查（累积 CCU 样本算衰减）；❌ 7 天一次
-const INVEST_LIMIT=Math.max(0,Math.min(40,Number(process.env.INVEST_LIMIT??15)));
+// 断网保护（2026-10-04）：08:30 代理恰好死了 → 直连够不到 Google，梗/可玩雷达几百次请求逐个 12s 超时卡了 7 小时，
+// 投入价值全算成「❌ 26」假分。够不到 Google 就跳过这三步（不写假数据），下次再跑
+const googleReachable=await fetch('https://suggestqueries.google.com/complete/search?client=firefox&q=game',{signal:AbortSignal.timeout(10000)}).then(r=>r.ok).catch(()=>false);
+if(!googleReachable)console.error('Google unreachable (proxy dead?) → skip invest / meme / playable this run');
+const INVEST_LIMIT=googleReachable?Math.max(0,Math.min(40,Number(process.env.INVEST_LIMIT??15))):0;
 const investDue=c=>{
   if(!c.invest)return true;
   const age=Date.now()-Date.parse(c.invest.checkedAt||0);
@@ -327,7 +331,7 @@ if(investRows.length){
 
 // 梗游戏雷达（2026-10-02）：「<梗名> game」联想冒头 → 换皮游戏站窗口；独立状态，失败不影响主管线
 let memeAlerts=[];
-try{
+if(googleReachable)try{
   const meme=await runMemeWatch();
   memeAlerts=meme.alerts.map(r=>r.name);
   console.log(`Meme watch: ${meme.rows.length} tracked, ${memeAlerts.length} alert${memeAlerts.length?` → ${memeAlerts.join(' / ')}`:''}${meme.errors.length?`; feed errors: ${meme.errors.join('; ')}`:''}`);
@@ -335,7 +339,7 @@ try{
 
 // 可玩游戏雷达（2026-10-02）：玩家正在搜的可玩游戏起量 + 梗×玩法配对（读上面梗雷达的状态）；失败不影响主管线
 let playableAlerts=[];
-try{
+if(googleReachable)try{
   const playable=await runPlayableWatch();
   playableAlerts=playable.alerts.map(r=>r.name);
   console.log(`Playable watch: ${playable.discovered} found, ${playable.rows.length} checked, ${playableAlerts.length} new go${playableAlerts.length?` → ${playableAlerts.join(' / ')}`:''}; ${playable.openPairs.length} open meme pairs${playable.errors.length?`; errors: ${playable.errors.join('; ')}`:''}`);
