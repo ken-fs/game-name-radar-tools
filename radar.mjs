@@ -86,7 +86,7 @@ export function parseDemand(text) {
   for (const line of text.split("\n")) {
     const head = line.match(/^── (.+)$/);
     if (head) {
-      current = { name: head[1].trim(), verdict: "", reason: "", trend: "", sub: "" };
+      current = { name: head[1].trim(), verdict: "", reason: "", trend: "", magnitude: "", sub: "" };
       out.push(current);
       continue;
     }
@@ -97,8 +97,11 @@ export function parseDemand(text) {
       current.verdict = verdict[1].trim() === "放弃" ? "❌ 放弃" : verdict[1].trim();
       current.reason = verdict[2].trim();
     }
-    const trend = line.match(/Trends\(codes\):\s*(.+)$/);
-    if (trend) current.trend = trend[1].trim();
+    const trend = line.match(/Trends\((codes|wiki)\):\s*(.+)$/);
+    if (trend) current.trend = trend[2].trim();
+    // 量级（相对自家锚点站）：报告里不显示它，读者无法分辨「零量词 rising」和「真需求」
+    const mag = line.match(/量级:\s*(.+)$/);
+    if (mag) current.magnitude = mag[1].trim().replace(/^近期约锚点\(([^)]+)\)的\s*/, "vs $1：");
     const sub = line.match(/子关键词:\s*(.+)$/);
     if (sub) current.sub = sub[1].trim().slice(0, 120);
   }
@@ -201,11 +204,11 @@ async function daily() {
     lines.push("（本次用了 --skip-roblox，没跑 Roblox 层）", "");
   } else {
     if (roblox.errors.length) lines.push(...roblox.errors.map((e) => `> ${e}`), "");
-    lines.push("**需求验证**（成长期 + 错配里挑的前几名；Trends 曲线 + 攻略子词）：", "");
+    lines.push("**需求验证**（成长期 + 错配里挑的前几名；Trends 曲线 + 量级 + 攻略子词）：", "");
     lines.push(
       ...table(
-        "| 判决 | 游戏 | Trends | 子关键词 |",
-        roblox.demand.map((d) => `| ${d.verdict || "?"} | ${d.name} | ${d.trend} | ${d.sub} |`),
+        "| 判决 | 游戏 | Trends | 量级（vs 锚点） | 子关键词 |",
+        roblox.demand.map((d) => `| ${d.verdict || "?"} | ${d.name} | ${d.trend} | ${d.magnitude || "-"} | ${d.sub} |`),
       ),
       "",
       "**YouTube 错配**（创作者跑得比玩家快）：",
