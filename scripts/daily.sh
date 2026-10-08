@@ -61,15 +61,20 @@ echo "网络就绪（$net_ok）"
 # 2. 主管线（Steam / itch / HTML5 / Trends / 投入价值 / 梗 / 可玩）
 "$NODE" --env-file-if-exists=.env scripts/scan.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 
-# 3. 判断是不是真成功：信息源至少七成成功，而且梗 / 可玩两份当天报告都生成了（它们依赖 Google 可达）
+# 3. 判断是不是真成功：核心发现源（Steam / itch / 门户 / Newgrounds）至少七成成功，而且梗 / 可玩两份
+#    当天报告都生成了。Trends「上升词」源不算进成败：它们被 Google 按 IP 限流时一失败就重试，
+#    只会越刷越被限（10-08 实测），所以只记警告。
 verdict=$("$NODE" -e '
 const fs=require("fs");const today=process.argv[1];
 const r=JSON.parse(fs.readFileSync("data/latest-report.json","utf8"));
 const fresh=(Date.now()-Date.parse(r.scannedAt))<3*3600e3;
-const src=r.sources||[];const ok=src.filter(s=>s.ok).length;
+const src=r.sources||[];const isTrends=s=>String(s.sourceId||"").startsWith("trends-");
+const core=src.filter(s=>!isTrends(s)),trends=src.filter(isTrends);
+const ok=core.filter(s=>s.ok).length,tOk=trends.filter(s=>s.ok).length;
 const meme=fs.existsSync(`../RADAR-MEME-${today}.md`),playable=fs.existsSync(`../RADAR-PLAYABLE-${today}.md`);
-const pass=fresh&&src.length>0&&ok/src.length>=0.7&&meme&&playable;
-console.log(`${pass?"OK":"FAIL"} 信息源 ${ok}/${src.length} · 梗报告 ${meme?"有":"无"} · 可玩报告 ${playable?"有":"无"} · 本次扫描 ${fresh?"新":"旧"}`);
+const pass=fresh&&core.length>0&&ok/core.length>=0.7&&meme&&playable;
+const warn=trends.length&&tOk<trends.length?` · ⚠️ Trends 上升词源 ${tOk}/${trends.length}（多半是被 Google 限流，不重试）`:"";
+console.log(`${pass?"OK":"FAIL"} 核心信息源 ${ok}/${core.length} · 梗报告 ${meme?"有":"无"} · 可玩报告 ${playable?"有":"无"} · 本次扫描 ${fresh?"新":"旧"}${warn}`);
 ' "$TODAY")
 echo "$verdict"
 
