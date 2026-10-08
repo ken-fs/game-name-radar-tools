@@ -133,7 +133,8 @@
     "url": "https://www.gamepix.com/new",
     "kind": "gamepix-new",
     "fetchKind": "gamepix-listing",
-    "enabled": true,
+    "enabled": false,
+    "disabledReason": "2026-10-04 起每天 403（直连和代理都是，Cloudflare 拦机器请求）；新游戏由 CrazyGames / Poki / Y8 覆盖",
     "baselineOnly": false
   },
   {

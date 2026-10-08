@@ -301,7 +301,13 @@ for(const candidate of steamQueue){
 // 复查节奏：没评过的优先；🟢/🔔/🟡 每 20h 复查（累积 CCU 样本算衰减）；❌ 7 天一次
 // 断网保护（2026-10-04）：08:30 代理恰好死了 → 直连够不到 Google，梗/可玩雷达几百次请求逐个 12s 超时卡了 7 小时，
 // 投入价值全算成「❌ 26」假分。够不到 Google 就跳过这三步（不写假数据），下次再跑
-const googleReachable=await fetch('https://suggestqueries.google.com/complete/search?client=firefox&q=game',{signal:AbortSignal.timeout(10000)}).then(r=>r.ok).catch(()=>false);
+// 只测一次很容易误判（2026-10-08：唤醒后代理还没连上，一次 10 秒超时就把投入价值 / 梗 / 可玩三个子雷达全跳过了），重试 3 次
+const probeGoogle=()=>fetch('https://suggestqueries.google.com/complete/search?client=firefox&q=game',{signal:AbortSignal.timeout(15000)}).then(r=>r.ok).catch(()=>false);
+let googleReachable=false;
+for(let attempt=0;attempt<3&&!googleReachable;attempt+=1){
+  googleReachable=await probeGoogle();
+  if(!googleReachable&&attempt<2)await new Promise(r=>setTimeout(r,20000));
+}
 if(!googleReachable)console.error('Google unreachable (proxy dead?) → skip invest / meme / playable this run');
 const INVEST_LIMIT=googleReachable?Math.max(0,Math.min(40,Number(process.env.INVEST_LIMIT??15))):0;
 const investDue=c=>{
