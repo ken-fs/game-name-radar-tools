@@ -8,6 +8,7 @@ test("cleanRobloxName strips update tags and emoji", () => {
   assert.equal(cleanRobloxName("🎃 [HALLOWEEN EVENT] FNaF World Multiplaye"), "FNaF World Multiplaye");
   assert.equal(cleanRobloxName("Anime Zero [FLAME DIRECTOR] 🔥👻"), "Anime Zero");
   assert.equal(cleanRobloxName("Run a Sari-Sari Store!"), "Run a Sari-Sari Store");
+  assert.equal(cleanRobloxName("+1 Assassin Leveling"), "Assassin Leveling");
 });
 
 test("parseGrowth reads the growth-scan table", () => {

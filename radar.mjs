@@ -49,10 +49,11 @@ function run(file, argv = [], timeoutMs = 30 * 60_000) {
   });
 }
 
-/** Roblox 名字去掉 [UPDATE] / 🎃 这类装饰，留给 Trends 和 SERP 用。 */
+/** Roblox 名字去掉 [UPDATE] / 🎃 / 开头「+1」这类装饰，留给 Trends 和 SERP 用（玩家搜的是「assassin leveling codes」）。 */
 export function cleanRobloxName(name) {
   return name
     .replace(/\[[^\]]*\]|\([^)]*\)|【[^】]*】/g, " ")
+    .replace(/^\s*\+\d+\s+/, " ")
     .replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu, " ")
     .replace(/\s+/g, " ")
     .replace(/[!?.:,]+$/g, "")
@@ -268,10 +269,12 @@ async function onRoblox(name) {
     `https://apis.roblox.com/search-api/omni-search?searchQuery=${encodeURIComponent(name)}&sessionId=radar&pageType=all`,
   );
   const games = (d?.searchResults ?? []).flatMap((g) => g.contents ?? []).filter((c) => c.contentType === "Game");
-  // 只认名字对得上的：完全一致，或以查询词开头且有一定在线（防「Dressmaker」匹到 11 人在线的同名小游戏）
+  // 只认名字对得上的：完全一致，或包含查询词且有一定在线（防「Dressmaker」匹到 11 人在线的同名小游戏）。
+  // 用包含不用开头：真名常带「+1 / Upd / 🔥」前缀，「Assassin Leveling」要能匹到「+1 Assassin Leveling」
+  const q = norm(cleanRobloxName(name));
   const hit = games.find((g) => {
     const n = norm(cleanRobloxName(g.name ?? ""));
-    return n === norm(name) || (n.startsWith(norm(name)) && (g.playerCount ?? 0) >= 300);
+    return n === q || (n.includes(q) && (g.playerCount ?? 0) >= 300);
   });
   return hit ? { name: cleanRobloxName(hit.name), playing: hit.playerCount ?? 0, universeId: hit.universeId } : null;
 }
