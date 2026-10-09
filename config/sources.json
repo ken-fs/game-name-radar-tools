@@ -79,6 +79,7 @@
     "url": "https://store.steampowered.com/search/?sort_by=Released_DESC&tags=492&category1=998&ndl=1",
     "kind": "steam-new",
     "fetchKind": "steam-listing",
+    "pages": 3,
     "enabled": true,
     "baselineOnly": false
   },
