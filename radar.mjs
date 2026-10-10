@@ -20,7 +20,7 @@
  *
  *   node radar.mjs --skip-roblox      # 只汇总当天已有报告（Roblox 层慢，约 5–15 分钟）
  */
-import { execFile } from "node:child_process";
+import { execFile, execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -47,6 +47,16 @@ function run(file, argv = [], timeoutMs = 30 * 60_000) {
       },
     );
   });
+}
+
+/** 通知中心推送：daily.sh 成功路径设 RADAR_NOTIFY=1 才发，手动跑不打扰。 */
+function notify(title, body, sound = "Glass") {
+  const esc = (s) => String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"').slice(0, 400);
+  try {
+    execFileSync("osascript", ["-e", `display notification "${esc(body)}" with title "${esc(title)}" sound name "${sound}"`]);
+  } catch {
+    /* 通知失败不影响主流程 */
+  }
 }
 
 /** Roblox 名字去掉 [UPDATE] / 🎃 / 开头「+1」这类装饰，留给 Trends 和 SERP 用（玩家搜的是「assassin leveling codes」）。 */
@@ -242,6 +252,16 @@ async function daily() {
   writeFileSync(out, `${lines.join("\n")}\n`);
   console.log(`✓ ${out}`);
   console.log(headline.length ? headline.join("\n") : "今天没有达到「值得投入」线的候选。");
+
+  // 每日成功跑完推一次「今天最值得看」（008-10-10 复盘：GO 只写进报告文件没人看，
+  // 用户 10-08 的 GO 到 10-10 才知道）。失败重试由 daily.sh 管，这里只管内容推送。
+  if (process.env.RADAR_NOTIFY === "1" && headline.length) {
+    const plain = headline
+      .map((h) => h.replace(/\*\*/g, "").replace(/^- /, "").replace(/（[^（）]{40,}）/g, ""))
+      .slice(0, 4)
+      .join("\n");
+    notify(`🎮 今日雷达：${headline.length} 条值得看`, plain, "Glass");
+  }
 }
 
 // ─── 单查：自动判平台 ─────────────────────────────────────────────────────────
@@ -311,6 +331,52 @@ async function check(names) {
   }
 }
 
+// ─── 早间快扫：只跑 Roblox 增长 + 错配，首次出现的强候选弹通知 ───────────────────
+//
+// 背景（2026-10-10 复盘）：Anime Zero 起量窗口正好撞上管线断档，竞品 10-03 建站、
+// 我们 10-08 才扫到。现在每天 12:30 的主管线之外，09:00 加一班只看 Roblox 榜单的
+// 快扫（不花 Trends 额度）：刚冒头的强候选第一次出现就推通知。
+async function morning() {
+  const [growthText, mismatchText] = await Promise.all([
+    run("lib/roblox-growth-scan.mjs"),
+    run("lib/roblox-yt-mismatch.mjs"),
+  ]);
+  const growth = parseGrowth(growthText);
+  const mismatch = parseMismatch(mismatchText);
+
+  const hot = [
+    ...mismatch
+      .filter((m) => m.flag === "🎣🎣" && m.channels >= 5 && m.ccu >= 300)
+      .map((m) => ({ id: m.id, name: cleanRobloxName(m.name), why: `错配 ${m.ratio}x（${m.channels} 频道 / ${m.ccu} 在线）` })),
+    ...growth
+      .filter((g) => g.growth >= 8 && g.ccu >= 300 && g.ccu <= 60000)
+      .map((g) => ({ id: g.id, name: cleanRobloxName(g.name), why: `增长 ${g.growth}x（${g.ccu} 在线 / ${g.ageDays} 天）` })),
+  ];
+
+  const stateFile = join(HERE, "data", "roblox-morning-state.json");
+  const prev = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, "utf8")) : null;
+  const seen = new Set(prev?.seen ?? []);
+  const fresh = hot.filter((h) => !seen.has(h.id));
+  // 只留最近 500 个 id，防止状态文件无限长大
+  const keep = [...new Set([...seen, ...hot.map((h) => h.id)])].slice(-500);
+  writeFileSync(stateFile, JSON.stringify({ scannedAt: new Date().toISOString(), hot: hot.length, seen: keep }, null, 2));
+
+  console.log(`早扫：强候选 ${hot.length} 个 · 首次出现 ${fresh.length} 个`);
+  for (const f of fresh.slice(0, 8)) console.log(`  🆕 ${f.name} — ${f.why}`);
+
+  if (!prev) {
+    console.log("（首次运行，只建基线，不通知）");
+    return;
+  }
+  if (fresh.length) {
+    notify(
+      `🆕 Roblox 早扫：${fresh.length} 个新候选`,
+      fresh.slice(0, 3).map((f) => `${f.name}（${f.why}）`).join("\n"),
+      "Glass",
+    );
+  }
+}
+
 const IS_MAIN = import.meta.url === `file://${process.argv[1]}` || Boolean(process.argv[1]?.endsWith("radar.mjs"));
 if (IS_MAIN) {
   if (args[0] === "check") {
@@ -320,6 +386,8 @@ if (IS_MAIN) {
       process.exit(1);
     }
     await check(names);
+  } else if (args.includes("--morning")) {
+    await morning();
   } else {
     await daily();
   }

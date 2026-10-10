@@ -85,8 +85,8 @@ if [[ "$verdict" != OK* ]]; then
   exit 1
 fi
 
-# 4. 总报告（Roblox 现跑 + 汇总上面的报告）
-"$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
+# 4. 总报告（Roblox 现跑 + 汇总上面的报告）；RADAR_NOTIFY=1 → 跑完把「今天最值得看」推到通知中心
+RADAR_NOTIFY=1 "$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 touch "$DONE"
 find "$LOGDIR" -name 'game-radar-ok-*' -mtime +14 -delete
 echo "=== $(date '+%F %T') 完成"

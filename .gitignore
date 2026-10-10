@@ -10,3 +10,6 @@ node_modules
 data/yt-mismatch-cache.json
 data/meme-watch-state.json
 data/playable-watch-state.json
+
+# 早扫状态（每次扫描重写）
+data/roblox-morning-state.json
