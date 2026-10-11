@@ -832,5 +832,95 @@
  "gotobedwiki.com": {
   "available": true,
   "checkedAt": "2026-10-11"
+ },
+ "edaywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "eday.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "edaygame.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "wingsoftheve.wiki": {
+  "available": false,
+  "registered": "2026-09-28",
+  "ns": "walk.ns.cloudflare.com,todd.ns.cloudflare.com",
+  "checkedAt": "2026-10-11"
+ },
+ "galacticracer.wiki": {
+  "available": false,
+  "registered": "2026-10-04",
+  "ns": "sierra.ns.cloudflare.com,eoin.ns.cloudflare.com",
+  "checkedAt": "2026-10-11"
+ },
+ "wingsofthevegame.com": {
+  "available": false,
+  "registered": "2025-12-12",
+  "ns": "NS-130-A.GANDI.NET,NS-237-B.GANDI.NET,NS-85-C.GANDI.NET",
+  "checkedAt": "2026-10-11"
+ },
+ "wingsofthevewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "dragonsdogma2darkarisen.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "galacticracergame.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "galacticracerwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "dragonsdogma2darkarisengame.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "darkarisen.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "dragonsdogma2darkarisenwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "darkarisengame.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "idleexpedition.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "darkarisenwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "idleexpeditiongame.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "idleexpeditionwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "iseeahottiegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "iseeahottiewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-11"
+ },
+ "iseeahottie.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-11"
  }
 }
