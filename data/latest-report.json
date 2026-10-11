@@ -1,23 +1,23 @@
 {
-  "scannedAt": "2026-09-25T06:12:27.355Z",
+  "scannedAt": "2026-10-10T04:30:05.202Z",
   "targetMarket": "US",
   "primaryMarket": "US",
   "referenceMarket": "WORLDWIDE",
-  "totalAdded": 382,
+  "totalAdded": 379,
   "sources": [
     {
       "ok": true,
       "sourceId": "itch-newest-web",
       "sourceName": "itch.io 最新网页游戏",
       "total": 36,
-      "added": 36
+      "added": 35
     },
     {
       "ok": true,
       "sourceId": "itch-new-popular-web",
       "sourceName": "itch.io New & Popular",
       "total": 36,
-      "added": 36
+      "added": 16
     },
     {
       "ok": true,
@@ -31,28 +31,28 @@
       "sourceId": "itch-featured-feed",
       "sourceName": "itch.io Featured Feed",
       "total": 10,
-      "added": 9
+      "added": 1
     },
     {
       "ok": true,
       "sourceId": "steam-top-wishlist",
       "sourceName": "Steam Top Wishlists",
-      "total": 49,
-      "added": 2
+      "total": 50,
+      "added": 1
     },
     {
       "ok": true,
       "sourceId": "steam-popular-new",
       "sourceName": "Steam 热门新发行",
       "total": 50,
-      "added": 32
+      "added": 26
     },
     {
       "ok": true,
       "sourceId": "steam-latest-indie",
       "sourceName": "Steam 最新独立游戏",
-      "total": 50,
-      "added": 48
+      "total": 150,
+      "added": 147
     },
     {
       "ok": true,
@@ -66,55 +66,48 @@
       "sourceId": "newgrounds-latest",
       "sourceName": "Newgrounds 最新通过作品",
       "total": 12,
-      "added": 11
+      "added": 12
     },
     {
       "ok": true,
       "sourceId": "crazygames-new",
       "sourceName": "CrazyGames 新游戏",
       "total": 70,
-      "added": 23
+      "added": 6
     },
     {
       "ok": true,
       "sourceId": "poki-new",
       "sourceName": "Poki 新游戏",
-      "total": 168,
-      "added": 34
+      "total": 186,
+      "added": 25
     },
     {
       "ok": true,
       "sourceId": "y8-new",
       "sourceName": "Y8 新游戏",
       "total": 73,
-      "added": 51
-    },
-    {
-      "ok": false,
-      "sourceId": "gamepix-new",
-      "sourceName": "GamePix 新游戏",
-      "error": "远程站点返回 403"
+      "added": 49
     },
     {
       "ok": true,
       "sourceId": "lagged-new",
       "sourceName": "Lagged 新游戏",
       "total": 82,
-      "added": 23
+      "added": 4
     },
     {
       "ok": true,
       "sourceId": "trends-rising-7d-itch-io",
       "sourceName": "Trends上涨 7天 · itch io",
-      "total": 6,
+      "total": 11,
       "added": 6
     },
     {
-      "ok": true,
+      "ok": false,
       "sourceId": "trends-rising-30d-itch-io",
       "sourceName": "Trends上涨 30天 · itch io",
-      "total": 16,
-      "added": 9
+      "error": "Google Trends request failed: fetch failed"
     },
     {
       "ok": true,
@@ -127,54 +120,69 @@
       "ok": true,
       "sourceId": "trends-rising-30d-indie-game",
       "sourceName": "Trends上涨 30天 · indie game",
-      "total": 4,
-      "added": 1
+      "total": 2,
+      "added": 0
     },
     {
       "ok": true,
       "sourceId": "trends-rising-7d-horror-game",
       "sourceName": "Trends上涨 7天 · horror game",
-      "total": 12,
-      "added": 11
+      "total": 11,
+      "added": 5
     },
     {
       "ok": true,
       "sourceId": "trends-rising-30d-horror-game",
       "sourceName": "Trends上涨 30天 · horror game",
-      "total": 24,
-      "added": 8
+      "total": 18,
+      "added": 4
     }
   ],
   "seoVerified": 26,
   "seoErrors": 4,
   "fastModelVersion": 3,
-  "fastPassedCount": 212,
+  "fastPassedCount": 149,
   "fastWatchCount": 221,
-  "fastRejectedCount": 4,
+  "fastRejectedCount": 15,
   "youtubeEnabled": true,
   "youtubeConfigured": true,
   "youtubeVerified": 3,
   "youtubeErrors": 0,
-  "trendsVerified": 0,
-  "trendErrors": 2,
+  "trendsVerified": 2,
+  "trendErrors": 0,
   "trendBatchRan": true,
   "trendQueueSize": 2,
   "risingDiscoveryRan": true,
   "seoModelVersion": 5,
   "trendModelVersion": 4,
-  "seoPassedCount": 305,
-  "trendEligibleCount": 138,
-  "trendPendingCount": 137,
-  "trendValidatedCount": 92,
-  "risingCount": 2,
+  "seoPassedCount": 246,
+  "trendEligibleCount": 89,
+  "trendPendingCount": 87,
+  "trendValidatedCount": 86,
+  "risingCount": 3,
   "globalRisingCount": 0,
   "recommendationCounts": {
     "independent": 0,
     "test-now": 0,
     "page": 0,
-    "watch": 343,
-    "reject": 0,
-    "pending": 2657,
+    "watch": 338,
+    "reject": 12,
+    "pending": 2650,
     "error": 0
+  },
+  "steamGateRan": 6,
+  "investRan": 15,
+  "memeAlerts": [
+    "dhruv rathee",
+    "tom welling",
+    "jeff bezos",
+    "un millón"
+  ],
+  "playableAlerts": [],
+  "investCounts": {
+    "go": 4,
+    "prelaunch": 0,
+    "watch": 44,
+    "skip": 42
   }
 }

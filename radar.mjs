@@ -267,7 +267,7 @@ async function daily() {
       .map((h) => h.replace(/\*\*/g, "").replace(/^- /, "").replace(/（[^（）]{40,}）/g, ""))
       .slice(0, 4)
       .join("\n");
-    notify(`🎮 今日雷达：${headline.length} 条值得看`, plain, "Glass");
+    notify(`📋 每日摘要：${headline.length} 条更新`, plain, "Glass");
   }
 }
 
@@ -377,7 +377,7 @@ async function morning() {
   }
   if (fresh.length) {
     notify(
-      `🆕 Roblox 早扫：${fresh.length} 个新候选`,
+      `🆕 早间扫描：${fresh.length} 条更新`,
       fresh.slice(0, 3).map((f) => `${f.name}（${f.why}）`).join("\n"),
       "Glass",
     );
