@@ -16,3 +16,7 @@ data/roblox-morning-state.json
 
 # 运行时产物（20MB 级，每日重生成；上次入库 2026-09-25 后一直本地turnover）
 data/candidates.json
+
+# 运行时状态（每次扫描重写，工作区噪音源）
+data/state.json
+data/latest-report.json
