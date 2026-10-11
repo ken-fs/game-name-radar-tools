@@ -88,6 +88,12 @@ fi
 
 # 4. 总报告（Roblox 现跑 + 汇总上面的报告）；RADAR_NOTIFY=1 → 跑完把「今天最值得看」推到通知中心
 RADAR_NOTIFY=1 "$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
+
+# 5. 占位队列（2026-10-11 加）：把当日高信号候选（近 21 天新词 + 5 天有活动）直接变成
+#    「域名可买性清单」——.wiki 生态位是抢出来的（BOMBANANA 复盘：发现躺 10 天、同行 9 域围上来）。
+#    零成本（RDAP 免费 + 7 天缓存）；🟢 新出现的可买 .wiki 推通知。
+"$NODE" --env-file-if-exists=.env lib/occupy-queue.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
+
 touch "$DONE"
 find "$LOGDIR" -name 'game-radar-ok-*' -mtime +14 -delete
 echo "=== $(date '+%F %T') 完成"
