@@ -1,4 +1,5 @@
 #!/bin/bash
+source /Users/david/Desktop/david/Ship/scripts/notify.sh  # ship_notify：推飞书（2026-10-11）
 # 每日雷达（launchd com.ken.game-radar 调用；北京时间 12:30–22:30 每小时一个时间点，
 # 按**美东时间**判断：美东当天 00:30 之后才跑（美区前一天的搜索 / 上新数据已完整），
 # 跑成功一次后当天其余时间点直接跳过。夏令时由 TZ=America/New_York 自动处理：
@@ -80,7 +81,7 @@ echo "$verdict"
 
 if [[ "$verdict" != OK* ]]; then
   if [ "$(date +%H)" -ge "$LAST_SLOT_HOUR" ]; then
-    osascript -e "display notification \"$verdict。日志：Ship/out/logs/game-radar.log\" with title \"游戏雷达今天没跑成\"" 2>/dev/null
+    ship_notify "每日任务未跑成" "游戏雷达：$verdict。日志：Ship/out/logs/game-radar.log"
   fi
   exit 1
 fi

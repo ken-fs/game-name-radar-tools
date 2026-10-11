@@ -50,7 +50,14 @@ function run(file, argv = [], timeoutMs = 30 * 60_000) {
 }
 
 /** 通知中心推送：daily.sh 成功路径设 RADAR_NOTIFY=1 才发，手动跑不打扰。 */
+const PUSH_SCRIPT = new URL("../scripts/notify.mjs", import.meta.url).pathname;
+
 function notify(title, body, sound = "Glass") {
+  // 先推飞书（Ship/scripts/notify.mjs，2026-10-11 加：用户不在电脑前会漏 macOS 通知）；推不出去再走下面的 macOS 通知。
+  try {
+    execFileSync(process.execPath, [PUSH_SCRIPT, "--title", String(title), "--body", String(body)], { stdio: "ignore", timeout: 30000 });
+    return;
+  } catch {}
   const esc = (s) => String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"').slice(0, 400);
   try {
     execFileSync("osascript", ["-e", `display notification "${esc(body)}" with title "${esc(title)}" sound name "${sound}"`]);
