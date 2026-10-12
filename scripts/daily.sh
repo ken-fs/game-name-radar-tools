@@ -59,7 +59,11 @@ if [ -z "$net_ok" ]; then
 fi
 echo "网络就绪（$net_ok）"
 
-# 2. 主管线（Steam / itch / HTML5 / Trends / 投入价值 / 梗 / 可玩）
+# 2. 主管线（Steam / itch / HTML5 / Trends / 投入价值 / 梗（含 Wikipedia 热门）/ 可玩）
+#    同时在后台跑 Steam 关注者增速（2026-10-12 加）：steamcommunity 限流，要慢慢抓（4 秒一个、最多 30 分钟），
+#    和 scan.mjs（约 30 分钟）打的不是同一个站，并行跑不拖长总时间；第 5 步出总报告前等它跑完。
+( "$NODE" lib/steam-follow-watch.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings ) &
+FOLLOW_PID=$!
 "$NODE" --env-file-if-exists=.env scripts/scan.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 
 # 3. 判断是不是真成功：核心发现源（Steam / itch / 门户 / Newgrounds）至少七成成功，而且梗 / 可玩两份
@@ -86,10 +90,18 @@ if [[ "$verdict" != OK* ]]; then
   exit 1
 fi
 
-# 4. 总报告（Roblox 现跑 + 汇总上面的报告）；RADAR_NOTIFY=1 → 跑完把「今天最值得看」推到通知中心
+# 4. 新数据源（2026-10-12 加，复盘盲区：volatiles / emberquest 这类 Steam 预发布游戏没有任何雷达报过）
+#    - Google 联想差分：「codes for / tier list for / best class in …」+ a–z 的补全和过去 14 天比 → RADAR-SUGGEST（约 4 分钟，
+#      放在 scan.mjs 之后跑：梗 / 可玩雷达也在打 Google 联想，错开）
+#    - 等第 2 步后台的 Steam 关注者增速（预发布 / 刚发售 ±30 天的游戏池 ≤300 个）→ RADAR-STEAMFOLLOW
+#    失败不影响下面的总报告（读不到就写「还没生成」）。都不推通知，🟢 进总报告统一推。
+"$NODE" lib/suggest-diff-watch.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
+wait "$FOLLOW_PID"
+
+# 5. 总报告（Roblox 现跑 + 汇总上面的报告）；RADAR_NOTIFY=1 → 跑完把「今天最值得看」推到通知中心
 RADAR_NOTIFY=1 "$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 
-# 5. 占位队列（2026-10-11 加）：把当日高信号候选（近 21 天新词 + 5 天有活动）直接变成
+# 6. 占位队列（2026-10-11 加）：把当日高信号候选（近 21 天新词 + 5 天有活动）直接变成
 #    「域名可买性清单」——.wiki 生态位是抢出来的（BOMBANANA 复盘：发现躺 10 天、同行 9 域围上来）。
 #    零成本（RDAP 免费 + 7 天缓存）；🟢 新出现的可买 .wiki 推通知。
 "$NODE" --env-file-if-exists=.env lib/occupy-queue.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings

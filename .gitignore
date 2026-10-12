@@ -20,3 +20,8 @@ data/candidates.json
 # 运行时状态（每次扫描重写，工作区噪音源）
 data/state.json
 data/latest-report.json
+
+# 关注者曲线 / 联想词差分 / 维基热门缓存（每天重写）
+data/steam-follow-state.json
+data/suggest-diff-state.json
+data/wiki-top-cache.json

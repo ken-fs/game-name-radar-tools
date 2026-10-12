@@ -24,6 +24,7 @@ import { execFile, execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { nrdCounts, nrdNote } from "./lib/nrd.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SHIP = join(HERE, "..");
@@ -175,16 +176,24 @@ function table(header, rows) {
   return rows.length ? [header, header.replace(/[^|]+/g, "---"), ...rows] : ["（今天没有）"];
 }
 
+/** 表格行 → 单元格（去掉首尾的空格和竖线） */
+const cells = (row) => row.split("|").slice(1, -1).map((c) => c.trim());
+const unlink = (s = "") => s.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\*\*/g, "").trim();
+
 async function daily() {
   const invest = readReport("INVEST");
   const playable = readReport("PLAYABLE");
   const meme = readReport("MEME");
+  const follow = readReport("STEAMFOLLOW");
+  const suggest = readReport("SUGGEST");
   const roblox = args.includes("--skip-roblox") ? null : await robloxLayer();
 
   const steamTop = rowsStartingWith(invest, ["🟢", "🔔"]);
   const steamWatch = rowsStartingWith(invest, ["🟡"], 5);
   const playableTop = rowsStartingWith(playable, ["🟢", "🟡 待复核"]);
   const memeTop = rowsStartingWith(meme, ["🚨"]);
+  const followTop = rowsStartingWith(follow, ["🟢", "🌱"], 6);
+  const suggestTop = rowsStartingWith(suggest, ["🟢"], 5);
   const robloxGo = roblox?.demand.filter((d) => d.verdict.startsWith("🟢")) ?? [];
   // 已经验证为「放弃」的错配不进「最值得看」（视频多但没人搜攻略，做站也接不住流量）
   const strongMismatch =
@@ -192,24 +201,43 @@ async function daily() {
       (m) => m.flag === "🎣🎣" && !roblox.demand.some((d) => d.name === cleanRobloxName(m.name) && d.verdict.startsWith("❌")),
     ) ?? [];
 
-  const headline = [
-    ...robloxGo.map((d) => `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）`),
+  // 每条带上游戏名，后面统一查「最近 3 天新注册域名」
+  const items = [
+    ...robloxGo.map((d) => ({ name: d.name, text: `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）` })),
     ...strongMismatch.map((m) => {
       const name = cleanRobloxName(m.name);
       const verified = roblox?.demand.find((d) => d.name === name);
       const demandNote = verified ? `；需求验证 ${verified.verdict}` : "；还没做需求验证";
-      return `- **Roblox 错配** ${name}：本周 ${m.channels} 个频道在做视频，热度是在线人数的 ${m.ratio} 倍（Hole Fishing 模型${demandNote}）`;
+      return { name, text: `- **Roblox 错配** ${name}：本周 ${m.channels} 个频道在做视频，热度是在线人数的 ${m.ratio} 倍（Hole Fishing 模型${demandNote}）` };
     }),
-    ...steamTop.map((r) => `- **Steam** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}（总分 ${r.split("|")[3]?.replace(/\*/g, "").trim()}）`),
-    ...playableTop.map((r) => `- **可玩游戏** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}`),
-    ...memeTop.map((r) => `- **梗** ${r.split("|")[2]?.replace(/\[([^\]]+)\]\([^)]*\)/, "$1").trim()}：刚冒头（${r.split("|")[3]?.trim()}）`),
+    ...steamTop.map((r) => ({ name: r.split("|")[2]?.trim(), text: `- **Steam** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}（总分 ${r.split("|")[3]?.replace(/\*/g, "").trim()}）` })),
+    ...followTop.map((r) => {
+      const [verdict, game, followers, dailyGain, growth, release] = cells(r);
+      return { name: unlink(game), text: `- **Steam 关注者** ${unlink(game)}：${verdict}（关注者 ${followers}，日增 ${dailyGain}，7 天 ${growth}，发售 ${release}）` };
+    }),
+    ...suggestTop.map((r) => {
+      const [, game, intents] = cells(r);
+      return { name: game, text: `- **联想新词** ${game}：Google 联想刚冒出（${intents}）` };
+    }),
+    ...playableTop.map((r) => ({ name: r.split("|")[2]?.trim(), text: `- **可玩游戏** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}` })),
+    ...memeTop.map((r) => {
+      const name = unlink(r.split("|")[2]);
+      return { name, text: `- **梗** ${name}：刚冒头（${r.split("|")[3]?.trim()}）` };
+    }),
   ];
+  // 新注册域名（whoisds 免费版，每天约 7 万个抽样）：同行开始抢注 = 热度确认 / 窗口在关
+  const nrd = items.length ? await nrdCounts(items.map((i) => i.name)) : { available: false, byName: {}, dates: [] };
+  const headline = items.map((i) => {
+    const note = nrd.available ? nrdNote(nrd.byName[i.name], { days: nrd.dates.length }) : "";
+    return note && nrd.byName[i.name] !== null ? `${i.text} · ${note}` : i.text;
+  });
 
   const lines = [
     `# 游戏雷达总报告 ${today}`,
     "",
-    "> `game-name-radar/radar.mjs` · Roblox + Steam + 可玩游戏 + 梗，四条线一份报告 · 零搜索额度",
-    "> 细节在各自的报告：RADAR-INVEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
+    "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
+    "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
+    `> 「近 3 天 N 个新域名」= whoisds 免费新注册域名列表里含这个名字的个数（每天约 7 万个抽样，0 不等于没人注册；⚠️ = ≥3 个，同行在抢）${nrd.available ? `；用的是 ${nrd.dates.join(" / ")}（UTC）` : "；今天没拿到列表"}`,
     "",
     "## 今天最值得看",
     "",
@@ -248,6 +276,12 @@ async function daily() {
   lines.push("## Steam（投入价值）", "");
   if (!invest) lines.push("（今天的 RADAR-INVEST 还没生成：每日管线 08:30 跑，可能没开机或还没跑完）", "");
   else lines.push(...table("| 判决 | 游戏 | 总分 | 需求 | 结构 | 窗口 | 广告 | 持续 |", [...steamTop, ...steamWatch]), "");
+  lines.push("## Steam 关注者增速（预发布 / 刚发售）", "");
+  if (!follow) lines.push("（今天的 RADAR-STEAMFOLLOW 还没生成）", "");
+  else lines.push(...table("| 判决 | 游戏 | 关注者 | 日增 | 7 天增长 | 发售 | 新注册域名 | 来源 |", rowsStartingWith(follow, ["🟢", "🌱", "🔵", "🟡"], 10)), "");
+  lines.push("## Google 联想新冒出的游戏词", "");
+  if (!suggest) lines.push("（今天的 RADAR-SUGGEST 还没生成）", "");
+  else lines.push(...table("| 判决 | 游戏名 | 攻略意图 | 补全例子 | 首见 | 新注册域名 |", suggestTop), "");
   lines.push("## 可玩游戏（HTML5 起量）", "");
   if (!playable) lines.push("（今天的 RADAR-PLAYABLE 还没生成）", "");
   else lines.push(...table("| 判决 | 游戏 | 热度 | 增长 | 同比 | 峰值 | 前 5 国 | 首见 | 域名 |", playableTop), "");
