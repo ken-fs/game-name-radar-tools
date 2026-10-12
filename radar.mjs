@@ -297,11 +297,16 @@ async function daily() {
   // 每日成功跑完推一次「今天最值得看」（008-10-10 复盘：GO 只写进报告文件没人看，
   // 用户 10-08 的 GO 到 10-10 才知道）。失败重试由 daily.sh 管，这里只管内容推送。
   if (process.env.RADAR_NOTIFY === "1" && headline.length) {
-    const plain = headline
-      .map((h) => h.replace(/\*\*/g, "").replace(/^- /, "").replace(/（[^（）]{40,}）/g, ""))
-      .slice(0, 4)
-      .join("\n");
-    notify(`📋 每日摘要：${headline.length} 条更新`, plain, "Glass");
+    // 2026-10-12：以前只推前 4 条（macOS 通知装不下），Roblox 一多新源（Steam 关注者 / 联想新词）就挤不进来。
+    // 现在走飞书：按信号线分组，每组最多 4 条，其余写「还有 N 条」，完整版在报告里。
+    const groups = new Map();
+    for (const h of headline) {
+      const line = h.match(/^- \*\*(.+?)\*\*/)?.[1] ?? "其他";
+      groups.set(line, [...(groups.get(line) ?? []), h.replace(/^- \*\*.+?\*\*\s*/, "").replace(/（[^（）]{60,}）/g, "")]);
+    }
+    const body = [...groups].map(([line, items]) => [`**${line}**`, ...items.slice(0, 4).map((i) => `- ${i}`),
+      ...(items.length > 4 ? [`- …还有 ${items.length - 4} 条`] : [])].join("\n"));
+    notify(`🎮 游戏雷达日报 ${today.slice(5)}（${headline.length} 条）`, `${body.join("\n\n")}\n\n完整报告：\`Ship/RADAR-${today}.md\``, "Glass");
   }
 }
 
