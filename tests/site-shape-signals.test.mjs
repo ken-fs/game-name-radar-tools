@@ -48,6 +48,14 @@ test('codes SERP: ≥3 media covering the game = closed', () => {
   assert.match(r.label, /⛔ codes 媒体 3 家/);
 });
 
+test('codes SERP: rows with only `link` (anyapi) still count media', () => {
+  const rows = ['https://beebom.com/deep-fishing-codes/', 'https://www.pockettactics.com/deep-fishing-codes', 'https://gamerant.com/deep-fishing-codes-roblox/']
+    .map((link) => ({ link, title: 'Deep Fishing Codes (October 2026)' }));
+  const r = classifyCodesSerp('Deep Fishing', rows);
+  assert.equal(r.verdict, 'closed');
+  assert.deepEqual(r.top, ['beebom.com', 'pockettactics.com', 'gamerant.com']);
+});
+
 test('codes SERP: 0–1 media = open, 2 = mixed', () => {
   const t = 'Command an Army Codes';
   assert.equal(classifyCodesSerp('Command an Army', ['youtube.com', 'reddit.com', 'beebom.com'].map((domain) => ({ domain, title: t }))).verdict, 'open');
