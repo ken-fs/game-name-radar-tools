@@ -94,8 +94,12 @@ fi
 #    - Google 联想差分：「codes for / tier list for / best class in …」+ a–z 的补全和过去 14 天比 → RADAR-SUGGEST（约 4 分钟，
 #      放在 scan.mjs 之后跑：梗 / 可玩雷达也在打 Google 联想，错开）
 #    - 等第 2 步后台的 Steam 关注者增速（预发布 / 刚发售 ±30 天的游戏池 ≤300 个）→ RADAR-STEAMFOLLOW
+#    - Steam 畅销 / 在玩榜新上榜（2026-10-13 加，复盘盲区：Dressmaker / Graveyard Keeper 2 / Dawnwalker 发售后冲上畅销榜，
+#      没有任何雷达报过）：周畅销 全球/美/德/日 + 在玩榜 + 实时畅销 美/德/日，新上榜或升 ≥30 名且刚发售 → RADAR-STEAMCHARTS
+#      （约 4 分钟；榜单本身十几次请求，时间花在 🟢 的工具需求 / 投入价值上，都打 Google 联想，所以排在联想差分之后、不和 scan.mjs 并行）
 #    失败不影响下面的总报告（读不到就写「还没生成」）。都不推通知，🟢 进总报告统一推。
 "$NODE" lib/suggest-diff-watch.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
+"$NODE" lib/steam-charts-watch.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 wait "$FOLLOW_PID"
 
 # 5. 总报告（Roblox 现跑 + 汇总上面的报告）；RADAR_NOTIFY=1 → 跑完把「今天最值得看」推到通知中心

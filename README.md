@@ -147,6 +147,24 @@ Steam/Wiki 候选和在线小游戏都会进入该层，避免 Steam 高愿望�
 
 单查：`node radar.mjs check "游戏名"` 会多出「站型信号」一段；也可以直接 `node lib/tool-demand.mjs "游戏名"`、`node lib/codes-media.mjs "游戏名"`。
 
+### 6. Steam 畅销 / 在玩榜新上榜（2026-10-13 加）
+
+全雷达复盘 `REVIEW-2026-10-12` 的盲区：Dressmaker、Graveyard Keeper 2、The Blood of Dawnwalker 发售后靠口碑冲上畅销榜（Dressmaker 发售第一周全球周畅销 #89 → #12），但原来的 Steam 源只有热门愿望单 / 热门新品 / 最新独立，没有畅销榜和在玩榜，三个都没报过。
+
+`lib/steam-charts-watch.mjs`（每日管线 `scripts/daily.sh` 第 4 步，约 4 分钟，零额度）：
+
+- 榜单（Steam 官方、免费、无 key）：周畅销 全球 / 美 / 德 / 日（`IStoreTopSellersService/GetWeeklyTopSellers`，自带上周名次，可按 `start_date` 查历史周）、在玩榜（`ISteamChartsService/GetMostPlayedGames`）、实时畅销 美 / 德 / 日（商店搜索 `filter=topsellers`）。各取前 100。`GetTopReleasesPages` 停在 2025-02，不用。
+- 每天把名次记进 `data/steam-charts-state.json`；前 14 天都不在前 100 = 🆕，比上次升 ≥30 名 = ⬆️。只报**发售 ≤45 天或 7 天内发售**的（名字 / 发售日 / 标签用 `IStoreBrowseService/GetItems` 批量拿，缓存 7 天），常青游戏进不来。
+- 🟢 冲榜 = 有一个榜进前 50 且发售 ≤30 天（或 7 天内发售的预购）· 🌱 上榜 = 其余。每条带新注册域名（`lib/nrd.mjs`）、🧮 工具需求（前 12 个）、投入价值（🟢 前 5 个，`lib/invest-score.mjs` 原样调用，管线 3 天内评过的直接用）。
+- 报告 `../RADAR-STEAMCHARTS-<日期>.md`；总报告「今天最值得看」只收当天第一次报的 🟢（周榜一周内每天是同一份数据），投入价值 ❌ 的不收。
+- ⚠️ 周畅销滞后约一周（统计周从周二开始），实时畅销补这一周，但第一次运行只建基线。
+
+```bash
+node lib/steam-charts-watch.mjs                    # 跑一轮，写报告和状态
+node lib/steam-charts-watch.mjs --dry-run          # 只打印
+node lib/steam-charts-watch.mjs --week=2026-09-22  # 回测那一周的周畅销（不写任何东西）
+```
+
 ## GitHub Actions
 
 `.github/workflows/radar.yml` 默认在每小时第17分和第47分运行。旧任务会在新任务开始时自动取消，只保留最新扫描。

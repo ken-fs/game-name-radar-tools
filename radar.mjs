@@ -233,6 +233,7 @@ async function daily() {
   const meme = readReport("MEME");
   const follow = readReport("STEAMFOLLOW");
   const suggest = readReport("SUGGEST");
+  const charts = readReport("STEAMCHARTS");
   const roblox = args.includes("--skip-roblox") ? null : await robloxLayer();
 
   const steamTop = rowsStartingWith(invest, ["🟢", "🔔"]);
@@ -241,6 +242,9 @@ async function daily() {
   const memeTop = rowsStartingWith(meme, ["🚨"]);
   const followTop = rowsStartingWith(follow, ["🟢", "🌱"], 6);
   const suggestTop = rowsStartingWith(suggest, ["🟢"], 5);
+  // Steam 畅销 / 在玩榜（2026-10-13 加）：周榜一周内天天是同一份数据，只把「今天第一次报」的 🟢（带 🆕）放进最值得看；
+  // 投入价值已经判了 ❌ 放弃的不放（同 Roblox 错配的处理）
+  const chartsTop = rowsStartingWith(charts, ["🟢 冲榜 🆕"], 10).filter((r) => !cells(r)[6]?.startsWith("❌")).slice(0, 5);
   const robloxGo = roblox?.demand.filter((d) => d.verdict.startsWith("🟢")) ?? [];
   // 已经验证为「放弃」的错配不进「最值得看」（视频多但没人搜攻略，做站也接不住流量）
   const strongMismatch =
@@ -261,6 +265,12 @@ async function daily() {
     ...followTop.map((r) => {
       const [verdict, game, followers, dailyGain, growth, release] = cells(r);
       return { kind: "steam", name: unlink(game), text: `- **Steam 关注者** ${unlink(game)}：${verdict}（关注者 ${followers}，日增 ${dailyGain}，7 天 ${growth}，发售 ${release}）` };
+    }),
+    // kind 不进 SIGNAL_KINDS：工具需求 / 投入价值本模块已经查过（写在这一行里），Steam 游戏基本没有 codes，不花 treg
+    ...chartsTop.map((r) => {
+      const [verdict, game, hits, release, , tool, invest] = cells(r);
+      const extra = [tool && tool !== "-" && tool !== "工具需求 0" ? tool : "", invest && invest !== "-" ? `投入价值 ${invest}` : ""].filter(Boolean).join(" · ");
+      return { kind: "steamcharts", name: unlink(game), text: `- **Steam 畅销榜** ${unlink(game)}：${verdict.replace(/ 🆕$/, "")}（${hits.replace(/<br>/g, "；")}，发售 ${release}）${extra ? ` · ${extra}` : ""}` };
     }),
     ...suggestTop.map((r) => {
       const [, game, intents] = cells(r);
@@ -284,8 +294,8 @@ async function daily() {
   const lines = [
     `# 游戏雷达总报告 ${today}`,
     "",
-    "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
-    "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
+    "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速 / 畅销·在玩榜）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
+    "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-STEAMCHARTS / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
     "> 站型信号（2026-10-13 加）：🧮 工具需求 = Google 联想里 ≥2 条 value / calculator / trading 类补全（能做首页即工具的价值表 / 计算器站）· codes 媒体 N 家 = 「<游戏> codes」美国前 10 里讲这个游戏的大媒体数：0–1 📣 抢速度 / 2 🟡 / ≥3 ⛔ codes 别当主打（做实体页 / 工具页）；SERP 错配 = 结果页讲的是别的游戏，不算数",
     `> 「近 3 天 N 个新域名」= whoisds 免费新注册域名列表里含这个名字的个数（每天约 7 万个抽样，0 不等于没人注册；⚠️ = ≥3 个，同行在抢）${nrd.available ? `；用的是 ${nrd.dates.join(" / ")}（UTC）` : "；今天没拿到列表"}`,
     "",
@@ -329,6 +339,9 @@ async function daily() {
   lines.push("## Steam 关注者增速（预发布 / 刚发售）", "");
   if (!follow) lines.push("（今天的 RADAR-STEAMFOLLOW 还没生成）", "");
   else lines.push(...table("| 判决 | 游戏 | 关注者 | 日增 | 7 天增长 | 发售 | 新注册域名 | 来源 |", rowsStartingWith(follow, ["🟢", "🌱", "🔵", "🟡"], 10)), "");
+  lines.push("## Steam 畅销 / 在玩榜新上榜（刚发售）", "");
+  if (!charts) lines.push("（今天的 RADAR-STEAMCHARTS 还没生成）", "");
+  else lines.push(...table("| 判决 | 游戏 | 上榜信号 | 发售 | 标签 | 工具需求 | 投入价值 | 新注册域名 | 也在 |", rowsStartingWith(charts, ["🟢", "🌱"], 10)), "");
   lines.push("## Google 联想新冒出的游戏词", "");
   if (!suggest) lines.push("（今天的 RADAR-SUGGEST 还没生成）", "");
   else lines.push(...table("| 判决 | 游戏名 | 攻略意图 | 补全例子 | 首见 | 新注册域名 |", suggestTop), "");
