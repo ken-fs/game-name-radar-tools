@@ -1068,35 +1068,41 @@
   "checkedAt": "2026-10-12"
  },
  "animezerovoidarbiter.wiki": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-12"
  },
  "animezerovoidarbitergame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-12"
  },
  "startyourbluelockcareer.wiki": {
-  "available": null,
+  "available": false,
+  "registered": "2026-10-08",
+  "ns": "robin.ns.cloudflare.com,damon.ns.cloudflare.com",
   "checkedAt": "2026-10-12"
  },
  "animezerovoidarbiterwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-12"
  },
  "startyourbluelockcareergame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-12"
  },
  "startyourbluelockcareerwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-12"
  },
  "theveil.wiki": {
-  "available": null,
+  "available": false,
+  "registered": "2025-06-07",
+  "ns": "pdns2.registrar-servers.com,pdns1.registrar-servers.com",
   "checkedAt": "2026-10-12"
  },
  "theveilgame.com": {
-  "available": null,
+  "available": false,
+  "registered": "2025-05-14",
+  "ns": "NS27.DOMAINCONTROL.COM,NS28.DOMAINCONTROL.COM",
   "checkedAt": "2026-10-12"
  },
  "animelegacysimulatorgame.com": {
@@ -1179,10 +1185,260 @@
  },
  "catastrophichorseracinggame.com": {
   "available": null,
-  "checkedAt": "2026-10-12"
+  "checkedAt": "2026-10-04"
  },
  "catastrophichorseracingwiki.com": {
   "available": null,
+  "checkedAt": "2026-10-04"
+ },
+ "anomalouscoffeemachinegame.com": {
+  "available": true,
   "checkedAt": "2026-10-12"
+ },
+ "anomalouscoffeemachinewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "anomalouscoffeemachine.wiki": {
+  "available": false,
+  "registered": "2026-10-05",
+  "ns": "pearl.ns.cloudflare.com,gabe.ns.cloudflare.com",
+  "checkedAt": "2026-10-12"
+ },
+ "deadcheckgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "deadcheck.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "deadcheckwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "projectcarl.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "animemysterious.wiki": {
+  "available": false,
+  "registered": "2026-09-28",
+  "ns": "razvan.ns.cloudflare.com,magnolia.ns.cloudflare.com",
+  "checkedAt": "2026-10-12"
+ },
+ "projectcarlgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "projectcarlwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "animemysteriousgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "animemysteriouswiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "mountsenadi.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "mountsenadigame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "mountsenadiwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "talyer.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "talyergame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "destroyavault.wiki": {
+  "available": false,
+  "registered": "2026-10-01",
+  "ns": "mitchell.ns.cloudflare.com,samara.ns.cloudflare.com",
+  "checkedAt": "2026-10-12"
+ },
+ "destroyavaultgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "destroyavaultwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "talyerwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "banditsimulatortd.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "denizen.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "banditsimulatortdgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "banditsimulatortdwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "denizenwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "denizengame.com": {
+  "available": true,
+  "checkedAt": "2026-10-12"
+ },
+ "feedamosquitowiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "feedamosquitogame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "feedamosquito.wiki": {
+  "available": false,
+  "registered": "2026-10-12",
+  "ns": "mitchell.ns.cloudflare.com,samara.ns.cloudflare.com",
+  "checkedAt": "2026-10-13"
+ },
+ "ironskiesbeta.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "ironskiesbetagame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "miniemergency.wiki": {
+  "available": false,
+  "registered": "2026-10-12",
+  "ns": "mitchell.ns.cloudflare.com,samara.ns.cloudflare.com",
+  "checkedAt": "2026-10-13"
+ },
+ "ironskiesbetawiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "breakeggstostealpets.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "miniemergencygame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "miniemergencywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "breakeggstostealpetsgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "cultoftheyellowking.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "breakeggstostealpetswiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "cultoftheyellowkingwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "cultoftheyellowkinggame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "barfendercoopbarsimulator.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "barfendercoopbarsimulatorwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "barfendercoopbarsimulatorgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "coopbarsimulator.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "coopbarsimulatorwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "coopbarsimulatorgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "burnwithme.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "genomeguardian2.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "burnwithmegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "burnwithmewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "genomeguardian2game.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "genomeguardian2wiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "trey2k23.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-13"
+ },
+ "trey2k23game.com": {
+  "available": null,
+  "checkedAt": "2026-10-13"
+ },
+ "trey2k23wiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-13"
+ },
+ "thehospital.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-13"
+ },
+ "thehospitalgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-13"
+ },
+ "thehospitalwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-13"
  }
 }
