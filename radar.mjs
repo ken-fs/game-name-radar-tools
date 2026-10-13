@@ -33,6 +33,7 @@ import { fileURLToPath } from "node:url";
 import { nrdCounts, nrdNote } from "./lib/nrd.mjs";
 import { codesMediaBatch } from "./lib/codes-media.mjs";
 import { toolDemand, toolDemandNote } from "./lib/tool-demand.mjs";
+import { num, writeVerdictLog } from "./lib/verdict-log.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SHIP = join(HERE, "..");
@@ -216,12 +217,14 @@ export async function siteShapeSignals(items, { tool = toolDemand, codes = codes
     const notes = [];
     try {
       const t = await tool(i.name);
+      i.shape = { tool: t };
       if (!t.ok || t.count) notes.push(toolDemandNote(t, { examples: 1 }));
     } catch {
       notes.push("工具需求 查询失败");
     }
     const c = codesMap.get(i.name);
     notes.push(c ? (c.verdict === "mismatch" ? "codes SERP 错配" : c.label) : "codes 媒体 查询失败");
+    i.shape = { codes: c, tool: i.shape?.tool }; // 原始值给判决记录（lib/verdict-log.mjs）
     out.set(i, notes);
   }
   return out;
@@ -252,34 +255,53 @@ async function daily() {
       (m) => m.flag === "🎣🎣" && !roblox.demand.some((d) => d.name === cleanRobloxName(m.name) && d.verdict.startsWith("❌")),
     ) ?? [];
 
+  // 判决记录（2026-10-13 加）：每条带上当时的原始数值（data），跑完写进 data/verdict-log.jsonl
+  const robloxStats = (name) => {
+    const g = roblox?.growth.find((x) => cleanRobloxName(x.name) === name);
+    const m = roblox?.mismatch.find((x) => cleanRobloxName(x.name) === name);
+    return { ageDays: g?.ageDays, ccu: g?.ccu ?? m?.ccu, growthX: g?.growth, placeId: g?.id ?? m?.id, updatedDaysAgo: g?.updatedDaysAgo, ytChannels: m?.channels, ytRatio: m?.ratio };
+  };
   // 每条带上游戏名，后面统一查「最近 3 天新注册域名」
   const items = [
-    ...robloxGo.map((d) => ({ kind: "roblox", name: d.name, text: `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）` })),
+    ...robloxGo.map((d) => ({ kind: "roblox", line: "roblox-demand", name: d.name, text: `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）`,
+      data: { verdict: d.verdict, signals: { ...robloxStats(d.name), magnitude: d.magnitude || undefined, subKeywords: d.sub ? d.sub.split(/[,，、]/).filter(Boolean).length : undefined, trend: d.trend || undefined } } })),
     ...strongMismatch.map((m) => {
       const name = cleanRobloxName(m.name);
       const verified = roblox?.demand.find((d) => d.name === name);
       const demandNote = verified ? `；需求验证 ${verified.verdict}` : "；还没做需求验证";
-      return { kind: "roblox", name, text: `- **Roblox 错配** ${name}：本周 ${m.channels} 个频道在做视频，热度是在线人数的 ${m.ratio} 倍（Hole Fishing 模型${demandNote}）` };
+      return { kind: "roblox", line: "roblox-mismatch", name, text: `- **Roblox 错配** ${name}：本周 ${m.channels} 个频道在做视频，热度是在线人数的 ${m.ratio} 倍（Hole Fishing 模型${demandNote}）`,
+        data: { verdict: verified?.verdict ?? m.flag, signals: { ...robloxStats(name), demandVerdict: verified?.verdict } } };
     }),
-    ...steamTop.map((r) => ({ kind: "steam", name: r.split("|")[2]?.trim(), text: `- **Steam** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}（总分 ${r.split("|")[3]?.replace(/\*/g, "").trim()}）` })),
+    ...steamTop.map((r) => {
+      const [verdict, game, total, demand, structure, window, ad, longevity] = cells(r).map((c) => c.replace(/\*/g, ""));
+      return { kind: "steam", line: "steam-invest", name: r.split("|")[2]?.trim(), text: `- **Steam** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}（总分 ${r.split("|")[3]?.replace(/\*/g, "").trim()}）`,
+        data: { verdict, signals: { investScore: num(total), investDemand: num(demand), investStructure: num(structure), investWindow: num(window), investAd: num(ad), investLongevity: num(longevity), game: unlink(game) } } };
+    }),
     ...followTop.map((r) => {
       const [verdict, game, followers, dailyGain, growth, release] = cells(r);
-      return { kind: "steam", name: unlink(game), text: `- **Steam 关注者** ${unlink(game)}：${verdict}（关注者 ${followers}，日增 ${dailyGain}，7 天 ${growth}，发售 ${release}）` };
+      return { kind: "steam", line: "steam-follow", name: unlink(game), text: `- **Steam 关注者** ${unlink(game)}：${verdict}（关注者 ${followers}，日增 ${dailyGain}，7 天 ${growth}，发售 ${release}）`,
+        data: { verdict, signals: { followers: num(followers), followersDailyGain: num(dailyGain), followers7dGrowthPct: num(growth), release } } };
     }),
     // kind 不进 SIGNAL_KINDS：工具需求 / 投入价值本模块已经查过（写在这一行里），Steam 游戏基本没有 codes，不花 treg
     ...chartsTop.map((r) => {
       const [verdict, game, hits, release, , tool, invest] = cells(r);
       const extra = [tool && tool !== "-" && tool !== "工具需求 0" ? tool : "", invest && invest !== "-" ? `投入价值 ${invest}` : ""].filter(Boolean).join(" · ");
-      return { kind: "steamcharts", name: unlink(game), text: `- **Steam 畅销榜** ${unlink(game)}：${verdict.replace(/ 🆕$/, "")}（${hits.replace(/<br>/g, "；")}，发售 ${release}）${extra ? ` · ${extra}` : ""}` };
+      const bestRank = Math.min(...[...hits.matchAll(/#(\d+)/g)].map((m) => Number(m[1])));
+      return { kind: "steamcharts", line: "steam-charts", name: unlink(game), text: `- **Steam 畅销榜** ${unlink(game)}：${verdict.replace(/ 🆕$/, "")}（${hits.replace(/<br>/g, "；")}，发售 ${release}）${extra ? ` · ${extra}` : ""}`,
+        data: { verdict, signals: { bestChartRank: Number.isFinite(bestRank) ? bestRank : undefined, charts: hits.replace(/<br>/g, "；").slice(0, 200), investScore: num(invest), release, toolDemandText: tool && tool !== "-" ? tool : undefined } } };
     }),
     ...suggestTop.map((r) => {
       const [, game, intents] = cells(r);
-      return { kind: "suggest", name: game, text: `- **联想新词** ${game}：Google 联想刚冒出（${intents}）` };
+      return { kind: "suggest", line: "suggest-diff", name: game, text: `- **联想新词** ${game}：Google 联想刚冒出（${intents}）`, data: { verdict: cells(r)[0], signals: { intents } } };
     }),
-    ...playableTop.map((r) => ({ name: r.split("|")[2]?.trim(), text: `- **可玩游戏** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}` })),
+    ...playableTop.map((r) => {
+      const [verdict, , heat, growth, yoy, peak] = cells(r);
+      return { line: "playable", name: r.split("|")[2]?.trim(), text: `- **可玩游戏** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}`,
+        data: { verdict, signals: { heat: num(heat), growth: num(growth), yoy: num(yoy), peak } } };
+    }),
     ...memeTop.map((r) => {
       const name = unlink(r.split("|")[2]);
-      return { name, text: `- **梗** ${name}：刚冒头（${r.split("|")[3]?.trim()}）` };
+      return { line: "meme", name, text: `- **梗** ${name}：刚冒头（${r.split("|")[3]?.trim()}）`, data: { verdict: cells(r)[0], signals: { playableCompletions: r.split("|")[3]?.trim() } } };
     }),
   ];
   // 新注册域名（whoisds 免费版，每天约 7 万个抽样）：同行开始抢注 = 热度确认 / 窗口在关
@@ -355,6 +377,8 @@ async function daily() {
   const out = join(SHIP, `RADAR-${today}.md`);
   writeFileSync(out, `${lines.join("\n")}\n`);
   console.log(`✓ ${out}`);
+  const logged = writeVerdictLog(items, { date: today, nrd });
+  if (logged) console.log(`✓ 判决记录 ${logged} 条 → data/verdict-log.jsonl`);
   console.log(headline.length ? headline.join("\n") : "今天没有达到「值得投入」线的候选。");
 
   // 每日成功跑完推一次「今天最值得看」（008-10-10 复盘：GO 只写进报告文件没人看，
