@@ -25,3 +25,8 @@ data/latest-report.json
 data/steam-follow-state.json
 data/suggest-diff-state.json
 data/wiki-top-cache.json
+
+# 站型信号缓存 + codes 媒体花费账本（2026-10-13 加，每天重写 / 追加，本地留痕不入库）
+data/tool-demand-cache.json
+data/codes-media-cache.json
+data/codes-media-spend.jsonl

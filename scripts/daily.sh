@@ -99,6 +99,8 @@ fi
 wait "$FOLLOW_PID"
 
 # 5. 总报告（Roblox 现跑 + 汇总上面的报告）；RADAR_NOTIFY=1 → 跑完把「今天最值得看」推到通知中心
+#    2026-10-13 加站型信号：「今天最值得看」每条带 🧮 工具需求（Google Suggest）+ codes 媒体进场数（treg，≤15 次/天、缓存 3 天）；
+#    查不到只在那一条写「查询失败」，不影响总报告
 RADAR_NOTIFY=1 "$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 
 # 6. 占位队列（2026-10-11 加）：把当日高信号候选（近 21 天新词 + 5 天有活动）直接变成

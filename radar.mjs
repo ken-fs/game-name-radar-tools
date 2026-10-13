@@ -19,12 +19,20 @@
  * （Roblox 官方 API、yt-dlp、Google Suggest / Trends）。
  *
  *   node radar.mjs --skip-roblox      # 只汇总当天已有报告（Roblox 层慢，约 5–15 分钟）
+ *
+ * 站型信号（2026-10-13 加，依据 Ship/research/GAME-WIKI-STRUCTURE-2026-10.md）：「今天最值得看」的
+ * Roblox / Steam / 联想新词候选每条再带两个标记——
+ *   🧮 工具需求（lib/tool-demand.mjs，Google Suggest 免费）：有价值表 / 计算器需求 = 能做首页即工具的站
+ *   codes 媒体 N 家（lib/codes-media.mjs，treg 约 $0.00015/次，每天 ≤15 次、缓存 3 天）：≥3 家 = codes 别当主打
+ * 两个都查不到只在那一条上写「查询失败」，不影响总报告。
  */
 import { execFile, execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { nrdCounts, nrdNote } from "./lib/nrd.mjs";
+import { codesMediaBatch } from "./lib/codes-media.mjs";
+import { toolDemand, toolDemandNote } from "./lib/tool-demand.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SHIP = join(HERE, "..");
@@ -151,6 +159,10 @@ async function robloxLayer() {
   const mismatch = parseMismatch(mismatchText);
   const names = shortlist(growth, mismatch);
   const demand = names.length ? parseDemand(await run("lib/roblox-demand-scan.mjs", names)) : [];
+  // 🧮 工具需求（2026-10-13 加）：结果缓存 24h，下面「今天最值得看」再查同名直接命中
+  for (const d of demand) {
+    try { d.tool = await toolDemand(d.name); } catch { d.tool = { ok: false }; }
+  }
   return { demand, growth, mismatch, errors: [growthText, mismatchText].filter((t) => t.startsWith("⚠️")) };
 }
 
@@ -180,6 +192,41 @@ function table(header, rows) {
 const cells = (row) => row.split("|").slice(1, -1).map((c) => c.trim());
 const unlink = (s = "") => s.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\*\*/g, "").trim();
 
+// ─── 站型信号（2026-10-13 加）──────────────────────────────────────────────────
+
+/** 哪些线要查站型信号：可玩游戏 / 梗没有 codes、也不是交易类，跳过 */
+const SIGNAL_KINDS = new Set(["roblox", "steam", "suggest"]);
+
+/**
+ * 「今天最值得看」每条的站型标记：🧮 工具需求 + codes 媒体进场数。返回 Map<item, string[]>。
+ * 任何一步失败只在那一条上写「查询失败」，绝不抛（daily.sh 的总报告不能因为它挂掉）。
+ */
+export async function siteShapeSignals(items, { tool = toolDemand, codes = codesMediaBatch } = {}) {
+  const out = new Map();
+  const eligible = items.filter((i) => SIGNAL_KINDS.has(i.kind) && i.name);
+  if (!eligible.length) return out;
+  let codesMap = new Map();
+  try {
+    // 按 items 顺序占额度（Roblox 在最前面），每天最多 15 次新查询，缓存 3 天
+    codesMap = await codes(eligible.map((i) => i.name));
+  } catch (error) {
+    console.error(`codes 媒体失败：${error.message}`);
+  }
+  for (const i of eligible) {
+    const notes = [];
+    try {
+      const t = await tool(i.name);
+      if (!t.ok || t.count) notes.push(toolDemandNote(t, { examples: 1 }));
+    } catch {
+      notes.push("工具需求 查询失败");
+    }
+    const c = codesMap.get(i.name);
+    notes.push(c ? (c.verdict === "mismatch" ? "codes SERP 错配" : c.label) : "codes 媒体 查询失败");
+    out.set(i, notes);
+  }
+  return out;
+}
+
 async function daily() {
   const invest = readReport("INVEST");
   const playable = readReport("PLAYABLE");
@@ -203,21 +250,21 @@ async function daily() {
 
   // 每条带上游戏名，后面统一查「最近 3 天新注册域名」
   const items = [
-    ...robloxGo.map((d) => ({ name: d.name, text: `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）` })),
+    ...robloxGo.map((d) => ({ kind: "roblox", name: d.name, text: `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）` })),
     ...strongMismatch.map((m) => {
       const name = cleanRobloxName(m.name);
       const verified = roblox?.demand.find((d) => d.name === name);
       const demandNote = verified ? `；需求验证 ${verified.verdict}` : "；还没做需求验证";
-      return { name, text: `- **Roblox 错配** ${name}：本周 ${m.channels} 个频道在做视频，热度是在线人数的 ${m.ratio} 倍（Hole Fishing 模型${demandNote}）` };
+      return { kind: "roblox", name, text: `- **Roblox 错配** ${name}：本周 ${m.channels} 个频道在做视频，热度是在线人数的 ${m.ratio} 倍（Hole Fishing 模型${demandNote}）` };
     }),
-    ...steamTop.map((r) => ({ name: r.split("|")[2]?.trim(), text: `- **Steam** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}（总分 ${r.split("|")[3]?.replace(/\*/g, "").trim()}）` })),
+    ...steamTop.map((r) => ({ kind: "steam", name: r.split("|")[2]?.trim(), text: `- **Steam** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}（总分 ${r.split("|")[3]?.replace(/\*/g, "").trim()}）` })),
     ...followTop.map((r) => {
       const [verdict, game, followers, dailyGain, growth, release] = cells(r);
-      return { name: unlink(game), text: `- **Steam 关注者** ${unlink(game)}：${verdict}（关注者 ${followers}，日增 ${dailyGain}，7 天 ${growth}，发售 ${release}）` };
+      return { kind: "steam", name: unlink(game), text: `- **Steam 关注者** ${unlink(game)}：${verdict}（关注者 ${followers}，日增 ${dailyGain}，7 天 ${growth}，发售 ${release}）` };
     }),
     ...suggestTop.map((r) => {
       const [, game, intents] = cells(r);
-      return { name: game, text: `- **联想新词** ${game}：Google 联想刚冒出（${intents}）` };
+      return { kind: "suggest", name: game, text: `- **联想新词** ${game}：Google 联想刚冒出（${intents}）` };
     }),
     ...playableTop.map((r) => ({ name: r.split("|")[2]?.trim(), text: `- **可玩游戏** ${r.split("|")[2]?.trim()}：${r.split("|")[1]?.trim()}` })),
     ...memeTop.map((r) => {
@@ -227,9 +274,11 @@ async function daily() {
   ];
   // 新注册域名（whoisds 免费版，每天约 7 万个抽样）：同行开始抢注 = 热度确认 / 窗口在关
   const nrd = items.length ? await nrdCounts(items.map((i) => i.name)) : { available: false, byName: {}, dates: [] };
+  const signals = await siteShapeSignals(items);
   const headline = items.map((i) => {
     const note = nrd.available ? nrdNote(nrd.byName[i.name], { days: nrd.dates.length }) : "";
-    return note && nrd.byName[i.name] !== null ? `${i.text} · ${note}` : i.text;
+    const text = note && nrd.byName[i.name] !== null ? `${i.text} · ${note}` : i.text;
+    return [text, ...(signals.get(i) ?? [])].join(" · ");
   });
 
   const lines = [
@@ -237,6 +286,7 @@ async function daily() {
     "",
     "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
     "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
+    "> 站型信号（2026-10-13 加）：🧮 工具需求 = Google 联想里 ≥2 条 value / calculator / trading 类补全（能做首页即工具的价值表 / 计算器站）· codes 媒体 N 家 = 「<游戏> codes」美国前 10 里讲这个游戏的大媒体数：0–1 📣 抢速度 / 2 🟡 / ≥3 ⛔ codes 别当主打（做实体页 / 工具页）；SERP 错配 = 结果页讲的是别的游戏，不算数",
     `> 「近 3 天 N 个新域名」= whoisds 免费新注册域名列表里含这个名字的个数（每天约 7 万个抽样，0 不等于没人注册；⚠️ = ≥3 个，同行在抢）${nrd.available ? `；用的是 ${nrd.dates.join(" / ")}（UTC）` : "；今天没拿到列表"}`,
     "",
     "## 今天最值得看",
@@ -253,8 +303,8 @@ async function daily() {
     lines.push("**需求验证**（成长期 + 错配里挑的前几名；Trends 曲线 + 量级 + 攻略子词）：", "");
     lines.push(
       ...table(
-        "| 判决 | 游戏 | Trends | 量级（vs 锚点） | 子关键词 |",
-        roblox.demand.map((d) => `| ${d.verdict || "?"} | ${d.name} | ${d.trend} | ${d.magnitude || "-"} | ${d.sub} |`),
+        "| 判决 | 游戏 | Trends | 量级（vs 锚点） | 子关键词 | 工具需求 |",
+        roblox.demand.map((d) => `| ${d.verdict || "?"} | ${d.name} | ${d.trend} | ${d.magnitude || "-"} | ${d.sub} | ${toolDemandNote(d.tool, { examples: 1 }) || "-"} |`),
       ),
       "",
       "**YouTube 错配**（创作者跑得比玩家快）：",
@@ -275,7 +325,7 @@ async function daily() {
   }
   lines.push("## Steam（投入价值）", "");
   if (!invest) lines.push("（今天的 RADAR-INVEST 还没生成：每日管线 08:30 跑，可能没开机或还没跑完）", "");
-  else lines.push(...table("| 判决 | 游戏 | 总分 | 需求 | 结构 | 窗口 | 广告 | 持续 |", [...steamTop, ...steamWatch]), "");
+  else lines.push(...table("| 判决 | 游戏 | 总分 | 需求 | 结构 | 窗口 | 广告 | 持续 | 信号 |", [...steamTop, ...steamWatch]), "");
   lines.push("## Steam 关注者增速（预发布 / 刚发售）", "");
   if (!follow) lines.push("（今天的 RADAR-STEAMFOLLOW 还没生成）", "");
   else lines.push(...table("| 判决 | 游戏 | 关注者 | 日增 | 7 天增长 | 发售 | 新注册域名 | 来源 |", rowsStartingWith(follow, ["🟢", "🌱", "🔵", "🟡"], 10)), "");
@@ -367,6 +417,17 @@ async function check(names) {
       console.log(await run("lib/steam-gate.mjs", [steam.name]));
       console.log("── Steam 投入价值");
       console.log(await run("lib/invest-score.mjs", [String(steam.appId), steam.name]));
+    }
+    if (roblox || steam) {
+      // 站型信号（2026-10-13 加）：Steam 的工具需求已经算进上面的投入价值「结构」里，这里两条线一起再列一次
+      const game = roblox?.name ?? steam.name;
+      const [t, c] = await Promise.all([
+        toolDemand(game).catch(() => ({ ok: false })),
+        codesMediaBatch([game]).then((m) => m.get(game)).catch(() => null),
+      ]);
+      console.log("── 站型信号");
+      console.log(`   ${toolDemandNote(t, { examples: 4 }) || "工具需求 0"}`);
+      console.log(`   ${c ? c.label : "codes 媒体 查询失败"}${c?.media?.length ? `（${c.media.join(" / ")}）` : ""}${c?.cached ? "（缓存）" : ""}\n`);
     }
     if (!(roblox || steam)) {
       console.log("── 可玩游戏走势");

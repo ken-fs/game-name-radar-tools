@@ -138,6 +138,15 @@ Steam/Wiki 候选和在线小游戏都会进入该层，避免 Steam 高愿望�
 - 90天前段是否接近无量，近期才开始上涨
 - 是否已有同名域名、专门Wiki或多个攻略站占位
 
+### 5. 站型信号（2026-10-13 加）
+
+依据 `Ship/research/GAME-WIKI-STRUCTURE-2026-10.md`：流量最大的独立游戏站是「首页就是工具」的价值表 / 计算器站；而 codes 词一旦有大媒体覆盖，独立站基本进不去前 10。所以候选再看两件事：
+
+- **🧮 工具需求**（`lib/tool-demand.mjs`，Google Suggest，免费）：查「<游戏> value / values / calculator / trading / stock」，含游戏名且带 value list / calculator / trade / stock 等意图的补全 ≥2 条 = 🧮。算进投入价值「结构」维度（+5），也出现在 Roblox 需求验证表和总报告「今天最值得看」里。结果缓存 24 小时（`data/tool-demand-cache.json`）。
+- **codes 媒体进场数**（`lib/codes-media.mjs`，treg `treg.google.serp.organic`，约 $0.00015–0.00055/次）：「<游戏> codes」Google 美国前 10 里，**标题含游戏名**的结果中有几家大媒体（GameRant / Beebom / IGN 等 21 家）。0–1 家 📣 codes 还有窗口（抢速度）· 2 家 🟡 · ≥3 家 ⛔ codes 别当主打（做实体页 / 工具页）。讲这个游戏的结果不到 3 条 = 「SERP 错配」（treg 路由偶尔返回别的游戏），不报 0 家。只查「今天最值得看」的 Roblox / Steam / 联想新词候选，每天最多 15 次新查询，按游戏缓存 3 天（`data/codes-media-cache.json`），花费记在 `data/codes-media-spend.jsonl`。
+
+单查：`node radar.mjs check "游戏名"` 会多出「站型信号」一段；也可以直接 `node lib/tool-demand.mjs "游戏名"`、`node lib/codes-media.mjs "游戏名"`。
+
 ## GitHub Actions
 
 `.github/workflows/radar.yml` 默认在每小时第17分和第47分运行。旧任务会在新任务开始时自动取消，只保留最新扫描。
