@@ -100,6 +100,11 @@ export function parseGrowth(text) {
     .map((m) => ({ ageDays: Number(m[4]), ccu: Number(m[2]), growth: Number(m[1]), id: m[7], name: m[6].trim(), updatedDaysAgo: Number(m[5]) }));
 }
 
+/** 增长扫描的「大而稳」段（行首 ⚓，其余列同 GROWTH_ROW） */
+export function parseSteady(text) {
+  return parseGrowth(text.split("\n").filter((line) => /^\s+⚓/.test(line)).map((line) => line.replace("⚓", " ")).join("\n"));
+}
+
 export function parseMismatch(text) {
   return text
     .split("\n")
@@ -140,10 +145,12 @@ export function parseDemand(text) {
  * 拿去做需求验证的候选：强错配（🎣🎣）和成长期各占一半，成长期只要 CCU 800–60K
  * （太小撑不起站、太大 SERP 已锁死）。Trends 会限流，总数控制在 limit 以内。
  */
-function shortlist(growth, mismatch, limit = 8) {
+function shortlist(growth, mismatch, steady = [], limit = 8) {
   const picked = new Map();
   const half = Math.ceil(limit / 2);
   for (const m of mismatch.filter((r) => r.flag === "🎣🎣").slice(0, half)) picked.set(m.id, m.name);
+  // 大而稳留 2 个名额（2026-10-14，Deep Fishing 漏报：它从来抢不过增长比高的小游戏）
+  for (const g of steady.slice(0, 2)) picked.set(g.id, g.name);
   for (const g of growth.filter((r) => r.ccu >= 800 && r.ccu <= 60_000)) {
     if (picked.size >= limit) break;
     picked.set(g.id, g.name);
@@ -157,14 +164,15 @@ async function robloxLayer() {
     run("lib/roblox-yt-mismatch.mjs"),
   ]);
   const growth = parseGrowth(growthText);
+  const steady = parseSteady(growthText);
   const mismatch = parseMismatch(mismatchText);
-  const names = shortlist(growth, mismatch);
+  const names = shortlist(growth, mismatch, steady);
   const demand = names.length ? parseDemand(await run("lib/roblox-demand-scan.mjs", names)) : [];
   // 🧮 工具需求（2026-10-13 加）：结果缓存 24h，下面「今天最值得看」再查同名直接命中
   for (const d of demand) {
     try { d.tool = await toolDemand(d.name); } catch { d.tool = { ok: false }; }
   }
-  return { demand, growth, mismatch, errors: [growthText, mismatchText].filter((t) => t.startsWith("⚠️")) };
+  return { demand, growth, steady, mismatch, errors: [growthText, mismatchText].filter((t) => t.startsWith("⚠️")) };
 }
 
 // ─── 读当天每日管线的报告 ─────────────────────────────────────────────────────
@@ -257,7 +265,7 @@ async function daily() {
 
   // 判决记录（2026-10-13 加）：每条带上当时的原始数值（data），跑完写进 data/verdict-log.jsonl
   const robloxStats = (name) => {
-    const g = roblox?.growth.find((x) => cleanRobloxName(x.name) === name);
+    const g = [...(roblox?.growth ?? []), ...(roblox?.steady ?? [])].find((x) => cleanRobloxName(x.name) === name);
     const m = roblox?.mismatch.find((x) => cleanRobloxName(x.name) === name);
     return { ageDays: g?.ageDays, ccu: g?.ccu ?? m?.ccu, growthX: g?.growth, placeId: g?.id ?? m?.id, updatedDaysAgo: g?.updatedDaysAgo, ytChannels: m?.channels, ytRatio: m?.ratio };
   };
@@ -351,6 +359,13 @@ async function daily() {
       ...table(
         "| 增长比 | 游戏 | 在线 | 上线天数 | 最近更新 |",
         roblox.growth.slice(0, 10).map((g) => `| ${g.growth}x | ${g.name} | ${g.ccu} | ${g.ageDays} 天 | ${g.updatedDaysAgo} 天前 |`),
+      ),
+      "",
+      "**大而稳**（在线 5K–60K、增长 ≥3x、上线 ≤120 天，按在线排；上面没列的。前 2 个进需求验证）：",
+      "",
+      ...table(
+        "| 增长比 | 游戏 | 在线 | 上线天数 | 最近更新 |",
+        (roblox.steady ?? []).slice(0, 8).map((g) => `| ${g.growth}x | ${g.name} | ${g.ccu} | ${g.ageDays} 天 | ${g.updatedDaysAgo} 天前 |`),
       ),
       "",
     );
@@ -486,6 +501,7 @@ async function morning() {
     run("lib/roblox-yt-mismatch.mjs"),
   ]);
   const growth = parseGrowth(growthText);
+  const steady = parseSteady(growthText);
   const mismatch = parseMismatch(mismatchText);
 
   const hot = [
@@ -495,6 +511,7 @@ async function morning() {
     ...growth
       .filter((g) => g.growth >= 8 && g.ccu >= 300 && g.ccu <= 60000)
       .map((g) => ({ id: g.id, name: cleanRobloxName(g.name), why: `增长 ${g.growth}x（${g.ccu} 在线 / ${g.ageDays} 天）` })),
+    ...steady.map((g) => ({ id: g.id, name: cleanRobloxName(g.name), why: `大而稳 ${g.ccu} 在线、增长 ${g.growth}x（${g.ageDays} 天）` })),
   ];
 
   const stateFile = join(HERE, "data", "roblox-morning-state.json");

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { cleanRobloxName, parseDemand, parseGrowth, parseMismatch } from "../radar.mjs";
+import { cleanRobloxName, parseDemand, parseGrowth, parseMismatch, parseSteady } from "../radar.mjs";
 
 test("cleanRobloxName strips update tags and emoji", () => {
   assert.equal(cleanRobloxName("[🐟UPDATE] Hole Fishing"), "Hole Fishing");
@@ -19,6 +19,14 @@ test("parseGrowth reads the growth-scan table", () => {
   );
   assert.equal(rows.length, 2);
   assert.deepEqual(rows[0], { ageDays: 156, ccu: 4698, growth: 33.3, id: "10126644530", name: "[🛒] Run a Sari-Sari Store!", updatedDaysAgo: 0 });
+});
+
+test("parseSteady reads only the ⚓ rows, parseGrowth skips them", () => {
+  const text =
+    "   13.3x   18371    1102K    84天    0天前  Anime Zero  [10512942223]\n" +
+    "  ⚓   3.2x    7660     460K    87天    0天前  [PETS] Deep Fishing🎣  [10526853622]\n";
+  assert.deepEqual(parseSteady(text).map((r) => [r.id, r.ccu, r.growth]), [["10526853622", 7660, 3.2]]);
+  assert.deepEqual(parseGrowth(text).map((r) => r.id), ["10512942223"]);
 });
 
 test("parseMismatch keeps the fishing-rod flags", () => {
