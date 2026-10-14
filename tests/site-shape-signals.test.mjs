@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { classifyToolDemand, toolDemand, toolDemandNote } from '../lib/tool-demand.mjs';
-import { classifyCodesSerp, titleMentions } from '../lib/codes-media.mjs';
+import { classifyMedia, mediaSlug, probeMedia } from '../lib/codes-media.mjs';
 import { scoreInvest } from '../lib/invest-score.mjs';
 import { siteShapeSignals } from '../radar.mjs';
 
@@ -29,43 +29,27 @@ test('tool demand marks all-failed lookups as not ok instead of zero', async () 
   assert.equal(toolDemandNote(r), '工具需求 查询失败');
 });
 
-test('codes SERP: fuzzy results about other games = mismatch, not 0 media', () => {
-  const r = classifyCodesSerp('Pets Universe', [
-    { domain: 'urgametips.com', title: 'Clicking Universe Codes (October 2026)' },
-    { domain: 'youtube.com', title: 'ALL NEW Roblox Pet Catchers Codes!' },
-    { domain: 'petsuniverse.wiki', title: 'Latest Pets Universe Codes: Boost Your Game Today (2026)' },
-  ]);
-  assert.equal(r.verdict, 'mismatch');
-  assert.deepEqual(r.media, []);
+test('codes media: 0–1 = open, 2 = mixed, ≥3 = closed', () => {
+  assert.equal(classifyMedia([]).verdict, 'open');
+  assert.equal(classifyMedia(['urgametips.com']).verdict, 'open');
+  assert.equal(classifyMedia(['beebom.com', 'gamerant.com']).verdict, 'mixed');
+  assert.match(classifyMedia(['beebom.com', 'gamerant.com', 'pcgamesn.com']).label, /⛔ codes 媒体 3 家/);
 });
 
-test('codes SERP: ≥3 media covering the game = closed', () => {
-  const rows = ['gamerant.com', 'www.beebom.com', 'ign.com', 'youtube.com'].map((domain) => ({ domain, title: 'Grow a Garden Codes (October 2026)' }));
-  rows.push({ domain: 'pcgamesn.com', title: 'Garden Horizons codes' }); // 讲别的游戏的媒体不算
-  const r = classifyCodesSerp('Grow a Garden', rows);
-  assert.equal(r.verdict, 'closed');
-  assert.deepEqual(r.media, ['gamerant.com', 'beebom.com', 'ign.com']);
-  assert.match(r.label, /⛔ codes 媒体 3 家/);
+test('mediaSlug drops apostrophes and tags punctuation', () => {
+  assert.equal(mediaSlug('Build An Ant Empire'), 'build-an-ant-empire');
+  assert.equal(mediaSlug("Don't Be Late For School!"), 'dont-be-late-for-school');
 });
 
-test('codes SERP: rows with only `link` (anyapi) still count media', () => {
-  const rows = ['https://beebom.com/deep-fishing-codes/', 'https://www.pockettactics.com/deep-fishing-codes', 'https://gamerant.com/deep-fishing-codes-roblox/']
-    .map((link) => ({ link, title: 'Deep Fishing Codes (October 2026)' }));
-  const r = classifyCodesSerp('Deep Fishing', rows);
-  assert.equal(r.verdict, 'closed');
-  assert.deepEqual(r.top, ['beebom.com', 'pockettactics.com', 'gamerant.com']);
+test('probeMedia counts a domain once even when two URL shapes hit', async () => {
+  const live = new Set(['https://www.pockettactics.com/deep-fishing-codes', 'https://www.pockettactics.com/deep-fishing/codes', 'https://beebom.com/deep-fishing-codes/']);
+  const r = await probeMedia('Deep Fishing', { exists: async (u) => live.has(u) });
+  assert.deepEqual(r.media, ['beebom.com', 'pockettactics.com']);
+  assert.equal(r.verdict, 'mixed');
 });
 
-test('codes SERP: 0–1 media = open, 2 = mixed', () => {
-  const t = 'Command an Army Codes';
-  assert.equal(classifyCodesSerp('Command an Army', ['youtube.com', 'reddit.com', 'beebom.com'].map((domain) => ({ domain, title: t }))).verdict, 'open');
-  assert.equal(classifyCodesSerp('Command an Army', ['youtube.com', 'ign.com', 'beebom.com'].map((domain) => ({ domain, title: t }))).verdict, 'mixed');
-});
-
-test('titleMentions normalizes punctuation and spacing', () => {
-  assert.ok(titleMentions('Pets Universe!', 'Pets Universe codes'));
-  assert.ok(titleMentions('Blox Fruits', 'BloxFruits Codes Wiki'));
-  assert.ok(!titleMentions('Fisch', 'Fish It codes'));
+test('probeMedia throws when every request failed (network down ≠ 0 media)', async () => {
+  await assert.rejects(probeMedia('Deep Fishing', { exists: async () => null }));
 });
 
 test('invest score: 🧮 tool demand adds to structure', () => {
