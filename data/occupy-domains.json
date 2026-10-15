@@ -1423,22 +1423,352 @@
  },
  "trey2k23game.com": {
   "available": null,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-06"
  },
  "trey2k23wiki.com": {
   "available": null,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-06"
  },
  "thehospital.wiki": {
   "available": null,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-06"
  },
  "thehospitalgame.com": {
   "available": null,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-06"
  },
  "thehospitalwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-06"
+ },
+ "valormortiswiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "valormortis.wiki": {
+  "available": false,
+  "registered": "2026-07-25",
+  "ns": "donna.ns.cloudflare.com,cory.ns.cloudflare.com",
+  "checkedAt": "2026-10-14"
+ },
+ "valormortisgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "chopaforest.wiki": {
+  "available": false,
+  "registered": "2026-10-14",
+  "ns": "mitchell.ns.cloudflare.com,samara.ns.cloudflare.com",
+  "checkedAt": "2026-10-14"
+ },
+ "fashiondesigner.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "fashiondesignergame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "chopaforestgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "chopaforestwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "tumbangpreso.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "fashiondesignerwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "climbforanimalseggs.wiki": {
+  "available": false,
+  "registered": "2026-10-08",
+  "ns": "rohin.ns.cloudflare.com,wanda.ns.cloudflare.com",
+  "checkedAt": "2026-10-14"
+ },
+ "tumbangpresogame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "tumbangpresowiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "nosuchplace.wiki": {
+  "available": false,
+  "registered": "2026-06-24",
+  "ns": "stanley.ns.cloudflare.com,rayne.ns.cloudflare.com",
+  "checkedAt": "2026-10-14"
+ },
+ "climbforanimalseggsgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "climbforanimalseggswiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "trashday.wiki": {
+  "available": false,
+  "registered": "2026-10-06",
+  "ns": "lynn.ns.cloudflare.com,josephine.ns.cloudflare.com",
+  "checkedAt": "2026-10-14"
+ },
+ "nosuchplacegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "nosuchplacewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "legionwashere.wiki": {
+  "available": false,
+  "registered": "2026-10-02",
+  "ns": "lynn.ns.cloudflare.com,josephine.ns.cloudflare.com",
+  "checkedAt": "2026-10-14"
+ },
+ "trashdaygame.com": {
+  "available": false,
+  "registered": "2026-02-17",
+  "ns": "NS6.WIXDNS.NET,NS7.WIXDNS.NET",
+  "checkedAt": "2026-10-14"
+ },
+ "trashdaywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "voodoofishin.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "legionwasherewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "voodoofishingame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "voodoofishinwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "legionwasheregame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "deepdishdungeon.wiki": {
+  "available": false,
+  "registered": "2026-09-09",
+  "ns": "ns2-coming-soon.sav.com,ns1-coming-soon.sav.com",
+  "checkedAt": "2026-10-14"
+ },
+ "deepdishdungeongame.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "deepdishdungeonwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-14"
+ },
+ "overthehillgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "overthehillwiki.com": {
+  "available": false,
+  "registered": "2026-09-13",
+  "ns": "FRED.NS.CLOUDFLARE.COM,GEORGIA.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-15"
+ },
+ "overthehill.wiki": {
+  "available": false,
+  "registered": "2026-07-25",
+  "ns": "cruz.ns.cloudflare.com,vick.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "castlevaniabelmontscurse.wiki": {
+  "available": false,
+  "registered": "2026-08-31",
+  "ns": "glen.ns.cloudflare.com,mary.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "castlevaniabelmontscursegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "belmontscurse.wiki": {
+  "available": false,
+  "registered": "2026-08-22",
+  "ns": "jobs.ns.cloudflare.com,grannbo.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "belmontscursewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "belmontscursegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "harpoonafish.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "castlevaniabelmontscursewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "thegameoflife.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "harpoonafishgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "harpoonafishwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "washthecar.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "thegameoflifewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "thegameoflifegame.com": {
+  "available": false,
+  "registered": "2023-10-11",
+  "ns": "IRMA.NS.CLOUDFLARE.COM,LOU.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-15"
+ },
+ "washthecargame.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "1princessevolution.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "1princessevolutiongame.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "beltdance.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "1princessevolutionwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "washthecarwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "beltdancegame.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "beltdancewiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "arknightsendfield.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "arknightsendfieldgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "endfield.wiki": {
+  "available": false,
+  "registered": "2023-11-11",
+  "ns": "addilyn.ns.cloudflare.com,martin.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "arknightsendfieldwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "warhammer40000boltgun2.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "endfieldgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "warhammer40000boltgun2game.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "endfieldwiki.com": {
+  "available": false,
+  "registered": "2026-01-27",
+  "ns": "NOAH.NS.CLOUDFLARE.COM,VERONICA.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-15"
+ },
+ "warhammer40000boltgun2wiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-15"
+ },
+ "boltgun2.wiki": {
+  "available": false,
+  "registered": "2026-10-14",
+  "ns": "mitchell.ns.cloudflare.com,brynne.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "boltgun2game.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "ratatan.wiki": {
+  "available": false,
+  "registered": "2026-07-15",
+  "ns": "elinore.ns.cloudflare.com,anderson.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "boltgun2wiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
+ },
+ "thewitchsbakery.wiki": {
+  "available": false,
+  "registered": "2026-08-12",
+  "ns": "drew.ns.cloudflare.com,aida.ns.cloudflare.com",
+  "checkedAt": "2026-10-15"
+ },
+ "ratatangame.com": {
+  "available": false,
+  "registered": "2023-07-21",
+  "ns": "NS-CLOUD-C1.GOOGLEDOMAINS.COM,NS-CLOUD-C2.GOOGLEDOMAINS.COM,NS-CLOUD-C3.GOOGLEDOMAINS.COM,NS-CLOUD-C4.GOOGLEDOMAINS.COM",
+  "checkedAt": "2026-10-15"
+ },
+ "ratatanwiki.com": {
+  "available": false,
+  "registered": "2024-12-05",
+  "ns": "NS-A1.CONOHA.IO,NS-A2.CONOHA.IO,NS-A3.CONOHA.IO",
+  "checkedAt": "2026-10-15"
+ },
+ "thewitchsbakerygame.com": {
+  "available": false,
+  "registered": "2024-06-05",
+  "ns": "DNS105.OVH.NET,NS105.OVH.NET",
+  "checkedAt": "2026-10-15"
+ },
+ "thewitchsbakerywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-15"
  }
 }

@@ -112,6 +112,17 @@ RADAR_NOTIFY=1 "$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyA
 #    零成本（RDAP 免费 + 7 天缓存）；🟢 新出现的可买 .wiki 推通知。
 "$NODE" --env-file-if-exists=.env lib/occupy-queue.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 
+# 7. occupy 数据入库（2026-10-16 加）：占位队列状态 / 域名清单是刻意跟踪的（3e73983），但管线每天改、
+#    以前没人 commit → 巡检第二天必报「改了没 commit」。跑完顺手提交 + 推送（失败不挡管线，巡检会抓）。
+git add data/occupy-state.json data/occupy-domains.json
+if ! git diff --cached --quiet; then
+  git commit -q -m "chore: occupy-queue 每日状态 $TODAY"
+  GIT_TERMINAL_PROMPT=0 git push -q origin main \
+    || GIT_TERMINAL_PROMPT=0 git -c http.proxy=http://127.0.0.1:7897 push -q origin main \
+    || GIT_SSH_COMMAND="ssh -i $HOME/.ssh/id_ed25519 -o IdentitiesOnly=yes" git push -q git@github.com:ken-fs/game-name-radar-tools.git main \
+    || echo "⚠️ occupy 数据 push 失败，留在本地，明天巡检会报"
+fi
+
 touch "$DONE"
 find "$LOGDIR" -name 'game-radar-ok-*' -mtime +14 -delete
 echo "=== $(date '+%F %T') 完成"
