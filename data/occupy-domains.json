@@ -1677,19 +1677,19 @@
  },
  "beltdancegame.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "beltdancewiki.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "arknightsendfield.wiki": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "arknightsendfieldgame.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "endfield.wiki": {
   "available": false,
@@ -1699,7 +1699,7 @@
  },
  "arknightsendfieldwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "warhammer40000boltgun2.wiki": {
   "available": true,
@@ -1707,11 +1707,11 @@
  },
  "endfieldgame.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "warhammer40000boltgun2game.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "endfieldwiki.com": {
   "available": false,
@@ -1721,7 +1721,7 @@
  },
  "warhammer40000boltgun2wiki.com": {
   "available": null,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-08"
  },
  "boltgun2.wiki": {
   "available": false,
@@ -1770,5 +1770,113 @@
  "thewitchsbakerywiki.com": {
   "available": true,
   "checkedAt": "2026-10-15"
+ },
+ "killpeppa.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "killpeppawiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "killpeppagame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "sliceadummy.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "sliceadummygame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "sliceadummywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "talesofeterniaremastered.wiki": {
+  "available": false,
+  "registered": "2026-10-11",
+  "ns": "robin.ns.cloudflare.com,damon.ns.cloudflare.com",
+  "checkedAt": "2026-10-16"
+ },
+ "chainedbeasts.wiki": {
+  "available": false,
+  "registered": "2026-08-12",
+  "ns": "drew.ns.cloudflare.com,aida.ns.cloudflare.com",
+  "checkedAt": "2026-10-16"
+ },
+ "talesofeterniaremasteredwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "talesofeterniaremasteredgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "chainedbeastsgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "enshrouded.wiki": {
+  "available": false,
+  "registered": "2026-08-24",
+  "ns": "guy.ns.cloudflare.com,jocelyn.ns.cloudflare.com",
+  "checkedAt": "2026-10-16"
+ },
+ "chainedbeastswiki.com": {
+  "available": false,
+  "registered": "2026-08-12",
+  "ns": "AIDA.NS.CLOUDFLARE.COM,DREW.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-16"
+ },
+ "duperyagameofsolodeduction.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "enshroudedwiki.com": {
+  "available": false,
+  "registered": "2026-10-14",
+  "ns": "DNS1.P09.NSONE.NET,DNS2.P09.NSONE.NET,DNS3.P09.NSONE.NET,DNS4.P09.NSONE.NET",
+  "checkedAt": "2026-10-16"
+ },
+ "enshroudedgame.com": {
+  "available": false,
+  "registered": "2026-06-26",
+  "ns": "LEAH.NS.CLOUDFLARE.COM,ROCKY.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-16"
+ },
+ "agameofsolodeduction.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "duperyagameofsolodeductionwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "duperyagameofsolodeductiongame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "agameofsolodeductiongame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "tidyupthesmalltown.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "agameofsolodeductionwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "tidyupthesmalltowngame.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
+ },
+ "tidyupthesmalltownwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-16"
  }
 }
