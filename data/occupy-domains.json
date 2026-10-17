@@ -1422,12 +1422,12 @@
   "checkedAt": "2026-10-13"
  },
  "trey2k23game.com": {
-  "available": null,
-  "checkedAt": "2026-10-06"
+  "available": true,
+  "checkedAt": "2026-10-17"
  },
  "trey2k23wiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-06"
+  "available": true,
+  "checkedAt": "2026-10-17"
  },
  "thehospital.wiki": {
   "available": null,
@@ -1878,5 +1878,103 @@
  "tidyupthesmalltownwiki.com": {
   "available": true,
   "checkedAt": "2026-10-16"
+ },
+ "bikeforegg.wiki": {
+  "available": false,
+  "registered": "2026-10-16",
+  "ns": "mitchell.ns.cloudflare.com,samara.ns.cloudflare.com",
+  "checkedAt": "2026-10-17"
+ },
+ "runanairline.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "bikeforegggame.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "bikeforeggwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "runanairlinegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "runanairlinewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "beatthebosssteal.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "beatthebossstealwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "beyondthesestars.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "beatthebossstealgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "beyondthesestarsgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "tenebrissomnia.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "beyondthesestarswiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "tenebrissomniagame.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "tenebrissomniawiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "penguincolony.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "penguincolonygame.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "penguincolonywiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "alicenation.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "alicenationgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-17"
+ },
+ "alicemadnessreturns.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "alicemadnessreturnsgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "alicenationwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
+ },
+ "alicemadnessreturnswiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-17"
  }
 }
