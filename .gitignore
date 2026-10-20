@@ -29,6 +29,7 @@ data/wiki-top-cache.json
 # 站型信号缓存 + codes 媒体花费账本（2026-10-13 加，每天重写 / 追加，本地留痕不入库）
 data/tool-demand-cache.json
 data/codes-media-cache.json
+data/serp-gap-cache.json
 data/codes-media-spend.jsonl
 
 # Steam 畅销 / 在玩榜快照（2026-10-13 加，每天重写）

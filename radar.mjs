@@ -9,7 +9,7 @@
  *       梗游戏三份报告，再现跑 Roblox 层（成长期扫描 + YouTube 错配 + 前几名的需求验证），
  *       汇总成一份，最上面是「今天最值得看」。launchd 在 scan.mjs 之后接着跑它。
  *
- *   node radar.mjs check "名字" [...]  # 单查一个或几个游戏 / 梗，自动判断该走哪条线：
+ *   node radar.mjs check "名字" [...]  # 单查一个或几个游戏 / 梗，自动判断该走哪条线（Roblox / Steam 末尾带 SERP 空位）：
  *       Roblox 上搜得到 → Roblox 需求验证（Trends 曲线 + 攻略子词）
  *       Steam 上搜得到  → Steam 工具闸门 + 投入价值五维评分
  *       都没有          → 可玩游戏走势 + 梗雷达（高 CPM 市场本地语言联想）
@@ -34,6 +34,7 @@ import { nrdCounts, nrdNote } from "./lib/nrd.mjs";
 import { codesMediaBatch } from "./lib/codes-media.mjs";
 import { toolDemand, toolDemandNote } from "./lib/tool-demand.mjs";
 import { num, writeVerdictLog } from "./lib/verdict-log.mjs";
+import { robloxUpdated, serpGap, serpGapDetail, serpGapNote, steamUpdated } from "./lib/serp-gap.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SHIP = join(HERE, "..");
@@ -316,10 +317,11 @@ async function daily() {
   // 新注册域名（whoisds 免费版，每天约 7 万个抽样）：同行开始抢注 = 热度确认 / 窗口在关
   const nrd = items.length ? await nrdCounts(items.map((i) => i.name)) : { available: false, byName: {}, dates: [] };
   const signals = await siteShapeSignals(items);
+  const gaps = await serpGapSignals(items);
   const headline = items.map((i) => {
     const note = nrd.available ? nrdNote(nrd.byName[i.name], { days: nrd.dates.length }) : "";
     const text = note && nrd.byName[i.name] !== null ? `${i.text} · ${note}` : i.text;
-    return [text, ...(signals.get(i) ?? [])].join(" · ");
+    return [text, ...(signals.get(i) ?? []), gaps.get(i)].filter(Boolean).join(" · ");
   });
 
   const lines = [
@@ -328,6 +330,7 @@ async function daily() {
     "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速 / 畅销·在玩榜）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
     "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-STEAMCHARTS / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
     "> 站型信号（2026-10-13 加）：🧮 工具需求 = Google 联想里 ≥2 条 value / calculator / trading 类补全（能做首页即工具的价值表 / 计算器站）· codes 媒体 N 家 = 「<游戏> codes」美国前 10 里讲这个游戏的大媒体数：0–1 📣 抢速度 / 2 🟡 / ≥3 ⛔ codes 别当主打（做实体页 / 工具页）；SERP 错配 = 结果页讲的是别的游戏，不算数",
+    "> SERP 空位（2026-10-20 加，前 5 个 Roblox / Steam 候选）：🌐 语言空位 = 德法西意日韩里本地联想有人搜、前 10 本地语言页 ≤2（能用本地语言页抢）· 🕰️ = 美国前 10 有日期的页面 ≥60% 早于游戏最近更新（30 天内还在更新的按 30 天前算）；单次 SERP 会抖，是提示不是判决",
     `> 「近 3 天 N 个新域名」= whoisds 免费新注册域名列表里含这个名字的个数（每天约 7 万个抽样，0 不等于没人注册；⚠️ = ≥3 个，同行在抢）${nrd.available ? `；用的是 ${nrd.dates.join(" / ")}（UTC）` : "；今天没拿到列表"}`,
     "",
     "## 今天最值得看",
@@ -417,6 +420,25 @@ async function daily() {
 
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
 
+/**
+ * SERP 空位（2026-10-20 加，lib/serp-gap.mjs）：🌐 本地语言空位 + 🕰️ 前 10 过时。
+ * 只查「今天最值得看」前 5 个 Roblox / Steam 候选（每个约 $0.001，缓存 3 天）；没空位不写，失败只在那一条上标，绝不抛。
+ */
+export async function serpGapSignals(items, { limit = 5, gap = serpGap } = {}) {
+  const out = new Map();
+  for (const i of items.filter((x) => (x.kind === "roblox" || x.kind === "steam") && x.name).slice(0, limit)) {
+    try {
+      const hit = i.kind === "roblox" ? await onRoblox(i.name) : await onSteam(i.name);
+      const updatedAt = hit ? await (i.kind === "roblox" ? robloxUpdated(hit.universeId) : steamUpdated(hit.appId)) : null;
+      const note = serpGapNote(await gap(hit?.name ?? i.name, { kind: i.kind, updatedAt }));
+      if (note) out.set(i, note);
+    } catch {
+      out.set(i, "SERP 空位 查询失败");
+    }
+  }
+  return out;
+}
+
 /** 判平台用的查询偶尔会超时（代理抖一下就漏判），失败重试两次。 */
 async function fetchJson(url, attempts = 3) {
   for (let i = 0; i < attempts; i += 1) {
@@ -481,6 +503,11 @@ async function check(names) {
       console.log("── 站型信号");
       console.log(`   ${toolDemandNote(t, { examples: 4 }) || "工具需求 0"}`);
       console.log(`   ${c ? c.label : "codes 媒体 查询失败"}${c?.media?.length ? `（${c.media.join(" / ")}）` : ""}${c?.cached ? "（缓存）" : ""}\n`);
+      // SERP 空位（2026-10-20 加）：本地语言市场有人搜、前 10 没本地页 / 前 10 早于游戏更新
+      const kind = roblox ? "roblox" : "steam";
+      const updatedAt = roblox ? await robloxUpdated(roblox.universeId) : await steamUpdated(steam.appId);
+      console.log("── SERP 空位（🌐 本地语言 / 🕰️ 过时）");
+      console.log(`${serpGapDetail(await serpGap(game, { kind, updatedAt }).catch(() => null))}\n`);
     }
     if (!(roblox || steam)) {
       console.log("── 可玩游戏走势");
