@@ -23,7 +23,7 @@
  * 站型信号（2026-10-13 加，依据 Ship/research/GAME-WIKI-STRUCTURE-2026-10.md）：「今天最值得看」的
  * Roblox / Steam / 联想新词候选每条再带两个标记——
  *   🧮 工具需求（lib/tool-demand.mjs，Google Suggest 免费）：有价值表 / 计算器需求 = 能做首页即工具的站
- *   codes 媒体 N 家（lib/codes-media.mjs，直接请求 10 家媒体的 codes 页网址，免费、缓存 3 天）：≥3 家 = codes 别当主打
+ *   codes 媒体 N 家（lib/codes-media.mjs，直接请求 8 家媒体的 codes 页网址，免费、缓存 1 天）：≥3 家 = codes 别当主打
  * 两个都查不到只在那一条上写「查询失败」，不影响总报告。
  */
 import { execFile, execFileSync } from "node:child_process";

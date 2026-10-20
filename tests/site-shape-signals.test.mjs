@@ -36,6 +36,24 @@ test('codes media: 0–1 = open, 2 = mixed, ≥3 = closed', () => {
   assert.match(classifyMedia(['beebom.com', 'gamerant.com', 'pcgamesn.com']).label, /⛔ codes 媒体 3 家/);
 });
 
+test('codes media: blocked sites are not counted as missing (2026-10-20)', () => {
+  const r = classifyMedia([], ['progameguides.com', 'tryhardguides.com']);
+  assert.equal(r.verdict, 'unverified');
+  assert.match(r.label, /2 家被挡/);
+  const partly = classifyMedia(['beebom.com'], ['tryhardguides.com']);
+  assert.equal(partly.verdict, 'open');
+  assert.match(partly.label, /另有 1 家被挡未计/);
+  assert.equal(classifyMedia(['beebom.com', 'gamerant.com', 'pcgamesn.com'], ['tryhardguides.com']).verdict, 'closed');
+});
+
+test('probeMedia treats 403 as blocked, not as "no page"', async () => {
+  const r = await probeMedia('Pa Deliber', {
+    exists: async (u) => (u.includes('beebom') || u.includes('thegamer') ? 'blocked' : null),
+  });
+  assert.equal(r.verdict, 'unverified');
+  assert.deepEqual(r.blocked, ['beebom.com', 'thegamer.com']);
+});
+
 test('mediaSlug drops apostrophes and tags punctuation', () => {
   assert.equal(mediaSlug('Build An Ant Empire'), 'build-an-ant-empire');
   assert.equal(mediaSlug("Don't Be Late For School!"), 'dont-be-late-for-school');
