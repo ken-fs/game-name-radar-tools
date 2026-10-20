@@ -134,7 +134,7 @@ export function parseDemand(text) {
     if (trend) current.trend = trend[2].trim();
     // 量级（相对自家锚点站）：报告里不显示它，读者无法分辨「零量词 rising」和「真需求」
     const mag = line.match(/量级:\s*(.+)$/);
-    if (mag) current.magnitude = mag[1].trim().replace(/^近期约锚点\(([^)]+)\)的\s*/, "vs $1：");
+    if (mag) current.magnitude = mag[1].trim().replace(/^近期约锚点\(([^)]+)\)的\s*/, "vs $1：").replace(/（候选[^）]*）/, "");
     const sub = line.match(/子关键词:\s*(.+)$/);
     if (sub) current.sub = sub[1].trim().slice(0, 120);
   }

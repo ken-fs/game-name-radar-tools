@@ -147,6 +147,23 @@ Steam/Wiki 候选和在线小游戏都会进入该层，避免 Steam 高愿望�
 
 单查：`node radar.mjs check "游戏名"` 会多出「站型信号」一段；也可以直接 `node lib/tool-demand.mjs "游戏名"`、`node lib/codes-media.mjs "游戏名"`。
 
+### 5b. 量级锚点：现在是动态的（2026-10-20 加）
+
+以前 `TRENDS_ANCHOR` 在 `.env` 里写死一个游戏词（`race for eggs codes`）。**锚点自己也是会死的游戏词** —— 那个游戏凉了以后锚点就没量，比例自动退回「按峰值比估」，于是输出过「锚点的 476%」这种假数字（说 Tap Simulator REBORN，2026-10-20）。
+
+现在 `.env` 写 `TRENDS_ANCHOR=auto`（默认）：
+
+1. `lib/anchor.mjs` 把自家站群每个游戏的 `<名字> codes` 用 DataForSEO 按最新一个月搜索量排序（$0.09/月一次），取前 5；
+2. 一次 Google Trends 五词对比，测这 5 个**现在还有量**的是谁，取最大的当锚点（和候选用的是同一把尺）；
+3. 结果存 `data/anchor.json`，30 天重测。当前锚点：`node lib/anchor.mjs`（`--force` 强制重测）。
+
+报纸上的量级现在是「近期约锚点(X)的 N%（候选 a / 锚点 b）」。两个要注意的：
+
+- **不要拿它乘 Ads 月搜换算绝对量**：Ads 跨词标定差 50 倍（`dungeon lootr codes` 报 49,500/月，但同尺子下它和 Tap Simulator REBORN 一个级别），只能同词跨时间比。
+- 候选落到底刻度（候选 ≤1、锚点 ≥4）时比例只是**上界**，报纸会写 `≤N%`；`<锚点 10%` 额外标 ⚠️ 量级偏小。
+
+开关：`TRENDS_ANCHOR=none` 关掉；`TRENDS_ANCHOR=某个词` 回到手动指定（老行为）。
+
 ### 6. Steam 畅销 / 在玩榜新上榜（2026-10-13 加）
 
 全雷达复盘 `REVIEW-2026-10-12` 的盲区：Dressmaker、Graveyard Keeper 2、The Blood of Dawnwalker 发售后靠口碑冲上畅销榜（Dressmaker 发售第一周全球周畅销 #89 → #12），但原来的 Steam 源只有热门愿望单 / 热门新品 / 最新独立，没有畅销榜和在玩榜，三个都没报过。
