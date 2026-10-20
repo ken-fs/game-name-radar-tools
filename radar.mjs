@@ -267,7 +267,8 @@ async function daily() {
   const robloxStats = (name) => {
     const g = [...(roblox?.growth ?? []), ...(roblox?.steady ?? [])].find((x) => cleanRobloxName(x.name) === name);
     const m = roblox?.mismatch.find((x) => cleanRobloxName(x.name) === name);
-    return { ageDays: g?.ageDays, ccu: g?.ccu ?? m?.ccu, growthX: g?.growth, placeId: g?.id ?? m?.id, updatedDaysAgo: g?.updatedDaysAgo, ytChannels: m?.channels, ytRatio: m?.ratio };
+    // universeId 不是 placeId（2026-10-20 修：VERDICT-LOG 里叫 placeId，拿它去 /places/<id> 查是 null）
+    return { ageDays: g?.ageDays, ccu: g?.ccu ?? m?.ccu, growthX: g?.growth, universeId: g?.id ?? m?.id, updatedDaysAgo: g?.updatedDaysAgo, ytChannels: m?.channels, ytRatio: m?.ratio };
   };
   // 每条带上游戏名，后面统一查「最近 3 天新注册域名」
   const items = [
