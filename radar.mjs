@@ -23,7 +23,8 @@
  * 站型信号（2026-10-13 加，依据 Ship/research/GAME-WIKI-STRUCTURE-2026-10.md）：「今天最值得看」的
  * Roblox / Steam / 联想新词候选每条再带两个标记——
  *   🧮 工具需求（lib/tool-demand.mjs，Google Suggest 免费）：有价值表 / 计算器需求 = 能做首页即工具的站
- *   codes 媒体 N 家（lib/codes-media.mjs，直接请求 8 家媒体的 codes 页网址，免费、缓存 1 天）：≥3 家 = codes 别当主打
+ *   codes 媒体 N 家（lib/codes-media.mjs，直接请求 8 家媒体的 codes 页网址，免费、缓存 1 天）：≥3 家 = codes 别当主打；
+ *   只查 Roblox / 联想新词（买断制 Steam 游戏没有 codes 生态）
  * 两个都查不到只在那一条上写「查询失败」，不影响总报告。
  */
 import { execFile, execFileSync } from "node:child_process";
@@ -215,25 +216,34 @@ export async function siteShapeSignals(items, { tool = toolDemand, codes = codes
   const out = new Map();
   const eligible = items.filter((i) => SIGNAL_KINDS.has(i.kind) && i.name);
   if (!eligible.length) return out;
+  // codes 只对 Roblox / 联想新词有意义：买断制 Steam 游戏基本没有 codes 生态，
+  // 硬查只会得到「0 家 · 还有窗口」的假信号（2026-10-21 修）。
+  const codesEligible = eligible.filter((i) => i.kind !== "steam");
   let codesMap = new Map();
-  try {
-    // 按 items 顺序占额度（Roblox 在最前面），每天最多 15 次新查询，缓存 3 天
-    codesMap = await codes(eligible.map((i) => i.name));
-  } catch (error) {
-    console.error(`codes 媒体失败：${error.message}`);
+  if (codesEligible.length) {
+    try {
+      // 按 items 顺序占额度（Roblox 在最前面），每天最多 15 次新查询，缓存 1 天
+      codesMap = await codes(codesEligible.map((i) => i.name));
+    } catch (error) {
+      console.error(`codes 媒体失败：${error.message}`);
+    }
   }
   for (const i of eligible) {
     const notes = [];
+    const shape = {};
     try {
       const t = await tool(i.name);
-      i.shape = { tool: t };
+      shape.tool = t;
       if (!t.ok || t.count) notes.push(toolDemandNote(t, { examples: 1 }));
     } catch {
       notes.push("工具需求 查询失败");
     }
-    const c = codesMap.get(i.name);
-    notes.push(c ? (c.verdict === "mismatch" ? "codes SERP 错配" : c.label) : "codes 媒体 查询失败");
-    i.shape = { codes: c, tool: i.shape?.tool }; // 原始值给判决记录（lib/verdict-log.mjs）
+    if (i.kind !== "steam") {
+      const c = codesMap.get(i.name);
+      notes.push(c ? (c.verdict === "mismatch" ? "codes SERP 错配" : c.label) : "codes 媒体 查询失败");
+      shape.codes = c;
+    }
+    i.shape = shape; // 原始值给判决记录（lib/verdict-log.mjs）
     out.set(i, notes);
   }
   return out;
@@ -329,7 +339,7 @@ async function daily() {
     "",
     "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速 / 畅销·在玩榜）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
     "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-STEAMCHARTS / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
-    "> 站型信号（2026-10-13 加）：🧮 工具需求 = Google 联想里 ≥2 条 value / calculator / trading 类补全（能做首页即工具的价值表 / 计算器站）· codes 媒体 N 家 = 「<游戏> codes」美国前 10 里讲这个游戏的大媒体数：0–1 📣 抢速度 / 2 🟡 / ≥3 ⛔ codes 别当主打（做实体页 / 工具页）；SERP 错配 = 结果页讲的是别的游戏，不算数",
+    "> 站型信号（2026-10-13 加）：🧮 工具需求 = Google 联想里 ≥2 条 value / calculator / trading 类补全（能做首页即工具的价值表 / 计算器站）· codes 媒体 N 家 = 「<游戏> codes」美国前 10 里讲这个游戏的大媒体数：0–1 📣 抢速度 / 2 🟡 / ≥3 ⛔ codes 别当主打（做实体页 / 工具页），只对 Roblox / 联想新词查（买断制 Steam 游戏无 codes 生态）；SERP 错配 = 结果页讲的是别的游戏，不算数",
     "> SERP 空位（2026-10-20 加，前 5 个 Roblox / Steam 候选）：🌐 语言空位 = 德法西意日韩里本地联想有人搜、前 10 本地语言页 ≤2（能用本地语言页抢）· 🕰️ = 美国前 10 有日期的页面 ≥60% 早于游戏最近更新（30 天内还在更新的按 30 天前算）；单次 SERP 会抖，是提示不是判决",
     `> 「近 3 天 N 个新域名」= whoisds 免费新注册域名列表里含这个名字的个数（每天约 7 万个抽样，0 不等于没人注册；⚠️ = ≥3 个，同行在抢）${nrd.available ? `；用的是 ${nrd.dates.join(" / ")}（UTC）` : "；今天没拿到列表"}`,
     "",

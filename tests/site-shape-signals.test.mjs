@@ -90,3 +90,16 @@ test('siteShapeSignals never throws and marks failures per item', async () => {
   assert.deepEqual(out.get(items[0]), ['工具需求 查询失败', 'codes 媒体 查询失败']);
   assert.equal(out.has(items[1]), false, 'meme / playable lines are skipped');
 });
+
+test('siteShapeSignals skips codes media for Steam (paid games have no codes ecosystem)', async () => {
+  const items = [{ kind: 'steam', name: 'Some Steam Game', text: '- **Steam** Some Steam Game' }];
+  let codesCalled = false;
+  const out = await siteShapeSignals(items, {
+    tool: async () => ({ ok: true, count: 0, tag: false, hits: [] }),
+    codes: async () => { codesCalled = true; return new Map(); },
+  });
+  assert.equal(codesCalled, false, 'codes 不该为 Steam 花额度');
+  assert.deepEqual(out.get(items[0]), []);
+  assert.equal(items[0].shape.codes, undefined);
+  assert.deepEqual(items[0].shape.tool, { ok: true, count: 0, tag: false, hits: [] });
+});
