@@ -985,7 +985,7 @@
  },
  "tapsimulatorrebornwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "tapsimulatorreborn.wiki": {
   "available": false,
@@ -995,7 +995,7 @@
  },
  "tapsimulatorreborngame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "reborn.wiki": {
   "available": false,
@@ -1309,17 +1309,17 @@
  },
  "feedamosquitowiki.com": {
   "available": true,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-21"
  },
  "feedamosquitogame.com": {
   "available": true,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-21"
  },
  "feedamosquito.wiki": {
   "available": false,
   "registered": "2026-10-12",
   "ns": "mitchell.ns.cloudflare.com,samara.ns.cloudflare.com",
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-21"
  },
  "ironskiesbeta.wiki": {
   "available": true,
@@ -1421,7 +1421,7 @@
  },
  "trey2k23.wiki": {
   "available": true,
-  "checkedAt": "2026-10-13"
+  "checkedAt": "2026-10-21"
  },
  "trey2k23game.com": {
   "available": true,
@@ -1569,15 +1569,15 @@
   "available": false,
   "registered": "2026-09-09",
   "ns": "ns2-coming-soon.sav.com,ns1-coming-soon.sav.com",
-  "checkedAt": "2026-10-14"
+  "checkedAt": "2026-10-21"
  },
  "deepdishdungeongame.com": {
   "available": true,
-  "checkedAt": "2026-10-14"
+  "checkedAt": "2026-10-21"
  },
  "deepdishdungeonwiki.com": {
   "available": true,
-  "checkedAt": "2026-10-14"
+  "checkedAt": "2026-10-21"
  },
  "overthehillgame.com": {
   "available": true,
@@ -2078,8 +2078,10 @@
   "checkedAt": "2026-10-19"
  },
  "fivenightswithmaids.wiki": {
-  "available": null,
-  "checkedAt": "2026-10-20"
+  "available": false,
+  "registered": "2026-10-13",
+  "ns": "pearl.ns.cloudflare.com,gabe.ns.cloudflare.com",
+  "checkedAt": "2026-10-21"
  },
  "fivenightswithmaidswiki.com": {
   "available": true,
@@ -2145,15 +2147,15 @@
  },
  "plinkyplonky.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "plinkyplonkygame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "plinkyplonkywiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "huntingtogetherbetatest.wiki": {
   "available": true,
@@ -2181,7 +2183,7 @@
  },
  "vampiresurvivors.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "vampiresurvivorswiki.com": {
   "available": true,
@@ -2197,23 +2199,23 @@
  },
  "indiegameslistgame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "indiegameslistwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-21"
  },
  "drawacardgame.com": {
-  "available": null,
-  "checkedAt": "2026-10-20"
+  "available": true,
+  "checkedAt": "2026-10-21"
  },
  "drawacard.wiki": {
-  "available": null,
-  "checkedAt": "2026-10-20"
+  "available": true,
+  "checkedAt": "2026-10-21"
  },
  "drawacardwiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-20"
+  "available": true,
+  "checkedAt": "2026-10-21"
  },
  "catchanegg.wiki": {
   "available": false,
@@ -2245,35 +2247,35 @@
  },
  "laketerritory.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "laketerritorygame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "cardbattlesprestige.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "laketerritorywiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "cardbattlesprestigegame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "cardbattlesprestigewiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "prestige.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "prestigewiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "coinharvest.wiki": {
   "available": true,
@@ -2319,38 +2321,250 @@
  },
  "discoelysium.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "discoelysiumgame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "discoelysiumwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "krillionunlimited.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "krillionunlimitedgame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "krillionunlimitedwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "yorktimes.wiki": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "yorktimesgame.com": {
   "available": null,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-13"
  },
  "yorktimeswiki.com": {
   "available": true,
   "checkedAt": "2026-10-20"
+ },
+ "boundbyinsanitygame.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "boundbyinsanitywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "boundbyinsanity.wiki": {
+  "available": false,
+  "registered": "2026-09-07",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-10-21"
+ },
+ "madison.wiki": {
+  "available": false,
+  "registered": "2025-01-15",
+  "ns": "plato.ns.cloudflare.com,aspen.ns.cloudflare.com",
+  "checkedAt": "2026-10-21"
+ },
+ "madisongame.com": {
+  "available": false,
+  "registered": "2017-09-06",
+  "ns": "CLARA.NS.CLOUDFLARE.COM,NIKON.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-21"
+ },
+ "madisonwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "luto.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "lutogame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "lutowiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "pinoykaraokekaraokeduels.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "pinoykaraokekaraokeduelsgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "pinoykaraokekaraokeduelswiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "hushtheycanhearbeta.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "hushtheycanhearbetagame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "theycanhearbeta.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "hushtheycanhearbetawiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "theycanhearbetagame.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "theycanhearbetawiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "lineageisailueatarchiwa.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "lineageisailueatarchiwawiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "lineageisailueatarchiwagame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "gladiatorlife.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "gladiatorlifegame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "gladiatorlifewiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "stickwars.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "stickwarsgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "stickwarswiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "fixmyphonewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "fixmyphonegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "fixmyphone.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "folktography.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "folktographygame.com": {
+  "available": false,
+  "registered": "2026-08-04",
+  "ns": "ED.NS.CLOUDFLARE.COM,SUSAN.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-21"
+ },
+ "folktographywiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "fs25mods.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "fs25modsgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "fs25modswiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "startrekoutpostsunknown.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "startrekoutpostsunknowngame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "startrekoutpostsunknownwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "outpostsunknown.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "outpostsunknowngame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "outpostsunknownwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "mycopunk.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "mycopunkgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "mycopunkwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-21"
+ },
+ "akibalostgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "akibalost.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "akibalostwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "asistersjourney.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "asistersjourneygame.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
+ },
+ "asistersjourneywiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-21"
  }
 }
