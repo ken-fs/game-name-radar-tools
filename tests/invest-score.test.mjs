@@ -91,14 +91,17 @@ test('gameplayLongTail 不把同名公司算成需求（Orbit Engineer → orbit
 
 test('invest score: 名字在补全里根本不存在 = 归因失败，直接 veto（Orbit Engineer / Merge Block Arena）', () => {
   const base = {
-    game: 'Orbit Engineer', released: true, releaseDate: 'Oct 16, 2026', priceUsd: 9.09,
+    game: 'Orbit Engineer', released: true, releaseDate: 'Sep 20, 2026', priceUsd: 9.09,
     tags: ['Strategy', 'City Builder', 'Colony Sim', 'Management', 'Base Building'], achievements: 4,
     ccu: 400, ccuHistory: [], longTail: ['orbit engineer guide'], domains: dom('orbitengineer', ['wiki']), wikis: [],
   };
-  const r = scoreInvest({ ...base, nameAttributed: false });
+  const r = scoreInvest({ ...base, nameAttributed: false }, NOW);
   assert.equal(r.verdict, 'skip');
   assert.equal(r.dims.demand, 0);
   assert.ok(r.vetoes.includes('名字归因失败'));
   // 查不到（null）不判死
-  assert.notEqual(scoreInvest({ ...base, nameAttributed: null }).verdict, 'skip');
+  assert.notEqual(scoreInvest({ ...base, nameAttributed: null }, NOW).verdict, 'skip');
+  // 上线不到 3 天的游戏联想还没长出来，不能当归因失败
+  const fresh = scoreInvest({ ...base, releaseDate: 'Sep 29, 2026', nameAttributed: false }, NOW);
+  assert.ok(!fresh.vetoes.includes('名字归因失败'));
 });
