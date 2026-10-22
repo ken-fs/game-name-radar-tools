@@ -42,7 +42,7 @@ test("量级低于锚点 1%：联想没攻略词时，媒体没查全只观察�
   assert.match(combine({ shape: "no-data" }, noSub, mag, { verdict: "open", media: [] }).decision, /放弃/);
   assert.match(combine({ shape: "no-data" }, noSub, mag, { verdict: "mixed", media: ["a.com", "b.com"] }).decision, /观察/);
   // 低刻度（候选 ≤1、锚点 ≥4）时比例只是上界，不能否决
-  assert.match(combine({ shape: "no-data" }, noSub, { ...mag, lowResolution: true }, { verdict: "open", media: [] }).decision, /观察/);
+  assert.match(combine({ shape: "no-data" }, { verdict: "mixed" }, { ...mag, lowResolution: true }, { verdict: "open", media: [] }).decision, /观察/);
 });
 
 test("三条同时无量才放弃；媒体写过 codes 就是有人搜（观察，不判死）", () => {
@@ -91,4 +91,35 @@ test("kym / manual 来源的冒头不加未确认标记", () => {
   ];
   const rep = renderReport(rows, "2026-10-08", {});
   assert.doesNotMatch(rep, /未确认是梗/);
+});
+
+// 2026-10-22：名字归因闸门——联想里一条含游戏名的补全都没有
+test("联想里没有整词含游戏名 + 媒体 0 家 + Trends 没起量 = 名字归因失败（Merge Block Arena）", () => {
+  const unnamed = { verdict: "mixed", attributed: false };   // 拿到的是 merge block app / merge arena build
+  const empty = { verdict: "empty", attributed: false };
+  const named = { verdict: "guide-rich", attributed: true };
+  const open = { verdict: "open", media: [] };
+  assert.match(combine({ shape: "no-data" }, unnamed, null, open).decision, /放弃/);
+  assert.match(combine({ shape: "no-data" }, empty, null, open).decision, /放弃/);
+  assert.match(combine({ shape: "no-data" }, named, null, open).decision, /观察/);
+  // Trends 起量 = 只是联想还没收录，不判死
+  assert.match(combine({ shape: "high-stable" }, unnamed, null, open).decision, /观察/);
+  assert.match(combine({ shape: "rising" }, unnamed, null, open).decision, /观察/);
+  // 媒体真写了 codes = 有人搜，不判死
+  assert.match(combine({ shape: "no-data" }, unnamed, null, { verdict: "mixed", media: ["a.com", "b.com"] }).decision, /观察/);
+  // 媒体没查全时不判死
+  assert.match(combine({ shape: "no-data" }, unnamed, null, null).decision, /观察/);
+});
+
+test("联想两次都请求失败 ≠ 名字不存在（不能判死）", () => {
+  const failedSub = { verdict: "empty", attributed: false, failed: true };
+  assert.match(combine({ shape: "no-data" }, failedSub, null, { verdict: "open", media: [] }).decision, /观察/);
+});
+
+test("补全里有整词游戏名才算归因成功（hole fishing codes 算，merge block app 不算）", () => {
+  const ok = classifySubkeywords("Hole Fishing", ["hole fishing codes", "hole fishing roblox codes", "hole fishing script no key"]);
+  assert.equal(ok.attributed, true);
+  assert.equal(ok.verdict, "guide-rich");
+  const no = classifySubkeywords("Merge Block Arena", ["merge block app", "merge block games", "merge arena build"]);
+  assert.equal(no.attributed, false);
 });
