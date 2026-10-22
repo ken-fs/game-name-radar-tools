@@ -81,3 +81,10 @@ test('brand domain registered years before release = legacy ecosystem penalty', 
   const r = scoreInvest(facts({ domains }), NOW);
   assert.match(r.reasons.join(' '), /老生态/);
 });
+
+test('gameplayLongTail 不把同名公司算成需求（Orbit Engineer → orbit engineering boston）', () => {
+  const out = gameplayLongTail('Orbit Engineer', [
+    'orbit engineering', 'orbit engineering boston', 'orbit engineering company', 'orbit engineer guide',
+  ]);
+  assert.deepEqual(out, ['orbit engineer guide']);
+});
