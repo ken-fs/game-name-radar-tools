@@ -25,15 +25,33 @@ test("移除 fruit 后，真攻略词仍被识别（不误伤）", () => {
   assert.equal(s.verdict, "guide-rich");
 });
 
-// 2026-10-08：Trends 形状是相对值，零量词也会显示 rising——量级是第三道否决
-test("量级低于锚点 1% 时否决，但按峰值比估（不可靠）时不否决", () => {
+// 2026-10-22：三源规则——Trends 永远不能单独判死（它对 Roblox 长尾的分辨率是 0/1，
+// 自家最能赚的 hole fishing 在 Trends 上 candMax=1，旧规则会把它判死）
+test("量级低于锚点 1%：联想还有攻略词就不判死", () => {
   const trends = { shape: "rising" };
-  const sub = { verdict: "guide-rich" };
-  assert.match(combine(trends, sub, { ok: true, ratio: 0.003, basis: "recent" }).decision, /放弃/);
-  assert.match(combine(trends, sub, { ok: true, ratio: 0.003, basis: "peak" }).decision, /GO/);
-  assert.match(combine(trends, sub, { ok: true, ratio: 0.54, basis: "recent" }).decision, /GO/);
-  // 量级未测时不介入判决（原本的双源规则照旧）
-  assert.match(combine(trends, sub, null).decision, /GO/);
+  assert.match(combine(trends, { verdict: "guide-rich" }, { ok: true, ratio: 0.003, basis: "recent" }).decision, /GO/);
+  assert.match(combine(trends, { verdict: "guide-rich" }, { ok: true, ratio: 0.003, basis: "peak" }).decision, /GO/);
+  assert.match(combine(trends, { verdict: "guide-rich" }, { ok: true, ratio: 0.54, basis: "recent" }).decision, /GO/);
+  assert.match(combine(trends, { verdict: "guide-rich" }, null).decision, /GO/);
+});
+
+test("量级低于锚点 1%：联想没攻略词时，媒体没查全只观察、媒体 0 家才放弃", () => {
+  const noSub = { verdict: "empty" };
+  const mag = { ok: true, ratio: 0.002, basis: "recent" };
+  assert.match(combine({ shape: "no-data" }, noSub, mag, null).decision, /观察/);
+  assert.match(combine({ shape: "no-data" }, noSub, mag, { verdict: "open", media: [] }).decision, /放弃/);
+  assert.match(combine({ shape: "no-data" }, noSub, mag, { verdict: "mixed", media: ["a.com", "b.com"] }).decision, /观察/);
+  // 低刻度（候选 ≤1、锚点 ≥4）时比例只是上界，不能否决
+  assert.match(combine({ shape: "no-data" }, noSub, { ...mag, lowResolution: true }, { verdict: "open", media: [] }).decision, /观察/);
+});
+
+test("三条同时无量才放弃；媒体写过 codes 就是有人搜（观察，不判死）", () => {
+  assert.match(combine({ shape: "no-volume" }, { verdict: "empty" }, null, { verdict: "open", media: [] }).decision, /放弃/);
+  assert.match(combine({ shape: "no-volume" }, { verdict: "empty" }, null, { verdict: "mixed", media: ["a.com", "b.com"] }).decision, /观察/);
+  // 媒体没查全（被挡 / 请求失败）不能判死
+  assert.match(combine({ shape: "no-volume" }, { verdict: "empty" }, null, null).decision, /观察/);
+  assert.match(combine({ shape: "spike" }, { verdict: "empty" }, null, { verdict: "unverified", media: [], blocked: ["x.com", "y.com"] }).decision, /观察/);
+  assert.match(combine({ shape: "spike" }, { verdict: "empty" }, null, { verdict: "open", media: [] }).decision, /放弃/);
 });
 
 // 2026-10-08：amitabh bachchan / sud ouest 是地区热搜（影星、地名），不是网友梗
