@@ -4,7 +4,7 @@
  *
  * 以前要分开跑 Roblox / Steam / 可玩游戏 / 梗 四套雷达，记不住该用哪个。现在两种用法：
  *
- *   node radar.mjs                    # 今日总报告 → ../RADAR-<日期>.md
+ *   node radar.mjs                    # 今日总报告 → ../reports/summary/RADAR-<日期>.md
  *       读当天每日管线（scripts/scan.mjs，launchd 08:30）产出的 Steam 投入价值 / 可玩游戏 /
  *       梗游戏三份报告，再现跑 Roblox 层（成长期扫描 + YouTube 错配 + 前几名的需求验证），
  *       汇总成一份，最上面是「今天最值得看」。launchd 在 scan.mjs 之后接着跑它。
@@ -35,6 +35,7 @@ import { nrdCounts, nrdNote } from "./lib/nrd.mjs";
 import { codesMediaBatch } from "./lib/codes-media.mjs";
 import { toolDemand, toolDemandNote } from "./lib/tool-demand.mjs";
 import { num, writeVerdictLog } from "./lib/verdict-log.mjs";
+import { reportPath } from "../scripts/lib/reports.mjs";
 import { robloxUpdated, serpGap, serpGapDetail, serpGapNote, steamUpdated } from "./lib/serp-gap.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -180,7 +181,7 @@ async function robloxLayer() {
 // ─── 读当天每日管线的报告 ─────────────────────────────────────────────────────
 
 function readReport(kind) {
-  const file = join(SHIP, `RADAR-${kind}-${today}.md`);
+  const file = reportPath(`RADAR-${kind}-${today}.md`, { mkdir: false });
   return existsSync(file) ? readFileSync(file, "utf8") : null;
 }
 
@@ -403,7 +404,7 @@ async function daily() {
   if (!meme) lines.push("（今天的 RADAR-MEME 还没生成）", "");
   else lines.push(...table("| 判决 | 梗 | 各市场可玩补全 | 例子 | 来源 | 首见 | 域名 |", memeTop), "");
 
-  const out = join(SHIP, `RADAR-${today}.md`);
+  const out = reportPath(`RADAR-${today}.md`);
   writeFileSync(out, `${lines.join("\n")}\n`);
   console.log(`✓ ${out}`);
   const logged = writeVerdictLog(items, { date: today, nrd });
@@ -422,7 +423,7 @@ async function daily() {
     }
     const body = [...groups].map(([line, items]) => [`**${line}**`, ...items.slice(0, 4).map((i) => `- ${i}`),
       ...(items.length > 4 ? [`- …还有 ${items.length - 4} 条`] : [])].join("\n"));
-    notify(`🎮 游戏雷达日报 ${today.slice(5)}（${headline.length} 条）`, `${body.join("\n\n")}\n\n完整报告：\`Ship/RADAR-${today}.md\``, "Glass");
+    notify(`🎮 游戏雷达日报 ${today.slice(5)}（${headline.length} 条）`, `${body.join("\n\n")}\n\n完整报告：\`Ship/reports/summary/RADAR-${today}.md\``, "Glass");
   }
 }
 

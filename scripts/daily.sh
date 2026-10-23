@@ -56,13 +56,13 @@ for _ in $(seq 1 30); do
       export NODE_USE_ENV_PROXY=1 https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
       net_ok="proxy"; break
     fi
-    echo "⚠️ google 204 通（代理）但 suggestqueries 连不上——多半又是 DNS 污染（见 Ship/AGENTS.md「本机代理排查」），当未就绪处理"
+    echo "⚠️ google 204 通（代理）但 suggestqueries 连不上——多半又是 DNS 污染（见 Ship/docs/PROXY.md），当未就绪处理"
   elif curl -s --max-time 8 -o /dev/null -w '%{http_code}' https://www.google.com/generate_204 | grep -q 204; then
     if curl -s --max-time 8 -o /dev/null "https://suggestqueries.google.com/complete/search?client=firefox&q=ok"; then
       unset NODE_USE_ENV_PROXY https_proxy http_proxy
       net_ok="direct"; break
     fi
-    echo "⚠️ google 204 通（直连）但 suggestqueries 连不上——多半又是 DNS 污染（见 Ship/AGENTS.md「本机代理排查」），当未就绪处理"
+    echo "⚠️ google 204 通（直连）但 suggestqueries 连不上——多半又是 DNS 污染（见 Ship/docs/PROXY.md），当未就绪处理"
   fi
   sleep 30
 done
@@ -89,7 +89,7 @@ const fresh=(Date.now()-Date.parse(r.scannedAt))<3*3600e3;
 const src=r.sources||[];const isTrends=s=>String(s.sourceId||"").startsWith("trends-");
 const core=src.filter(s=>!isTrends(s)),trends=src.filter(isTrends);
 const ok=core.filter(s=>s.ok).length,tOk=trends.filter(s=>s.ok).length;
-const meme=fs.existsSync(`../RADAR-MEME-${today}.md`),playable=fs.existsSync(`../RADAR-PLAYABLE-${today}.md`);
+const meme=fs.existsSync(`../reports/meme/RADAR-MEME-${today}.md`),playable=fs.existsSync(`../reports/playable/RADAR-PLAYABLE-${today}.md`);
 const pass=fresh&&core.length>0&&ok/core.length>=0.7&&meme&&playable;
 const warn=trends.length&&tOk<trends.length?` · ⚠️ Trends 上升词源 ${tOk}/${trends.length}（多半是被 Google 限流，不重试）`:"";
 console.log(`${pass?"OK":"FAIL"} 核心信息源 ${ok}/${core.length} · 梗报告 ${meme?"有":"无"} · 可玩报告 ${playable?"有":"无"} · 本次扫描 ${fresh?"新":"旧"}${warn}`);

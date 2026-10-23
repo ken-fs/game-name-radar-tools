@@ -14,6 +14,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { listReports } from "../../scripts/lib/reports.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
@@ -58,8 +59,8 @@ function findInPool(keyword) {
 }
 
 // 报告文本层：词出现过的雷达产出（区分「独立抓到」vs「推送后才被人处理过」）
-const reportFiles = [];
-for (const dir of [SHIP, ROOT]) {
+const reportFiles = listReports().filter((r) => /^(RADAR|GAME-SCAN|OCCUPY)/.test(r.name)).map((r) => r.path);
+for (const dir of [SHIP, ROOT]) { // 老位置（2026-10-23 前在 Ship 根目录）还有残留也照读
   try {
     for (const f of readdirSync(dir)) {
       if (/\.(md)$/.test(f) && /^(RADAR|GAME-SCAN|OCCUPY)/.test(f)) reportFiles.push(join(dir, f));

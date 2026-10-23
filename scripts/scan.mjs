@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { reportPath as shipReportPath } from '../../scripts/lib/reports.mjs';
 import { scanSource, normalizeGameName, calculateCandidateScore, candidateLevel } from '../lib/scanner.mjs';
 import { scanSteamSource } from '../lib/steam-discovery.mjs';
 import { discoverRisingGameQueries } from '../lib/rising-discovery.mjs';
@@ -332,7 +333,7 @@ for(const candidate of investQueue){
 const investRows=candidates.filter(c=>c.invest&&Date.now()-Date.parse(c.invest.checkedAt||0)<7*86400000).map(c=>({game:c.gameName,...c.invest}));
 if(investRows.length){
   const date=now.slice(0,10);
-  await fs.writeFile(path.join(root,'..',`RADAR-INVEST-${date}.md`),renderInvestReport(investRows,date));
+  await fs.writeFile(shipReportPath(`RADAR-INVEST-${date}.md`),renderInvestReport(investRows,date));
 }
 
 // 梗游戏雷达（2026-10-02）：「<梗名> game」联想冒头 → 换皮游戏站窗口；独立状态，失败不影响主管线
