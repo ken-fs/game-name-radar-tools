@@ -1,9 +1,12 @@
 #!/bin/bash
 source /Users/david/Desktop/david/Ship/scripts/notify.sh  # ship_notify：推飞书（2026-10-11）
-# 每日雷达（launchd com.ken.game-radar 调用；北京时间 12:30–22:30 每小时一个时间点，
-# 按**美东时间**判断：美东当天 00:30 之后才跑（美区前一天的搜索 / 上新数据已完整），
-# 跑成功一次后当天其余时间点直接跳过。夏令时由 TZ=America/New_York 自动处理：
-# 夏令时期间北京 12:30 开跑，11 月起冬令时 13:30 开跑。）
+# 每日雷达（launchd com.ken.game-radar 调用；北京时间 08:30–18:30 每小时一个时间点，
+# 跑成功一次后当天其余时间点直接跳过。
+# 2026-10-23 提前：原来卡「美东当天 00:30 之后」（北京 12:30、冬令时 13:30 才起跑，管线 ~76 分钟，
+# 总报告 14 点后才出）→ 11:55 的站群后台快照永远只能带前一天的雷达。改到北京 08:30
+# （美东前一晚 20:30 / 冬令时 19:30），~09:46 出报告、赶上当天 11:55 快照。
+# 代价：美区「前一天」数据少最后 ~4 小时——YouTube 7 天中位 / Trends / Steam 实时畅销都是滚动周期，
+# 影响可忽略；当晚新上的游戏次日仍在「新」窗口内会被扫到。）
 #
 # 为什么要这层壳（2026-10-08 排查）：
 # - 10-04：08:30 没开机，整天没跑
@@ -18,24 +21,23 @@ HERE="$HOME/Desktop/david/Ship/game-name-radar"
 SHIP="$HOME/Desktop/david/Ship"
 NODE="$HOME/.nvm/versions/node/v22.22.0/bin/node"
 LOGDIR="$SHIP/out/logs"
-TODAY=$(date +%F)                          # 报告文件名用的本地日期（美东 00:30 之后与美东日期一致）
-US_DAY=$(TZ=America/New_York date +%F)
-US_HM=$(TZ=America/New_York date +%H%M)
-DONE="$LOGDIR/game-radar-ok-$US_DAY"
-LAST_SLOT_HOUR=22
+TODAY=$(date +%F)                          # 报告文件名用的本地日期
+BJ_HM=$(date +%H%M)
+DONE="$LOGDIR/game-radar-ok-$TODAY"
+LAST_SLOT_HOUR=18
 mkdir -p "$LOGDIR"
 exec >>"$LOGDIR/game-radar.log" 2>&1
 cd "$HERE" || exit 1
 echo "=== $(date '+%F %T') 开始"
 
 if [ "${1:-}" != "--force" ]; then
-  if [ "$US_HM" -lt 0030 ] || [ "$US_HM" -ge 1200 ]; then
-    # 只在美东 00:30–12:00 之间跑（对应北京下午到晚上）；不在窗口里的时间点直接跳过
-    echo "美东 $US_HM 不在 00:30–12:00 窗口，跳过"
+  if [ "$BJ_HM" -lt 0830 ]; then
+    # 08:30 之前不跑（launchd 时间点从 08:30 起；唤醒补跑落在更早时刻时直接跳过）
+    echo "北京 $BJ_HM 未到 08:30，跳过"
     exit 0
   fi
   if [ -f "$DONE" ]; then
-    echo "美东 $US_DAY 已经成功跑过，跳过"
+    echo "$TODAY 已经成功跑过，跳过"
     exit 0
   fi
 fi
