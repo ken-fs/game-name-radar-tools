@@ -46,16 +46,23 @@ if [ "${1:-}" != "--force" ]; then
   fi
 fi
 
-# 1. 等网络：能通过代理或直连拿到 Google 204 才算就绪
+# 1. 等网络：能通过代理或直连拿到 Google 204，**且 suggestqueries 能连上**才算就绪。
+#    2026-10-23 教训：只探 google.com/204 会被「google.com 没被污染、别的域名全被 DNS 污染」骗过，
+#    当天头两轮雷达信息源全挂。suggestqueries 用 curl 退出码判（连上就算通，429 限流也算通，不卡）。
 net_ok=""
 for _ in $(seq 1 30); do
   if curl -s -x http://127.0.0.1:7897 --max-time 8 -o /dev/null -w '%{http_code}' https://www.google.com/generate_204 | grep -q 204; then
-    export NODE_USE_ENV_PROXY=1 https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
-    net_ok="proxy"; break
-  fi
-  if curl -s --max-time 8 -o /dev/null -w '%{http_code}' https://www.google.com/generate_204 | grep -q 204; then
-    unset NODE_USE_ENV_PROXY https_proxy http_proxy
-    net_ok="direct"; break
+    if curl -s -x http://127.0.0.1:7897 --max-time 8 -o /dev/null "https://suggestqueries.google.com/complete/search?client=firefox&q=ok"; then
+      export NODE_USE_ENV_PROXY=1 https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
+      net_ok="proxy"; break
+    fi
+    echo "⚠️ google 204 通（代理）但 suggestqueries 连不上——多半又是 DNS 污染（见 Ship/AGENTS.md「本机代理排查」），当未就绪处理"
+  elif curl -s --max-time 8 -o /dev/null -w '%{http_code}' https://www.google.com/generate_204 | grep -q 204; then
+    if curl -s --max-time 8 -o /dev/null "https://suggestqueries.google.com/complete/search?client=firefox&q=ok"; then
+      unset NODE_USE_ENV_PROXY https_proxy http_proxy
+      net_ok="direct"; break
+    fi
+    echo "⚠️ google 204 通（直连）但 suggestqueries 连不上——多半又是 DNS 污染（见 Ship/AGENTS.md「本机代理排查」），当未就绪处理"
   fi
   sleep 30
 done
