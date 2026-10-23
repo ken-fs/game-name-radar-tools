@@ -242,14 +242,12 @@
   "checkedAt": "2026-10-11"
  },
  "carparkcapital.wiki": {
-  "available": false,
-  "registered": "2026-10-02",
-  "ns": "lynn.ns.cloudflare.com,josephine.ns.cloudflare.com",
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "carparkcapitalwiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "outlasttrials.wiki": {
   "available": false,
@@ -286,22 +284,20 @@
   "checkedAt": "2026-10-11"
  },
  "carparkcapitalgame.com": {
-  "available": true,
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "japaneseramensimulator.wiki": {
-  "available": false,
-  "registered": "2026-08-30",
-  "ns": "quentin.ns.cloudflare.com,alexandra.ns.cloudflare.com",
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "truckfulgame.com": {
   "available": true,
   "checkedAt": "2026-10-11"
  },
  "japaneseramensimulatorwiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "dodisciplinarycommitteemembersdreamofsuccubi.wiki": {
   "available": false,
@@ -338,8 +334,8 @@
   "checkedAt": "2026-10-11"
  },
  "japaneseramensimulatorgame.com": {
-  "available": true,
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "arcraidersfrozentrailcollectorsetwiki.com": {
   "available": true,
@@ -1519,7 +1515,7 @@
   "available": false,
   "registered": "2026-10-06",
   "ns": "lynn.ns.cloudflare.com,josephine.ns.cloudflare.com",
-  "checkedAt": "2026-10-14"
+  "checkedAt": "2026-10-23"
  },
  "nosuchplacegame.com": {
   "available": true,
@@ -1539,11 +1535,11 @@
   "available": false,
   "registered": "2026-02-17",
   "ns": "NS6.WIXDNS.NET,NS7.WIXDNS.NET",
-  "checkedAt": "2026-10-14"
+  "checkedAt": "2026-10-23"
  },
  "trashdaywiki.com": {
   "available": true,
-  "checkedAt": "2026-10-14"
+  "checkedAt": "2026-10-23"
  },
  "voodoofishin.wiki": {
   "available": true,
@@ -1686,54 +1682,54 @@
   "checkedAt": "2026-10-11"
  },
  "arknightsendfield.wiki": {
-  "available": null,
-  "checkedAt": "2026-10-08"
+  "available": false,
+  "registered": "2026-01-08",
+  "ns": "randy.ns.cloudflare.com,gigi.ns.cloudflare.com",
+  "checkedAt": "2026-10-23"
  },
  "arknightsendfieldgame.com": {
-  "available": null,
-  "checkedAt": "2026-10-08"
+  "available": true,
+  "checkedAt": "2026-10-23"
  },
  "endfield.wiki": {
   "available": false,
   "registered": "2023-11-11",
   "ns": "addilyn.ns.cloudflare.com,martin.ns.cloudflare.com",
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-23"
  },
  "arknightsendfieldwiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-08"
+  "available": true,
+  "checkedAt": "2026-10-23"
  },
  "warhammer40000boltgun2.wiki": {
-  "available": true,
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "endfieldgame.com": {
-  "available": null,
-  "checkedAt": "2026-10-08"
+  "available": false,
+  "registered": "2022-01-30",
+  "ns": "DNS19.HICHINA.COM,DNS20.HICHINA.COM",
+  "checkedAt": "2026-10-23"
  },
  "warhammer40000boltgun2game.com": {
   "available": null,
-  "checkedAt": "2026-10-08"
+  "checkedAt": "2026-10-23"
  },
  "endfieldwiki.com": {
-  "available": false,
-  "registered": "2026-01-27",
-  "ns": "NOAH.NS.CLOUDFLARE.COM,VERONICA.NS.CLOUDFLARE.COM",
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "warhammer40000boltgun2wiki.com": {
   "available": null,
-  "checkedAt": "2026-10-08"
+  "checkedAt": "2026-10-23"
  },
  "boltgun2.wiki": {
-  "available": false,
-  "registered": "2026-10-14",
-  "ns": "mitchell.ns.cloudflare.com,brynne.ns.cloudflare.com",
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "boltgun2game.com": {
-  "available": true,
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "ratatan.wiki": {
   "available": false,
@@ -1742,14 +1738,12 @@
   "checkedAt": "2026-10-15"
  },
  "boltgun2wiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "thewitchsbakery.wiki": {
-  "available": false,
-  "registered": "2026-08-12",
-  "ns": "drew.ns.cloudflare.com,aida.ns.cloudflare.com",
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "ratatangame.com": {
   "available": false,
@@ -1764,14 +1758,12 @@
   "checkedAt": "2026-10-15"
  },
  "thewitchsbakerygame.com": {
-  "available": false,
-  "registered": "2024-06-05",
-  "ns": "DNS105.OVH.NET,NS105.OVH.NET",
-  "checkedAt": "2026-10-15"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "thewitchsbakerywiki.com": {
   "available": true,
-  "checkedAt": "2026-10-15"
+  "checkedAt": "2026-10-23"
  },
  "killpeppa.wiki": {
   "available": true,
@@ -1801,85 +1793,83 @@
   "available": false,
   "registered": "2026-10-11",
   "ns": "robin.ns.cloudflare.com,damon.ns.cloudflare.com",
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "chainedbeasts.wiki": {
-  "available": false,
-  "registered": "2026-08-12",
-  "ns": "drew.ns.cloudflare.com,aida.ns.cloudflare.com",
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "talesofeterniaremasteredwiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "talesofeterniaremasteredgame.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "chainedbeastsgame.com": {
   "available": true,
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "enshrouded.wiki": {
   "available": false,
   "registered": "2026-08-24",
   "ns": "guy.ns.cloudflare.com,jocelyn.ns.cloudflare.com",
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "chainedbeastswiki.com": {
   "available": false,
   "registered": "2026-08-12",
   "ns": "AIDA.NS.CLOUDFLARE.COM,DREW.NS.CLOUDFLARE.COM",
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "duperyagameofsolodeduction.wiki": {
   "available": true,
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "enshroudedwiki.com": {
   "available": false,
   "registered": "2026-10-14",
   "ns": "DNS1.P09.NSONE.NET,DNS2.P09.NSONE.NET,DNS3.P09.NSONE.NET,DNS4.P09.NSONE.NET",
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "enshroudedgame.com": {
   "available": false,
   "registered": "2026-06-26",
   "ns": "LEAH.NS.CLOUDFLARE.COM,ROCKY.NS.CLOUDFLARE.COM",
-  "checkedAt": "2026-10-16"
+  "checkedAt": "2026-10-23"
  },
  "agameofsolodeduction.wiki": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "duperyagameofsolodeductionwiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "duperyagameofsolodeductiongame.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "agameofsolodeductiongame.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "tidyupthesmalltown.wiki": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "agameofsolodeductionwiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "tidyupthesmalltowngame.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "tidyupthesmalltownwiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-16"
+  "available": null,
+  "checkedAt": "2026-10-23"
  },
  "bikeforegg.wiki": {
   "available": false,
@@ -2538,16 +2528,20 @@
   "checkedAt": "2026-10-22"
  },
  "mycopunk.wiki": {
-  "available": null,
-  "checkedAt": "2026-10-14"
+  "available": false,
+  "registered": "2025-08-22",
+  "ns": "tara.ns.cloudflare.com,clint.ns.cloudflare.com",
+  "checkedAt": "2026-10-23"
  },
  "mycopunkgame.com": {
-  "available": null,
-  "checkedAt": "2026-10-14"
+  "available": false,
+  "registered": "2024-02-28",
+  "ns": "NS-CLOUD-C1.GOOGLEDOMAINS.COM,NS-CLOUD-C2.GOOGLEDOMAINS.COM,NS-CLOUD-C3.GOOGLEDOMAINS.COM,NS-CLOUD-C4.GOOGLEDOMAINS.COM",
+  "checkedAt": "2026-10-23"
  },
  "mycopunkwiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-14"
+  "available": true,
+  "checkedAt": "2026-10-23"
  },
  "akibalostgame.com": {
   "available": true,
@@ -2776,5 +2770,249 @@
  "gemcraftlegacycollectionwiki.com": {
   "available": true,
   "checkedAt": "2026-10-22"
+ },
+ "gonefishing.wiki": {
+  "available": false,
+  "registered": "2026-10-21",
+  "ns": "phil.ns.cloudflare.com,zariyah.ns.cloudflare.com",
+  "checkedAt": "2026-10-23"
+ },
+ "gonefishinggame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "gonefishingwiki.com": {
+  "available": false,
+  "registered": "2026-10-21",
+  "ns": "FELIPE.NS.CLOUDFLARE.COM,WREN.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-23"
+ },
+ "finalfantasyresonance.wiki": {
+  "available": false,
+  "registered": "2026-06-10",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-10-23"
+ },
+ "finalfantasyresonancegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "finalfantasyresonancewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "callofdutymodernwarfare4.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "callofdutymodernwarfare4game.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "callofdutymodernwarfare4wiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "modernwarfare4.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "modernwarfare4game.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "modernwarfare4wiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "onepiecegrandgourmet.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "onepiecegrandgourmetgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "onepiecegrandgourmetwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "grandgourmet.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "everydaywefight.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "grandgourmetgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "grandgourmetwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "everydaywefightgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "groundworksimulator.wiki": {
+  "available": false,
+  "registered": "2026-10-22",
+  "ns": "pearl.ns.cloudflare.com,gabe.ns.cloudflare.com",
+  "checkedAt": "2026-10-23"
+ },
+ "everydaywefightwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "groundworksimulatorgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "groundworksimulatorwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "moadra.wiki": {
+  "available": false,
+  "registered": "2026-10-16",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-10-23"
+ },
+ "moadragame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "moadrawiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "helaofmicemagic.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "helaofmicemagicgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "helaofmicemagicwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "ofmicemagic.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "ofmicemagicgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "ofmicemagicwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "tidyupthedragonhoard.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "tidyupthedragonhoardgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "tidyupthedragonhoardwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "emberville.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "embervillegame.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "embervillewiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "frosthaven.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "thejackboxpartypack12.wiki": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "frosthavengame.com": {
+  "available": false,
+  "registered": "2025-01-22",
+  "ns": "NS19.DOMAINCONTROL.COM,NS20.DOMAINCONTROL.COM",
+  "checkedAt": "2026-10-23"
+ },
+ "thejackboxpartypack12game.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "frosthavenwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "thejackboxpartypack12wiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "clockworkrevolution.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "clockworkrevolutiongame.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "clockworkrevolutionwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "shippingstoresimulator2037game.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "shippingstoresimulator2037.wiki": {
+  "available": false,
+  "registered": "2026-10-14",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-10-23"
+ },
+ "shippingstoresimulator2037wiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "onemillioncoins.wiki": {
+  "available": false,
+  "registered": "2026-10-15",
+  "ns": "pearl.ns.cloudflare.com,gabe.ns.cloudflare.com",
+  "checkedAt": "2026-10-23"
+ },
+ "onemillioncoinsgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-23"
+ },
+ "onemillioncoinswiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "planetzoo2.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "planetzoo2game.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
+ },
+ "planetzoo2wiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-23"
  }
 }
