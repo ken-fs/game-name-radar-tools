@@ -17,6 +17,10 @@ source /Users/david/Desktop/david/Ship/scripts/notify.sh  # ship_notify：推飞
 # 现在：先等网络就绪（最多 15 分钟）→ 跑 scan.mjs → 检查这次是不是「真成功」→ 成功才写当天的完成标记、
 # 再跑 radar.mjs 出总报告；不成功就不写标记，下一个时间点自动重试；当天最后一次还失败就弹通知。
 set -u
+# 2026-10-23 教训：macOS bash 3.2 在 UTF-8 locale 下会把多字节标点（如「）」）误拼进变量名，
+# 「$net_ok）」→ 报 unbound 直接挂（set -u）。launchd 环境无 LANG 所以一直没事，
+# 但 agent / 用户手动跑会带着 LANG=zh_CN.UTF-8 → 必崩。钉死 C locale（只影响字符分类，中文照常输出）。
+export LC_ALL=C
 HERE="$HOME/Desktop/david/Ship/game-name-radar"
 SHIP="$HOME/Desktop/david/Ship"
 NODE="$HOME/.nvm/versions/node/v22.22.0/bin/node"
@@ -44,7 +48,7 @@ fi
 
 # 1. 等网络：能通过代理或直连拿到 Google 204 才算就绪
 net_ok=""
-for i in $(seq 1 30); do
+for _ in $(seq 1 30); do
   if curl -s -x http://127.0.0.1:7897 --max-time 8 -o /dev/null -w '%{http_code}' https://www.google.com/generate_204 | grep -q 204; then
     export NODE_USE_ENV_PROXY=1 https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897
     net_ok="proxy"; break
