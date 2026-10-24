@@ -37,6 +37,7 @@ import { toolDemand, toolDemandNote } from "./lib/tool-demand.mjs";
 import { num, writeVerdictLog } from "./lib/verdict-log.mjs";
 import { reportPath } from "../scripts/lib/reports.mjs";
 import { robloxUpdated, serpGap, serpGapDetail, serpGapNote, steamUpdated } from "./lib/serp-gap.mjs";
+import { eventNote, robloxEvent } from "./lib/roblox-event.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SHIP = join(HERE, "..");
@@ -327,6 +328,13 @@ async function daily() {
   ];
   // 新注册域名（whoisds 免费版，每天约 7 万个抽样）：同行开始抢注 = 热度确认 / 窗口在关
   const nrd = items.length ? await nrdCounts(items.map((i) => i.name)) : { available: false, byName: {}, dates: [] };
+  // 官方限时活动（2026-10-24 加，lib/roblox-event.mjs）：月量估算不作数，标截止日
+  for (const i of items.filter((x) => x.kind === "roblox" && x.data.signals.universeId)) {
+    const ev = await robloxEvent(i.data.signals.universeId);
+    if (!ev) continue;
+    i.text += ` · ${eventNote(ev, { short: true })}，别买新域名`;
+    i.data.signals.officialEvent = { endsAt: ev.endsAt?.toISOString().slice(0, 10) ?? null, daysLeft: ev.daysLeft };
+  }
   const signals = await siteShapeSignals(items);
   const gaps = await serpGapSignals(items);
   const headline = items.map((i) => {
@@ -494,6 +502,8 @@ async function check(names) {
     console.log(
       `平台：${[roblox && `Roblox（${roblox.name}，在线 ${roblox.playing}）`, steam && `Steam（${steam.name}，appid ${steam.appId}）`].filter(Boolean).join(" + ") || "Roblox / Steam 都没有 → 按可玩游戏 / 梗查"}`,
     );
+    const event = roblox ? await robloxEvent(roblox.universeId) : null;
+    if (event) console.log(eventNote(event));
     if (roblox) {
       console.log("\n── Roblox 需求验证");
       console.log(await run("lib/roblox-demand-scan.mjs", [roblox.name]));
@@ -557,6 +567,10 @@ async function morning() {
   const prev = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, "utf8")) : null;
   const seen = new Set(prev?.seen ?? []);
   const fresh = hot.filter((h) => !seen.has(h.id));
+  for (const f of fresh.slice(0, 8)) {
+    const ev = await robloxEvent(f.id);
+    if (ev) f.why += ` · ${eventNote(ev, { short: true })}`;
+  }
   // 只留最近 500 个 id，防止状态文件无限长大
   const keep = [...new Set([...seen, ...hot.map((h) => h.id)])].slice(-500);
   writeFileSync(stateFile, JSON.stringify({ scannedAt: new Date().toISOString(), hot: hot.length, seen: keep }, null, 2));
