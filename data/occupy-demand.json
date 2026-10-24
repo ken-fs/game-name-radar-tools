@@ -239,5 +239,73 @@
  "prem:akibalost.wiki": {
   "value": 0,
   "at": "2026-10-22T11:02:28.966Z"
+ },
+ "volg:Big Dig": {
+  "value": 40,
+  "forms": {
+   "game": 40,
+   "codes": 0,
+   "roblox": 0
+  },
+  "at": "2026-10-23T08:00:14.908Z"
+ },
+ "volg:Every Day We Fight": {
+  "value": 0,
+  "forms": {
+   "game": 0,
+   "codes": 0,
+   "roblox": 0
+  },
+  "at": "2026-10-23T08:00:14.908Z"
+ },
+ "volg:Dupery: A Game of Solo Deduction": {
+  "value": 0,
+  "forms": {
+   "game": 0,
+   "codes": 0,
+   "roblox": 0
+  },
+  "at": "2026-10-23T08:00:14.908Z"
+ },
+ "volg:The Jackbox Party Pack 12": {
+  "value": 0,
+  "forms": {
+   "game": 0,
+   "codes": 0,
+   "roblox": 0
+  },
+  "at": "2026-10-23T08:00:14.908Z"
+ },
+ "prem:bigdig.wiki": {
+  "value": 0,
+  "at": "2026-10-23T08:00:23.462Z"
+ },
+ "prem:everydaywefight.wiki": {
+  "value": 0,
+  "at": "2026-10-23T08:00:24.294Z"
+ },
+ "prem:duperyagameofsolodeduction.wiki": {
+  "value": 0,
+  "at": "2026-10-23T08:00:25.115Z"
+ },
+ "prem:thejackboxpartypack12.wiki": {
+  "value": 0,
+  "at": "2026-10-23T08:00:25.864Z"
+ },
+ "prem:tidyupthesmalltown.wiki": {
+  "value": 0,
+  "at": "2026-10-24T02:35:11.278Z"
+ },
+ "prem:tidyupthedragonhoard.wiki": {
+  "value": 0,
+  "at": "2026-10-24T02:35:12.623Z"
+ },
+ "prem:revival.wiki": {
+  "value": 0,
+  "at": "2026-10-24T02:35:13.401Z"
+ },
+ "prem:helaofmicemagic.wiki": {
+  "value": 0,
+  "at": "2026-10-24T05:54:44.299Z"
  }
 }

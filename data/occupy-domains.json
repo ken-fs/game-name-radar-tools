@@ -524,7 +524,7 @@
   "checkedAt": "2026-10-11"
  },
  "orderofthesinkingstargame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "deadlockwiki.com": {
@@ -534,11 +534,13 @@
   "checkedAt": "2026-10-11"
  },
  "orderofthesinkingstar.wiki": {
-  "available": null,
+  "available": false,
+  "registered": "2026-08-14",
+  "ns": "jean.ns.cloudflare.com,kyle.ns.cloudflare.com",
   "checkedAt": "2026-10-24"
  },
  "orderofthesinkingstarwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "fable.wiki": {
@@ -1800,15 +1802,17 @@
   "checkedAt": "2026-10-23"
  },
  "chainedbeasts.wiki": {
-  "available": null,
+  "available": false,
+  "registered": "2026-08-12",
+  "ns": "drew.ns.cloudflare.com,aida.ns.cloudflare.com",
   "checkedAt": "2026-10-24"
  },
  "talesofeterniaremasteredwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "talesofeterniaremasteredgame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "chainedbeastsgame.com": {
@@ -1844,19 +1848,19 @@
   "checkedAt": "2026-10-23"
  },
  "agameofsolodeduction.wiki": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "duperyagameofsolodeductionwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "duperyagameofsolodeductiongame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "agameofsolodeductiongame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "tidyupthesmalltown.wiki": {
@@ -1864,7 +1868,7 @@
   "checkedAt": "2026-10-24"
  },
  "agameofsolodeductionwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "tidyupthesmalltowngame.com": {
@@ -2906,27 +2910,27 @@
   "checkedAt": "2026-10-24"
  },
  "helaofmicemagic.wiki": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "helaofmicemagicgame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "helaofmicemagicwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "ofmicemagic.wiki": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "ofmicemagicgame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "ofmicemagicwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "tidyupthedragonhoard.wiki": {
@@ -2934,11 +2938,11 @@
   "checkedAt": "2026-10-24"
  },
  "tidyupthedragonhoardgame.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "tidyupthedragonhoardwiki.com": {
-  "available": null,
+  "available": true,
   "checkedAt": "2026-10-24"
  },
  "emberville.wiki": {
@@ -2960,7 +2964,9 @@
   "checkedAt": "2026-10-24"
  },
  "frosthaven.wiki": {
-  "available": null,
+  "available": false,
+  "registered": "2026-10-16",
+  "ns": "nora.ns.cloudflare.com,jack.ns.cloudflare.com",
   "checkedAt": "2026-10-24"
  },
  "thejackboxpartypack12.wiki": {
@@ -3082,6 +3088,20 @@
   "checkedAt": "2026-10-24"
  },
  "realmoftaiwuwiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-24"
+ },
+ "dontsplash.wiki": {
+  "available": false,
+  "registered": "2026-10-18",
+  "ns": "meg.ns.cloudflare.com,ben.ns.cloudflare.com",
+  "checkedAt": "2026-10-24"
+ },
+ "dontsplashgame.com": {
+  "available": true,
+  "checkedAt": "2026-10-24"
+ },
+ "dontsplashwiki.com": {
   "available": true,
   "checkedAt": "2026-10-24"
  }
