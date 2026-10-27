@@ -77,7 +77,7 @@
   "available": false,
   "registered": "2026-06-20",
   "ns": "jarred.ns.cloudflare.com,bingo.ns.cloudflare.com",
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "gearsofwaredaygame.com": {
   "available": true,
@@ -103,7 +103,7 @@
   "available": false,
   "registered": "2026-09-29",
   "ns": "EMERSON.NS.CLOUDFLARE.COM,PEARL.NS.CLOUDFLARE.COM",
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "acecombat8wingsofthevewiki.com": {
   "available": true,
@@ -133,7 +133,7 @@
  },
  "lovemaniacwiki.com": {
   "available": true,
-  "checkedAt": "2026-10-19"
+  "checkedAt": "2026-10-27"
  },
  "aion2.wiki": {
   "available": false,
@@ -145,7 +145,7 @@
   "available": false,
   "registered": "2025-10-29",
   "ns": "1-YOU.NJALLA.NO,2-CAN.NJALLA.IN,3-GET.NJALLA.FO",
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "aion2wiki.com": {
   "available": false,
@@ -157,7 +157,7 @@
   "available": false,
   "registered": "2026-02-09",
   "ns": "curitiba.ns.porkbun.com,fortaleza.ns.porkbun.com,maceio.ns.porkbun.com,salvador.ns.porkbun.com",
-  "checkedAt": "2026-10-19"
+  "checkedAt": "2026-10-27"
  },
  "starwarsgalacticracerwiki.com": {
   "available": true,
@@ -167,7 +167,7 @@
   "available": false,
   "registered": "2026-09-29",
   "ns": "NS43.DOMAINCONTROL.COM,NS44.DOMAINCONTROL.COM",
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "starwarsgalacticracergame.com": {
   "available": false,
@@ -197,7 +197,7 @@
   "available": false,
   "registered": "2019-07-05",
   "ns": "NS37.DOMAINCONTROL.COM,NS38.DOMAINCONTROL.COM",
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "mechwarrior5mercenariesashesandascensiongame.com": {
   "available": true,
@@ -485,7 +485,7 @@
   "available": false,
   "registered": "2026-08-07",
   "ns": "arely.ns.cloudflare.com,walt.ns.cloudflare.com",
-  "checkedAt": "2026-10-11"
+  "checkedAt": "2026-10-27"
  },
  "easportsfc27game.com": {
   "available": true,
@@ -505,11 +505,11 @@
   "available": false,
   "registered": "2026-01-06",
   "ns": "NS-1299.AWSDNS-34.ORG,NS-1701.AWSDNS-20.CO.UK,NS-411.AWSDNS-51.COM,NS-546.AWSDNS-04.NET",
-  "checkedAt": "2026-10-11"
+  "checkedAt": "2026-10-27"
  },
  "silverpineswiki.com": {
-  "available": true,
-  "checkedAt": "2026-10-11"
+  "available": null,
+  "checkedAt": "2026-10-27"
  },
  "lightnofire.wiki": {
   "available": false,
@@ -1718,8 +1718,8 @@
   "checkedAt": "2026-10-23"
  },
  "warhammer40000boltgun2game.com": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": true,
+  "checkedAt": "2026-10-27"
  },
  "endfieldwiki.com": {
   "available": false,
@@ -1728,16 +1728,18 @@
   "checkedAt": "2026-10-25"
  },
  "warhammer40000boltgun2wiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": true,
+  "checkedAt": "2026-10-27"
  },
  "boltgun2.wiki": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": false,
+  "registered": "2026-10-14",
+  "ns": "mitchell.ns.cloudflare.com,brynne.ns.cloudflare.com",
+  "checkedAt": "2026-10-27"
  },
  "boltgun2game.com": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": true,
+  "checkedAt": "2026-10-27"
  },
  "ratatan.wiki": {
   "available": false,
@@ -1750,8 +1752,10 @@
   "checkedAt": "2026-10-25"
  },
  "thewitchsbakery.wiki": {
-  "available": null,
-  "checkedAt": "2026-10-16"
+  "available": false,
+  "registered": "2026-08-12",
+  "ns": "drew.ns.cloudflare.com,aida.ns.cloudflare.com",
+  "checkedAt": "2026-10-27"
  },
  "ratatangame.com": {
   "available": false,
@@ -1766,8 +1770,10 @@
   "checkedAt": "2026-10-15"
  },
  "thewitchsbakerygame.com": {
-  "available": null,
-  "checkedAt": "2026-10-16"
+  "available": false,
+  "registered": "2024-06-05",
+  "ns": "DNS105.OVH.NET,NS105.OVH.NET",
+  "checkedAt": "2026-10-27"
  },
  "thewitchsbakerywiki.com": {
   "available": true,
@@ -1947,7 +1953,7 @@
  },
  "tenebrissomniawiki.com": {
   "available": true,
-  "checkedAt": "2026-10-19"
+  "checkedAt": "2026-10-27"
  },
  "penguincolony.wiki": {
   "available": null,
@@ -2295,15 +2301,15 @@
  },
  "bigdig.wiki": {
   "available": true,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "bigdiggame.com": {
   "available": true,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "bigdigwiki.com": {
   "available": true,
-  "checkedAt": "2026-10-20"
+  "checkedAt": "2026-10-27"
  },
  "aiolympius.wiki": {
   "available": true,
@@ -3152,27 +3158,29 @@
   "checkedAt": "2026-10-25"
  },
  "onewayticketsgame.com": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": true,
+  "checkedAt": "2026-10-27"
  },
  "onewayticketswiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": true,
+  "checkedAt": "2026-10-27"
  },
  "dungeoninngame.com": {
   "available": null,
-  "checkedAt": "2026-10-25"
+  "checkedAt": "2026-10-19"
  },
  "dungeoninn.wiki": {
   "available": null,
-  "checkedAt": "2026-10-25"
+  "checkedAt": "2026-10-19"
  },
  "dungeoninnwiki.com": {
   "available": null,
-  "checkedAt": "2026-10-25"
+  "checkedAt": "2026-10-19"
  },
  "moonsweepersgame.com": {
-  "available": null,
-  "checkedAt": "2026-10-25"
+  "available": false,
+  "registered": "2026-10-26",
+  "ns": "EZRA.NS.CLOUDFLARE.COM,KAMI.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-10-27"
  }
 }
