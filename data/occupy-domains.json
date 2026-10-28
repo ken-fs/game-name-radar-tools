@@ -508,8 +508,8 @@
   "checkedAt": "2026-10-27"
  },
  "silverpineswiki.com": {
-  "available": null,
-  "checkedAt": "2026-10-27"
+  "available": true,
+  "checkedAt": "2026-10-28"
  },
  "lightnofire.wiki": {
   "available": false,
@@ -2561,15 +2561,17 @@
  },
  "akibalostgame.com": {
   "available": true,
-  "checkedAt": "2026-10-21"
+  "checkedAt": "2026-10-28"
  },
  "akibalost.wiki": {
-  "available": true,
-  "checkedAt": "2026-10-21"
+  "available": false,
+  "registered": "2026-10-25",
+  "ns": "jonah.ns.cloudflare.com,nicole.ns.cloudflare.com",
+  "checkedAt": "2026-10-28"
  },
  "akibalostwiki.com": {
   "available": true,
-  "checkedAt": "2026-10-21"
+  "checkedAt": "2026-10-28"
  },
  "asistersjourney.wiki": {
   "available": true,
