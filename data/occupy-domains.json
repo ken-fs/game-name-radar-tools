@@ -2677,15 +2677,15 @@
   "available": false,
   "registered": "2026-06-17",
   "ns": "clay.ns.cloudflare.com,ollie.ns.cloudflare.com",
-  "checkedAt": "2026-10-22"
+  "checkedAt": "2026-10-29"
  },
  "stupidneverdiesgame.com": {
   "available": true,
-  "checkedAt": "2026-10-22"
+  "checkedAt": "2026-10-29"
  },
  "stupidneverdieswiki.com": {
   "available": true,
-  "checkedAt": "2026-10-22"
+  "checkedAt": "2026-10-29"
  },
  "nagaisan.wiki": {
   "available": true,
@@ -2753,15 +2753,15 @@
   "available": false,
   "registered": "2026-10-12",
   "ns": "robin.ns.cloudflare.com,damon.ns.cloudflare.com",
-  "checkedAt": "2026-10-22"
+  "checkedAt": "2026-10-29"
  },
  "bruisers2dboxinggame.com": {
   "available": true,
-  "checkedAt": "2026-10-22"
+  "checkedAt": "2026-10-29"
  },
  "bruisers2dboxingwiki.com": {
   "available": true,
-  "checkedAt": "2026-10-22"
+  "checkedAt": "2026-10-29"
  },
  "escapefromplaytime.wiki": {
   "available": false,
@@ -3184,5 +3184,83 @@
   "registered": "2026-10-26",
   "ns": "EZRA.NS.CLOUDFLARE.COM,KAMI.NS.CLOUDFLARE.COM",
   "checkedAt": "2026-10-27"
+ },
+ "punchuponatime.wiki": {
+  "available": false,
+  "registered": "2026-08-23",
+  "ns": "glen.ns.cloudflare.com,mary.ns.cloudflare.com",
+  "checkedAt": "2026-10-29"
+ },
+ "punchuponatimegame.com": {
+  "available": true,
+  "checkedAt": "2026-10-29"
+ },
+ "shreddead.wiki": {
+  "available": false,
+  "registered": "2026-10-27",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-10-29"
+ },
+ "punchuponatimewiki.com": {
+  "available": true,
+  "checkedAt": "2026-10-29"
+ },
+ "shreddeadgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "shreddeadwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "fangtopia.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "fangtopiawiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "fangtopiagame.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "themailroom.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "themailroomgame.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "themailroomwiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "reka.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "rekawiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "rekagame.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "paopao.wiki": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "paopaowiki.com": {
+  "available": null,
+  "checkedAt": "2026-10-29"
+ },
+ "paopaogame.com": {
+  "available": false,
+  "registered": "2021-09-05",
+  "ns": "NSG1.NAMEBRIGHTDNS.COM,NSG2.NAMEBRIGHTDNS.COM",
+  "checkedAt": "2026-10-29"
  }
 }
