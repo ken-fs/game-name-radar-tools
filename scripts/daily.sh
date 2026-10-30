@@ -125,9 +125,13 @@ RADAR_NOTIFY=1 "$NODE" radar.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyA
 #    零成本（RDAP 免费 + 7 天缓存）；🟢 新出现的可买 .wiki 推通知。
 "$NODE" --env-file-if-exists=.env lib/occupy-queue.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
 
-# 7. occupy 数据入库（2026-10-16 加）：占位队列状态 / 域名清单是刻意跟踪的（3e73983），但管线每天改、
-#    以前没人 commit → 巡检第二天必报「改了没 commit」。跑完顺手提交 + 推送（失败不挡管线，巡检会抓）。
-git add data/occupy-state.json data/occupy-domains.json
+# 7. 否决候选到期复测（2026-10-30 加）：需求型否决 +3/+7/+14/+30 天复测，结构型只留档。
+#    复用现有 Roblox / Steam 闸门；只有「判决上升 + 有需求证据」才推翻转，网络失败次日重试。
+"$NODE" --env-file-if-exists=.env lib/rejection-recheck.mjs 2>&1 | grep --line-buffered -v -e EnvHttpProxyAgent -e trace-warnings
+
+# 8. occupy / 否决账本数据入库（2026-10-16 加）：管线每天改、以前没人 commit → 巡检第二天必报「改了没 commit」。
+#    跑完顺手提交 + 推送（失败不挡管线，巡检会抓）。
+git add data/occupy-state.json data/occupy-domains.json data/rejections.json
 if ! git diff --cached --quiet; then
   git commit -q -m "chore: occupy-queue 每日状态 $TODAY"
   GIT_TERMINAL_PROMPT=0 git push -q origin main \

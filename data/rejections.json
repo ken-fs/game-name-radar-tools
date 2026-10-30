@@ -1,0 +1,377 @@
+{
+  "_comment": "否决账本。新增字段：name / platform(roblox|steam|other) / category(demand|structural|pre-release) / decidedAt(YYYY-MM-DD) / decidedVerdict / verdict / reason / status(active|flipped|manual|closed) / nextRecheck；pre-release 另填 releaseDate。active 才自动复测，flipped 等人工深核，manual 只留档，closed 已结束。history 由脚本维护。",
+  "decisions": [
+    {
+      "name": "Build a Dungeon",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-11",
+      "decidedVerdict": "❌",
+      "verdict": "🟢 GO",
+      "reason": "当时 declining、量级≈0；10-30 已变为 rising + 7 攻略词",
+      "status": "flipped",
+      "nextRecheck": null,
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "❌",
+          "to": "🟢 GO",
+          "outcome": "flip",
+          "guideWords": 7,
+          "ccu": 1457,
+          "note": "人工复核；待重新查 SERP / 实体 / 竞品"
+        }
+      ]
+    },
+    {
+      "name": "Harpoon a Fish",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-15",
+      "decidedVerdict": "❌",
+      "verdict": "🟡 观察",
+      "reason": "当时 declining、量小；随后 CCU 冲到 11.7K 且有多个 Wiki 进场",
+      "status": "flipped",
+      "nextRecheck": null,
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "❌",
+          "to": "🟡 观察",
+          "outcome": "flip",
+          "note": "早期窗口已错过；只复核高 CPM 需求是否恢复"
+        }
+      ]
+    },
+    {
+      "name": "Tap Simulator REBORN",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-20",
+      "decidedVerdict": "🟡 观察",
+      "verdict": "🟢 GO",
+      "reason": "当时需求未证明；10-30 已有 35K CCU + 26 工具词",
+      "status": "flipped",
+      "nextRecheck": null,
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "🟡 观察",
+          "to": "🟢 GO",
+          "outcome": "flip",
+          "guideWords": 6,
+          "ccu": 35168,
+          "note": "优先人工复核 value 工具站与实时孵化竞品"
+        }
+      ]
+    },
+    {
+      "name": "Build and Conquer",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-11",
+      "decidedVerdict": "❌",
+      "verdict": "🟡 观察",
+      "reason": "攻略词已出现，但 10-30 CCU 仅 964、codes 仍为 spike",
+      "status": "active",
+      "nextRecheck": "2026-11-10",
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "❌",
+          "to": "🟡 观察",
+          "outcome": "stable",
+          "ccu": 964,
+          "guideWords": 5
+        }
+      ]
+    },
+    {
+      "name": "We Were Here Tomorrow",
+      "platform": "steam",
+      "category": "demand",
+      "decidedAt": "2026-10-21",
+      "decidedVerdict": "❌",
+      "verdict": "🟡 观察",
+      "reason": "线性解谜；攻略长尾开始形成但峰值 CCU 约 406",
+      "status": "active",
+      "nextRecheck": "2026-11-20",
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "❌",
+          "to": "🟡 观察",
+          "outcome": "stable",
+          "guideWords": 9
+        }
+      ]
+    },
+    {
+      "name": "My Dino Empire",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-29",
+      "decidedVerdict": "🟡 观察",
+      "verdict": "🟡 观察",
+      "reason": "至少 30 Index 档位，但实体需求未过、CCU 低于 2K",
+      "status": "active",
+      "nextRecheck": "2026-11-01",
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "🟡 观察",
+          "to": "🟡 观察",
+          "outcome": "stable",
+          "ccu": 1327
+        }
+      ]
+    },
+    {
+      "name": "Hello Kitty Party Land",
+      "platform": "other",
+      "category": "demand",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "🟡 观察",
+      "verdict": "🟡 观察",
+      "reason": "Switch 新作；实体够，个体攻略需求与真数据仍待形成",
+      "status": "active",
+      "nextRecheck": "2026-11-02",
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "🟡 观察",
+          "to": "🟡 观察",
+          "outcome": "stable"
+        }
+      ]
+    },
+    {
+      "name": "Maid Cafe Simulator",
+      "platform": "steam",
+      "category": "demand",
+      "decidedAt": "2026-10-10",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "低 CCU、攻略需求弱；只保留低成本复测",
+      "status": "active",
+      "nextRecheck": "2026-11-09",
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "❌",
+          "to": "❌",
+          "outcome": "stable"
+        }
+      ]
+    },
+    {
+      "name": "Junkyard Simulator",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-28",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "Roblox 需求与名字归因未过",
+      "status": "active",
+      "nextRecheck": "2026-11-27",
+      "lastChecked": "2026-10-30",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "from": "❌",
+          "to": "❌",
+          "outcome": "stable",
+          "ccu": 892
+        }
+      ]
+    },
+    {
+      "name": "Airport Contraband",
+      "platform": "steam",
+      "category": "demand",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "工具与攻略需求不足、峰值 CCU 低",
+      "status": "active",
+      "nextRecheck": "2026-11-02",
+      "history": []
+    },
+    {
+      "name": "ATMOSFAR",
+      "platform": "steam",
+      "category": "demand",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "工具需求 0、峰值 CCU 低",
+      "status": "active",
+      "nextRecheck": "2026-11-02",
+      "history": []
+    },
+    {
+      "name": "Portal Sandbox",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "Trends spike、名字碰撞",
+      "status": "active",
+      "nextRecheck": "2026-11-02",
+      "history": []
+    },
+    {
+      "name": "Punch Walls to Escape",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "CCU 低、Trends declining",
+      "status": "active",
+      "nextRecheck": "2026-11-02",
+      "history": []
+    },
+    {
+      "name": "Dig For Dinos",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "CCU 太低",
+      "status": "active",
+      "nextRecheck": "2026-11-02",
+      "history": []
+    },
+    {
+      "name": "Clover Time",
+      "platform": "roblox",
+      "category": "structural",
+      "decidedAt": "2026-10-11",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "专用 Wiki 先手；后续上涨主要低 CPM 地区",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Tales of Eternia Remastered",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-15",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "老 Wiki 与攻略媒体覆盖；只有新数据空位才人工重开",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Harvest Moon: Echoes of Teradea",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-15",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "多个 Wiki + 低 CCU；需求上涨本身不重开",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Mycopunk",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-21",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "Fandom 196 页；只有 calculator 需求或独家工具数据再重开",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Build A Zombie",
+      "platform": "roblox",
+      "category": "structural",
+      "decidedAt": "2026-10-30",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "YouTube / SERP 归因到别的僵尸游戏",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Probably Stolen",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-29",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "多个真实 Wiki 已进场；只有独家价格 / 配方库才重开",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Planet Zoo 2",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-15",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "官方、老 Fandom 和大媒体已占位",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Just Dance: Decades of Hits",
+      "platform": "other",
+      "category": "structural",
+      "decidedAt": "2026-10-14",
+      "decidedVerdict": "❌",
+      "verdict": "❌",
+      "reason": "Fandom 已铺全歌曲且没有独家数据库",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Frostrail",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-20",
+      "decidedVerdict": "🟡 观察",
+      "verdict": "🟡 观察",
+      "reason": "先手站已占核心词；只在其停更或正式版真数据空位时重开",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Nature of Dread",
+      "platform": "steam",
+      "category": "structural",
+      "decidedAt": "2026-10-20",
+      "decidedVerdict": "🟡 观察",
+      "verdict": "🟡 观察",
+      "reason": "线性恐怖、实体结构不足",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    }
+  ]
+}

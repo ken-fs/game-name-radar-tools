@@ -474,7 +474,7 @@ async function fetchJson(url, attempts = 3) {
   return null;
 }
 
-async function onRoblox(name) {
+export async function onRoblox(name) {
   const d = await fetchJson(
     `https://apis.roblox.com/search-api/omni-search?searchQuery=${encodeURIComponent(name)}&sessionId=radar&pageType=all`,
   );
