@@ -182,6 +182,31 @@ node lib/steam-charts-watch.mjs --dry-run          # 只打印
 node lib/steam-charts-watch.mjs --week=2026-09-22  # 回测那一周的周畅销（不写任何东西）
 ```
 
+## 可玩游戏：门户起量与早期每日
+
+`lib/playable-trend-watch.mjs` 仍用 Poki / Crazy Games / unblocked 联想 + Trends 相对 Monkey Mart 判 🟢。这条门槛只覆盖已经出现在门户搜索里的词。
+
+`lib/playable-early-watch.mjs` 补另一条发现路径，给 Trends 还没成型的每日 / 独立浏览器游戏：
+
+- All the Dles 周热、新上架、目录新页上还在的游戏。上线超过两三周不会因此被丢掉
+- 可选：itch.io 最新网页、Newgrounds Daily Top（抓失败只记一笔）
+- 免费信号：上线新鲜度、Reddit 公开搜索 + DuckDuckGo 媒体/门户域名、Trends 7 天/30 天短窗（独立域名用主机名，避免把 Plain 这种普通词当成游戏热度）、X-Frame-Options + CSP `frame-ancestors`、同车道拥挤、大厂 IP（含 Pokémon 变体）
+- 不调用付费 SerpApi / X。缺信号就降级，不编造尖峰
+
+评分是 S / M / N / L / C，综合 = mean(S, M, N, L, 10−C)。探测顺序看周热、趋势斜率和赛道空不空（同类少、答案站少、还能嵌或能开源自托管），不看日历年龄。N 只给较新的词加一点分。答案站已经成片的老词（Size It Up 这一类）输在拥挤，不输在天数。S 没有独立社交证据时封顶 4.5。结果写进当天 `RADAR-PLAYABLE` 的「早期每日」一节，并另存 `RADAR-PLAYABLE-EARLY`。标签是 `early / social`（🟡 早期/社交），**不会**因为短窗热度不够或开源可部署就升成 🟢。
+
+每条早期候选写三条变现路径：
+
+1. **嵌入路径** — 响应头允许时「可试 iframe」（头不等于作者授权）
+2. **内容路径** — XFO / CSP 挡住嵌入时改走答案 / 归档（不搬官方题库）
+3. **开源部署** — 玩法页或 GitHub 上有公开仓库时写出 URL、许可证、是否像静态页可自托管。像的话标「优先」
+
+```bash
+node lib/playable-trend-watch.mjs --early          # 只跑早期路径
+node lib/playable-trend-watch.mjs                  # 门户 + 早期（每日 scan 已会调用）
+PLAYABLE_EARLY=0 node lib/playable-trend-watch.mjs # 关掉早期路径
+```
+
 ## GitHub Actions
 
 `.github/workflows/radar.yml` 默认在每小时第17分和第47分运行。旧任务会在新任务开始时自动取消，只保留最新扫描。
