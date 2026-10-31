@@ -347,7 +347,7 @@ async function daily() {
     `# 游戏雷达总报告 ${today}`,
     "",
     "> `game-name-radar/radar.mjs` · Roblox + Steam（投入价值 / 关注者增速 / 畅销·在玩榜）+ 联想新词 + 可玩游戏 + 梗，一份报告 · 零搜索额度",
-    "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-STEAMCHARTS / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-MEME（同日期）",
+    "> 细节在各自的报告：RADAR-INVEST / RADAR-STEAMFOLLOW / RADAR-STEAMCHARTS / RADAR-SUGGEST / RADAR-PLAYABLE / RADAR-PLAYABLE-EARLY / RADAR-MEME（同日期）",
     "> 站型信号（2026-10-13 加）：🧮 工具需求 = Google 联想里 ≥2 条 value / calculator / trading 类补全（能做首页即工具的价值表 / 计算器站）· codes 媒体 N 家 = 「<游戏> codes」美国前 10 里讲这个游戏的大媒体数：0–1 📣 抢速度 / 2 🟡 / ≥3 ⛔ codes 别当主打（做实体页 / 工具页），只对 Roblox / 联想新词查（买断制 Steam 游戏无 codes 生态）；SERP 错配 = 结果页讲的是别的游戏，不算数",
     "> SERP 空位（2026-10-20 加，前 5 个 Roblox / Steam 候选）：🌐 语言空位 = 德法西意日韩里本地联想有人搜、前 10 本地语言页 ≤2（能用本地语言页抢）· 🕰️ = 美国前 10 有日期的页面 ≥60% 早于游戏最近更新（30 天内还在更新的按 30 天前算）；单次 SERP 会抖，是提示不是判决",
     `> 「近 3 天 N 个新域名」= whoisds 免费新注册域名列表里含这个名字的个数（每天约 7 万个抽样，0 不等于没人注册；⚠️ = ≥3 个，同行在抢）${nrd.available ? `；用的是 ${nrd.dates.join(" / ")}（UTC）` : "；今天没拿到列表"}`,
@@ -408,6 +408,12 @@ async function daily() {
   lines.push("## 可玩游戏（HTML5 起量）", "");
   if (!playable) lines.push("（今天的 RADAR-PLAYABLE 还没生成）", "");
   else lines.push(...table("| 判决 | 游戏 | 热度 | 增长 | 同比 | 峰值 | 前 5 国 | 首见 | 域名 |", playableTop), "");
+  const earlyFile = readReport("PLAYABLE-EARLY");
+  const earlySource = playable?.includes("| 🟡 早期") ? playable : earlyFile;
+  const playableEarly = rowsStartingWith(earlySource, ["🟡 早期"], 8);
+  lines.push("## 早期每日 / 社交（Trends 未成型，不当 🟢）", "");
+  if (!earlySource) lines.push("（今天的早期每日还没生成）", "");
+  else lines.push(...table("| 判决 | 游戏 | 综合 | S | M | N | L | C | 上线 | Trends | 嵌入路径 | 内容路径 | 开源部署 | 来源 | 备注 |", playableEarly), "");
   lines.push("## 梗游戏", "");
   if (!meme) lines.push("（今天的 RADAR-MEME 还没生成）", "");
   else lines.push(...table("| 判决 | 梗 | 各市场可玩补全 | 例子 | 来源 | 首见 | 域名 |", memeTop), "");

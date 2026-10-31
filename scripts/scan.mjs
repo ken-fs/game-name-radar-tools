@@ -349,7 +349,10 @@ let playableAlerts=[];
 if(googleReachable)try{
   const playable=await runPlayableWatch();
   playableAlerts=playable.alerts.map(r=>r.name);
-  console.log(`Playable watch: ${playable.discovered} found, ${playable.rows.length} checked, ${playableAlerts.length} new go${playableAlerts.length?` → ${playableAlerts.join(' / ')}`:''}; ${playable.openPairs.length} open meme pairs${playable.errors.length?`; errors: ${playable.errors.join('; ')}`:''}`);
+  const earlyRows=playable.early?.rows||[];
+  const earlyTagged=earlyRows.filter(r=>r.verdict==='early').map(r=>r.name);
+  const earlyOss=earlyRows.filter(r=>r.paths?.oss?.deployable).length;
+  console.log(`Playable watch: ${playable.discovered} found, ${playable.rows.length} checked, ${playableAlerts.length} new go${playableAlerts.length?` → ${playableAlerts.join(' / ')}`:''}; early-daily ${earlyRows.length}${earlyTagged.length?` (early/social ${earlyTagged.join(' / ')})`:''}${earlyOss?`, open-source deploy ${earlyOss}`:''}; ${playable.openPairs.length} open meme pairs${playable.errors.length?`; errors: ${playable.errors.join('; ')}`:''}${playable.early?.errors?.length?`; early gaps: ${playable.early.errors.join('; ')}`:''}`);
 }catch(error){console.error(`Playable watch failed: ${error.message}`)}
 
 for(const candidate of candidates){
