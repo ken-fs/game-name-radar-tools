@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { cleanRobloxName, parseDemand, parseGrowth, parseMismatch, parseSteady } from "../radar.mjs";
+import { cleanRobloxName, parseDemand, parseGrowth, parseMismatch, parseSteady, withoutRejected } from "../radar.mjs";
 
 test("cleanRobloxName strips update tags and emoji", () => {
   assert.equal(cleanRobloxName("[🐟UPDATE] Hole Fishing"), "Hole Fishing");
@@ -9,6 +9,16 @@ test("cleanRobloxName strips update tags and emoji", () => {
   assert.equal(cleanRobloxName("Anime Zero [FLAME DIRECTOR] 🔥👻"), "Anime Zero");
   assert.equal(cleanRobloxName("Run a Sari-Sari Store!"), "Run a Sari-Sari Store");
   assert.equal(cleanRobloxName("+1 Assassin Leveling"), "Assassin Leveling");
+});
+
+test("已否决候选只有翻转后才重新进头条", () => {
+  const items = [{ name: "Build A Zombie" }, { name: "Merkado" }, { name: "Hole Fishing" }];
+  const ledger = { decisions: [
+    { name: "Build A Zombie", status: "manual" },
+    { name: "Merkado", status: "active" },
+    { name: "Hole Fishing", status: "flipped" },
+  ] };
+  assert.deepEqual(withoutRejected(items, ledger), [{ name: "Hole Fishing" }]);
 });
 
 test("parseGrowth reads the growth-scan table", () => {

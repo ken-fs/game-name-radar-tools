@@ -91,6 +91,14 @@ export function cleanRobloxName(name) {
     .trim();
 }
 
+/** 已否决候选只有复测翻转后才重新进头条；manual / closed 不被原始信号反复顶回来。 */
+export function withoutRejected(items, ledger) {
+  const rejected = new Set((ledger?.decisions ?? [])
+    .filter((d) => d.name && d.status !== "flipped")
+    .map((d) => d.name.trim().toLowerCase()));
+  return items.filter((i) => !rejected.has(String(i.name).trim().toLowerCase()));
+}
+
 // ─── Roblox 层 ────────────────────────────────────────────────────────────────
 
 const GROWTH_ROW = /^\s+([\d.]+)x\s+(\d+)\s+([\d.]+[KM]?)\s+(\d+)天\s+(\d+)天前\s+(.+?)\s+\[(\d+)\]\s*$/;
@@ -284,7 +292,9 @@ async function daily() {
     return { ageDays: g?.ageDays, ccu: g?.ccu ?? m?.ccu, growthX: g?.growth, universeId: g?.id ?? m?.id, updatedDaysAgo: g?.updatedDaysAgo, ytChannels: m?.channels, ytRatio: m?.ratio };
   };
   // 每条带上游戏名，后面统一查「最近 3 天新注册域名」
-  const items = [
+  let rejectionLedger = {};
+  try { rejectionLedger = JSON.parse(readFileSync(join(HERE, "data", "rejections.json"), "utf8")); } catch {}
+  const items = withoutRejected([
     ...robloxGo.map((d) => ({ kind: "roblox", line: "roblox-demand", name: d.name, text: `- **Roblox** ${d.name}：${d.verdict}（${d.reason}）`,
       data: { verdict: d.verdict, signals: { ...robloxStats(d.name), magnitude: d.magnitude || undefined, subKeywords: d.sub ? d.sub.split(/[,，、]/).filter(Boolean).length : undefined, trend: d.trend || undefined } } })),
     ...strongMismatch.map((m) => {
@@ -325,7 +335,7 @@ async function daily() {
       const name = unlink(r.split("|")[2]);
       return { line: "meme", name, text: `- **梗** ${name}：刚冒头（${r.split("|")[3]?.trim()}）`, data: { verdict: cells(r)[0], signals: { playableCompletions: r.split("|")[3]?.trim() } } };
     }),
-  ];
+  ], rejectionLedger);
   // 新注册域名（whoisds 免费版，每天约 7 万个抽样）：同行开始抢注 = 热度确认 / 窗口在关
   const nrd = items.length ? await nrdCounts(items.map((i) => i.name)) : { available: false, byName: {}, dates: [] };
   // 官方限时活动（2026-10-24 加，lib/roblox-event.mjs）：月量估算不作数，标截止日
