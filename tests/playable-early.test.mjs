@@ -11,6 +11,9 @@ import {
   ipRisk,
   meansFromTimeline,
   mergeDirectoryCandidates,
+  probePriority,
+  scoreCompetition,
+  selectProbeCandidates,
   monetizationPaths,
   parseAllTheDlesHome,
   parseAllTheDlesNew,
@@ -114,7 +117,7 @@ test('Poké Jam is IP risk on the extended list, including a spaced Poké prefix
   assert.notEqual(row.verdict, 'go');
 });
 
-test('directory parsers keep weekly rank, launch dates, and drop stale new listings', () => {
+test('directory parsers keep weekly rank and do not drop older listings', () => {
   const home = parseAllTheDlesHome(`
     <ol class="picks">
       <li class="pick" data-slug="gazillion"><span class="pick-name">Gazillion</span><span class="pick-sum">year range</span>
@@ -139,9 +142,56 @@ test('directory parsers keep weekly rank, launch dates, and drop stale new listi
     <article class="game-card" data-slug="old-game"><h3>Old Game</h3><span class="chip">launched Sep 1, 2026</span>
       <a class="key key-go card-play" href="https://old.example/">Play</a></article>`);
   assert.equal(fresh[0].launchedAt, '2026-10-20');
-  const merged = mergeDirectoryCandidates({ picks: home.picks, newly: home.newly, fresh }, { now: NOW, freshDays: 21 });
-  assert.equal(merged.find((row) => row.name === 'Old Game'), undefined);
+  const merged = mergeDirectoryCandidates({ picks: home.picks, newly: home.newly, fresh });
+  assert.equal(merged.find((row) => row.name === 'Old Game').launchedAt, '2026-09-01');
   assert.equal(merged.find((row) => row.name === 'Oss Game').launchedAt, '2026-10-20');
+});
+
+test('age is a novelty bonus; a months-old weekly climber with an open niche stays', () => {
+  const row = scoreEarly({
+    name: 'Still Climbing',
+    weeklyRank: 2,
+    launchedAt: '2026-07-01',
+    lists: ['weekly-hot'],
+    blurb: 'pin a country on the daily map',
+    embed: parseEmbedPolicy({}),
+    social: { measured: true, redditPosts7d: 0, mediaMentions: 0 },
+    competition: scoreCompetition({ lane: 'geo', peers: [], playUrl: 'https://climber.example/', answerNests: 0 }),
+  }, NOW);
+  assert.ok(row.novelty.days > 90);
+  assert.ok(row.novelty.score <= 4.5);
+  assert.equal(row.verdict, 'early');
+  assert.notEqual(row.verdict, 'go');
+});
+
+test('a filled answer niche loses on competition, not on a day count', () => {
+  const open = scoreCompetition({ lane: 'estimate', peers: [], playUrl: 'https://sizeitup.example/', answerNests: 0 });
+  const full = scoreCompetition({ lane: 'estimate', peers: [], playUrl: 'https://sizeitup.example/', answerNests: 5 });
+  assert.ok(full.c >= open.c + 3);
+  assert.match(full.notes.join(' '), /答案站已挤满/);
+  const row = scoreEarly({
+    name: 'Size It Up',
+    launchedAt: '2026-05-01',
+    lists: ['new-60d'],
+    blurb: 'estimate the closest scale',
+    embed: parseEmbedPolicy({ xFrameOptions: 'DENY', contentSecurityPolicy: "frame-ancestors 'none'" }),
+    social: { measured: true, answerNests: 5 },
+    competition: full,
+  }, NOW);
+  assert.ok(row.dims.C >= 7);
+  assert.notEqual(row.verdict, 'early');
+  assert.notEqual(row.verdict, 'go');
+});
+
+test('probe slots prefer an older empty lane over a newer crowded one', () => {
+  const counts = new Map([['rarity', 6], ['geo', 1]]);
+  const older = { name: 'Climber', blurb: 'pin a country on the daily map', lists: ['new-60d'], launchedAt: '2026-08-01' };
+  const younger = { name: 'Rarity Baby', blurb: 'name the rarer answer fewer people pick', lists: ['newly-added'], launchedAt: '2026-10-28' };
+  assert.ok(probePriority(older, counts, NOW) > probePriority(younger, counts, NOW));
+  const weekly = [1, 2, 3].map((rank) => ({ name: `Week ${rank}`, weeklyRank: rank, blurb: 'year range history', lists: ['weekly-hot'], launchedAt: '2026-06-01' }));
+  const picked = selectProbeCandidates([...weekly, older], { limit: 3, now: NOW });
+  assert.ok(picked.some((row) => row.name === 'Climber'));
+  assert.equal(picked.filter((row) => row.weeklyRank).length, 2);
 });
 
 test('repo extraction prefers the named repo and ignores weak search hits', () => {
@@ -180,7 +230,7 @@ test('itch and newgrounds parsers reuse the existing listing readers', () => {
 
 test('runEarlyPlayableWatch fills embed, content, and open-source columns without portal Suggest', async () => {
   const home = `<ol class="picks"><li class="pick" data-slug="gazillion"><span class="pick-name">Gazillion</span><span class="pick-sum">year range</span><a class="key key-go pick-play" href="https://gazillion.example/">Play</a></li><li class="pick" data-slug="plain"><span class="pick-name">Plain</span><span class="pick-sum">closest number</span><a class="key key-go pick-play" href="https://plain.example/">Play</a></li></ol><section><h2>Newly added</h2><article class="game-card" data-slug="oss-game"><h3>Oss Game</h3><span class="game-sum">static html</span><a class="key key-go card-play" href="https://oss.example/">Play</a></article></section>`;
-  const newer = `<h2 class="day-head">Added Oct 20, 2026</h2><article class="game-card" data-slug="oss-game"><h3>Oss Game</h3><span class="chip">launched Oct 20, 2026</span><a class="key key-go card-play" href="https://oss.example/">Play</a></article><h2 class="day-head">Added Sep 1, 2026</h2><article class="game-card" data-slug="old-game"><h3>Old Game</h3><span class="chip">launched Sep 1, 2026</span><a class="key key-go card-play" href="https://old.example/">Play</a></article>`;
+  const newer = `<h2 class="day-head">Added Oct 20, 2026</h2><article class="game-card" data-slug="oss-game"><h3>Oss Game</h3><span class="chip">launched Oct 20, 2026</span><a class="key key-go card-play" href="https://oss.example/">Play</a></article>`;
   const seen = [];
   const fetchImpl = async (url) => {
     const u = String(url);
@@ -220,7 +270,6 @@ test('runEarlyPlayableWatch fills embed, content, and open-source columns withou
   });
   assert.equal(seen.some((url) => url.includes('suggestqueries')), false);
   const byName = Object.fromEntries(result.rows.map((row) => [row.name, row]));
-  assert.equal(byName['Old Game'], undefined);
   assert.equal(byName.Gazillion.paths.embed.open, true);
   assert.equal(byName.Gazillion.paths.content.role, 'fallback');
   assert.equal(byName.Gazillion.paths.oss.found, false);

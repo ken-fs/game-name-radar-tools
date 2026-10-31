@@ -188,12 +188,12 @@ node lib/steam-charts-watch.mjs --week=2026-09-22  # 回测那一周的周畅销
 
 `lib/playable-early-watch.mjs` 补另一条发现路径，给 Trends 还没成型的每日 / 独立浏览器游戏：
 
-- All the Dles 周热、新上架、近 21 天新游戏
+- All the Dles 周热、新上架、目录新页上还在的游戏。上线超过两三周不会因此被丢掉
 - 可选：itch.io 最新网页、Newgrounds Daily Top（抓失败只记一笔）
 - 免费信号：上线新鲜度、Reddit 公开搜索 + DuckDuckGo 媒体/门户域名、Trends 7 天/30 天短窗（独立域名用主机名，避免把 Plain 这种普通词当成游戏热度）、X-Frame-Options + CSP `frame-ancestors`、同车道拥挤、大厂 IP（含 Pokémon 变体）
 - 不调用付费 SerpApi / X。缺信号就降级，不编造尖峰
 
-评分是 S / M / N / L / C，综合 = mean(S, M, N, L, 10−C)。S 没有独立社交证据时封顶 4.5。结果写进当天 `RADAR-PLAYABLE` 的「早期每日」一节，并另存 `RADAR-PLAYABLE-EARLY`。标签是 `early / social`（🟡 早期/社交），**不会**因为短窗热度不够或开源可部署就升成 🟢。
+评分是 S / M / N / L / C，综合 = mean(S, M, N, L, 10−C)。探测顺序看周热、趋势斜率和赛道空不空（同类少、答案站少、还能嵌或能开源自托管），不看日历年龄。N 只给较新的词加一点分。答案站已经成片的老词（Size It Up 这一类）输在拥挤，不输在天数。S 没有独立社交证据时封顶 4.5。结果写进当天 `RADAR-PLAYABLE` 的「早期每日」一节，并另存 `RADAR-PLAYABLE-EARLY`。标签是 `early / social`（🟡 早期/社交），**不会**因为短窗热度不够或开源可部署就升成 🟢。
 
 每条早期候选写三条变现路径：
 
