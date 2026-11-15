@@ -2,6 +2,30 @@
   "_comment": "否决账本。新增字段：name / platform(roblox|steam|other) / category(demand|structural|pre-release) / decidedAt(YYYY-MM-DD) / decidedVerdict / verdict / reason / status(active|flipped|manual|closed) / nextRecheck；pre-release 另填 releaseDate。active 才自动复测，flipped 等人工深核，manual 只留档，closed 已结束。history 由脚本维护。",
   "decisions": [
     {
+      "name": "Jujutsu Farm",
+      "platform": "roblox",
+      "category": "structural",
+      "decidedAt": "2026-11-15",
+      "decidedVerdict": "❌ 放弃",
+      "verdict": "❌ 放弃",
+      "reason": "需求真实（7497 CCU、codes 联想/Trends、2 个多源码），但至少 3 个专用 wiki 已于 11-10～11-11 进场（jujutsufarm.wiki 172 URL、jujutsu-farm.wiki 49 URL 且非空壳、jujutsu--farm.wiki 96 URL），Google codes 前 10 另有 6 家媒体/聚合站；已晚，不买不建（见 GAME-SCAN-2026-11-15）",
+      "status": "manual",
+      "nextRecheck": null,
+      "history": []
+    },
+    {
+      "name": "Pixel Blue Lock",
+      "platform": "roblox",
+      "category": "demand",
+      "decidedAt": "2026-11-15",
+      "decidedVerdict": "🟡 观察",
+      "verdict": "🟡 观察",
+      "reason": "codes 联想/Trends 与 Roblox Den 3 个有效码真实，独立域名专门站 0、Fandom 仅 3 页；但 CCU 从推送 1674 降到 1247（<1500），codes 前 10 只有 1 页 + 1 视频讲本游戏，YouTube 13 频道/中位 9600 为其他 Blue Lock/Pixel 内容错配。暂不买；升级需 CCU 连续 2 天 ≥1500、至少 2 个新的本游戏创作者/媒体来源且无新独立专门站（见 GAME-SCAN-2026-11-15）",
+      "status": "active",
+      "nextRecheck": "2026-11-18",
+      "history": []
+    },
+    {
       "name": "Roburbia",
       "platform": "roblox",
       "category": "demand",
