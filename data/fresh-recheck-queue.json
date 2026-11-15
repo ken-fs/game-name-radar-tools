@@ -6468,6 +6468,18 @@
      "glorybound-wiki.wiki",
      "glorybound-game.wiki"
     ]
+   },
+   {
+    "date": "2026-11-15",
+    "day": 5,
+    "base": 73.3,
+    "now": 63,
+    "ratio": 0.86,
+    "last": "2026-11-15",
+    "sites": [
+     "glorybound-wiki.wiki",
+     "glorybound-game.wiki"
+    ]
    }
   ]
  },
@@ -6489,6 +6501,17 @@
     "now": 53.3,
     "ratio": 0.88,
     "last": "2026-11-14",
+    "sites": [
+     "state-connect.wiki"
+    ]
+   },
+   {
+    "date": "2026-11-15",
+    "day": 3,
+    "base": 61.3,
+    "now": 45.7,
+    "ratio": 0.74,
+    "last": "2026-11-15",
     "sites": [
      "state-connect.wiki"
     ]
@@ -6531,6 +6554,15 @@
     "now": 9,
     "ratio": 0.55,
     "last": "2026-11-14",
+    "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 4,
+    "base": 48.7,
+    "now": 0,
+    "ratio": 0,
+    "last": "2026-11-15",
     "sites": []
    }
   ]
@@ -6597,6 +6629,17 @@
     "ratio": 1.17,
     "last": "2026-11-14",
     "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 4,
+    "base": 46.7,
+    "now": 49.3,
+    "ratio": 1.06,
+    "last": "2026-11-15",
+    "sites": [
+     "boosterpackheroes.org"
+    ]
    }
   ],
   "steady": {
@@ -6684,6 +6727,15 @@
     "ratio": 1.18,
     "last": "2026-11-14",
     "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 4,
+    "base": 20.3,
+    "now": 24,
+    "ratio": 1.18,
+    "last": "2026-11-15",
+    "sites": []
    }
   ]
  },
@@ -6714,6 +6766,15 @@
     "now": 59.7,
     "ratio": 1,
     "last": "2026-11-14",
+    "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 3,
+    "base": 61.3,
+    "now": 65.7,
+    "ratio": 1.07,
+    "last": "2026-11-15",
     "sites": []
    }
   ]
@@ -6747,6 +6808,15 @@
     "ratio": 0.73,
     "last": "2026-11-14",
     "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 3,
+    "base": 57.3,
+    "now": 23.3,
+    "ratio": 0.41,
+    "last": "2026-11-15",
+    "sites": []
    }
   ]
  },
@@ -6759,8 +6829,18 @@
   "prerelease": false,
   "term": "stack a butter squishy",
   "due": "2026-11-14",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-15",
+    "day": 2,
+    "base": 23.7,
+    "now": 14,
+    "ratio": 0.59,
+    "last": "2026-11-15",
+    "sites": []
+   }
+  ]
  },
  "uma dash": {
   "name": "UMA DASH",
@@ -6776,6 +6856,15 @@
    {
     "date": "2026-11-14",
     "day": 1,
+    "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 2,
+    "base": 0,
+    "now": 0,
+    "ratio": 0,
+    "last": "2026-11-15",
     "sites": []
    }
   ]
@@ -6800,6 +6889,18 @@
     "last": "2026-11-14",
     "sites": [
      "cultivationunbound.wiki"
+    ]
+   },
+   {
+    "date": "2026-11-15",
+    "day": 2,
+    "base": 65.3,
+    "now": 53.7,
+    "ratio": 0.82,
+    "last": "2026-11-15",
+    "sites": [
+     "cultivationunbound.wiki",
+     "cultivationunbound.site"
     ]
    }
   ]
@@ -6828,6 +6929,19 @@
      "farflunggame.fun",
      "farflung.live"
     ]
+   },
+   {
+    "date": "2026-11-15",
+    "day": 2,
+    "base": 92.7,
+    "now": 75,
+    "ratio": 0.81,
+    "last": "2026-11-15",
+    "sites": [
+     "playfarflunggame.com",
+     "farflunggame.fun",
+     "farflung.live"
+    ]
    }
   ]
  },
@@ -6840,8 +6954,18 @@
   "prerelease": false,
   "term": "rejected draft",
   "due": "2026-11-15",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-15",
+    "day": 1,
+    "base": 44.3,
+    "now": 28,
+    "ratio": 0.63,
+    "last": "2026-11-15",
+    "sites": []
+   }
+  ]
  },
  "warota i live next to the demon king s castle lol": {
   "name": "Warota: I Live Next to The Demon King's Castle LOL",
@@ -6857,6 +6981,11 @@
    {
     "date": "2026-11-14",
     "day": 1,
+    "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 2,
     "sites": []
    }
   ]
@@ -6876,6 +7005,15 @@
     "date": "2026-11-14",
     "day": 1,
     "sites": []
+   },
+   {
+    "date": "2026-11-15",
+    "day": 2,
+    "base": 0,
+    "now": 0,
+    "ratio": 0,
+    "last": "2026-11-15",
+    "sites": []
    }
   ]
  },
@@ -6888,8 +7026,20 @@
   "prerelease": false,
   "term": "do not stop",
   "due": "2026-11-15",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-15",
+    "day": 1,
+    "base": 72.3,
+    "now": 62,
+    "ratio": 0.86,
+    "last": "2026-11-15",
+    "sites": [
+     "donotstop.wiki"
+    ]
+   }
+  ]
  },
  "jail": {
   "name": "jail",
@@ -6900,8 +7050,18 @@
   "prerelease": false,
   "term": "jail game",
   "due": "2026-11-15",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-15",
+    "day": 1,
+    "base": 38,
+    "now": 48.7,
+    "ratio": 1.28,
+    "last": "2026-11-15",
+    "sites": []
+   }
+  ]
  },
  "a bizarre run": {
   "name": "A Bizarre Run",
@@ -6924,6 +7084,53 @@
   "prerelease": false,
   "term": "zombies aren t real",
   "due": "2026-11-15",
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-15",
+    "day": 1,
+    "base": 33.3,
+    "now": 33.3,
+    "ratio": 1,
+    "last": "2026-11-15",
+    "sites": []
+   }
+  ]
+ },
+ "aviassembly": {
+  "name": "Aviassembly",
+  "type": "Steam",
+  "kind": "steam",
+  "firstSeen": "2026-11-15",
+  "release": null,
+  "prerelease": false,
+  "term": "aviassembly",
+  "due": "2026-11-17",
+  "status": "pending",
+  "checks": []
+ },
+ "pixel blue lock": {
+  "name": "pixel blue lock",
+  "type": "联想新词",
+  "kind": "roblox",
+  "firstSeen": "2026-11-15",
+  "release": null,
+  "prerelease": false,
+  "term": "pixel blue lock",
+  "due": "2026-11-17",
+  "status": "pending",
+  "checks": []
+ },
+ "stratego": {
+  "name": "stratego",
+  "type": "可玩游戏",
+  "kind": "h5",
+  "firstSeen": "2026-11-15",
+  "release": null,
+  "prerelease": false,
+  "license": null,
+  "term": "stratego",
+  "due": "2026-11-17",
   "status": "pending",
   "checks": []
  }

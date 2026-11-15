@@ -2,7 +2,7 @@
  "_usage": {
   "month": "2026-11",
   "ddg": 34,
-  "tavily": 45
+  "tavily": 49
  },
  "10766468833": {
   "name": "Cut a Rock",
@@ -81,5 +81,17 @@
   "firstPicked": "2026-11-13",
   "lastPicked": "2026-11-13",
   "buy": "projectsouls.site"
+ },
+ "10770609435": {
+  "name": "Jujutsu Farm",
+  "firstPicked": "2026-11-15",
+  "lastPicked": "2026-11-15",
+  "buy": "jujutsufarm.com"
+ },
+ "10771765137": {
+  "name": "Pixel Blue Lock",
+  "firstPicked": "2026-11-15",
+  "lastPicked": "2026-11-15",
+  "buy": "pixelbluelock.com"
  }
 }

@@ -3714,16 +3714,18 @@
   "checkedAt": "2026-11-13"
  },
  "deathatflemingmanor.wiki": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": false,
+  "registered": "2026-10-29",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-11-15"
  },
  "deathatflemingmanorgame.com": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": true,
+  "checkedAt": "2026-11-15"
  },
  "deathatflemingmanorwiki.com": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": true,
+  "checkedAt": "2026-11-15"
  },
  "beatforspeed.wiki": {
   "available": false,
@@ -3740,18 +3742,16 @@
   "checkedAt": "2026-11-08"
  },
  "gravhounds.wiki": {
-  "available": false,
-  "registered": "2026-08-26",
-  "ns": "uriah.ns.cloudflare.com,barbara.ns.cloudflare.com",
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "gravhoundsgame.com": {
-  "available": true,
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "gravhoundswiki.com": {
-  "available": true,
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "huntingsimulator3.wiki": {
   "available": false,
@@ -3761,11 +3761,11 @@
  },
  "huntingsimulator3wiki.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "huntingsimulator3game.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "playrooms.wiki": {
   "available": false,
@@ -3774,36 +3774,42 @@
   "checkedAt": "2026-11-14"
  },
  "playroomswiki.com": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": true,
+  "checkedAt": "2026-11-15"
  },
  "playroomsgame.com": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": true,
+  "checkedAt": "2026-11-15"
  },
  "voidbreaker.wiki": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": false,
+  "registered": "2026-10-12",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-11-15"
  },
  "voidbreakergame.com": {
-  "available": null,
-  "checkedAt": "2026-11-14"
+  "available": false,
+  "registered": "2024-10-30",
+  "ns": "NS-CLOUD-E1.GOOGLEDOMAINS.COM,NS-CLOUD-E2.GOOGLEDOMAINS.COM,NS-CLOUD-E3.GOOGLEDOMAINS.COM,NS-CLOUD-E4.GOOGLEDOMAINS.COM",
+  "checkedAt": "2026-11-15"
  },
  "voidbreakerwiki.com": {
   "available": true,
-  "checkedAt": "2026-11-08"
+  "checkedAt": "2026-11-15"
  },
  "sushiamo.wiki": {
-  "available": true,
-  "checkedAt": "2026-11-08"
+  "available": false,
+  "registered": "2026-11-13",
+  "ns": "curitiba.ns.porkbun.com,fortaleza.ns.porkbun.com,maceio.ns.porkbun.com,salvador.ns.porkbun.com",
+  "checkedAt": "2026-11-15"
  },
  "sushiamogame.com": {
   "available": true,
-  "checkedAt": "2026-11-08"
+  "checkedAt": "2026-11-15"
  },
  "sushiamowiki.com": {
-  "available": true,
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "lightyearfrontier.wiki": {
   "available": false,
@@ -3823,7 +3829,7 @@
   "available": false,
   "registered": "2026-10-31",
   "ns": "jade.ns.cloudflare.com,kellen.ns.cloudflare.com",
-  "checkedAt": "2026-11-08"
+  "checkedAt": "2026-11-15"
  },
  "canemallgame.com": {
   "available": true,
@@ -3858,22 +3864,20 @@
   "checkedAt": "2026-11-08"
  },
  "horsesofhoofprintbay.wiki": {
-  "available": false,
-  "registered": "2026-11-05",
-  "ns": "elijah.ns.cloudflare.com,annabel.ns.cloudflare.com",
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "messagefromalienswiki.com": {
   "available": true,
   "checkedAt": "2026-11-08"
  },
  "horsesofhoofprintbaywiki.com": {
-  "available": true,
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "horsesofhoofprintbaygame.com": {
-  "available": true,
-  "checkedAt": "2026-11-08"
+  "available": null,
+  "checkedAt": "2026-11-15"
  },
  "dummylab.wiki": {
   "available": false,
@@ -4063,7 +4067,7 @@
  },
  "zedzonewiki.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "ruinsofmythdrannor.wiki": {
   "available": true,
@@ -4111,19 +4115,19 @@
  },
  "takeover2.wiki": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "takeover2game.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "takeover2wiki.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "whatthebuck.wiki": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-15"
  },
  "whatthebuckgame.com": {
   "available": true,
@@ -4197,7 +4201,7 @@
  },
  "funeralforthesun.wiki": {
   "available": null,
-  "checkedAt": "2026-11-06"
+  "checkedAt": "2026-11-15"
  },
  "funeralforthesungame.com": {
   "available": true,
@@ -4263,39 +4267,39 @@
  },
  "neversortbycolor.wiki": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "neversortbycolorgame.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "footballmanager27.wiki": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "neversortbycolorwiki.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "footballmanager27game.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "hillthorn.wiki": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "footballmanager27wiki.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "hillthorngame.com": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "westealfromoldpeoplethe.wiki": {
   "available": null,
-  "checkedAt": "2026-11-14"
+  "checkedAt": "2026-11-07"
  },
  "hillthornwiki.com": {
   "available": true,
@@ -4308,5 +4312,73 @@
  "westealfromoldpeoplethewiki.com": {
   "available": true,
   "checkedAt": "2026-11-14"
+ },
+ "lightupchristmasgame.com": {
+  "available": true,
+  "checkedAt": "2026-11-15"
+ },
+ "lightupchristmaswiki.com": {
+  "available": true,
+  "checkedAt": "2026-11-15"
+ },
+ "lightupchristmas.wiki": {
+  "available": false,
+  "registered": "2026-11-10",
+  "ns": "pat.ns.cloudflare.com,bjorn.ns.cloudflare.com",
+  "checkedAt": "2026-11-15"
+ },
+ "mycorelic.wiki": {
+  "available": false,
+  "registered": "2026-11-12",
+  "ns": "pearl.ns.cloudflare.com,gabe.ns.cloudflare.com",
+  "checkedAt": "2026-11-15"
+ },
+ "mycorelicgame.com": {
+  "available": true,
+  "checkedAt": "2026-11-15"
+ },
+ "mycorelicwiki.com": {
+  "available": true,
+  "checkedAt": "2026-11-15"
+ },
+ "apotheosisengine.wiki": {
+  "available": false,
+  "registered": "2026-11-12",
+  "ns": "brodie.ns.cloudflare.com,ruth.ns.cloudflare.com",
+  "checkedAt": "2026-11-15"
+ },
+ "apotheosisenginegame.com": {
+  "available": true,
+  "checkedAt": "2026-11-15"
+ },
+ "johngleep.wiki": {
+  "available": false,
+  "registered": "2026-11-11",
+  "ns": "pearl.ns.cloudflare.com,gabe.ns.cloudflare.com",
+  "checkedAt": "2026-11-15"
+ },
+ "apotheosisenginewiki.com": {
+  "available": true,
+  "checkedAt": "2026-11-15"
+ },
+ "johngleepgame.com": {
+  "available": null,
+  "checkedAt": "2026-11-15"
+ },
+ "johngleepwiki.com": {
+  "available": null,
+  "checkedAt": "2026-11-15"
+ },
+ "annihilated.wiki": {
+  "available": null,
+  "checkedAt": "2026-11-15"
+ },
+ "annihilatedgame.com": {
+  "available": null,
+  "checkedAt": "2026-11-15"
+ },
+ "annihilatedwiki.com": {
+  "available": null,
+  "checkedAt": "2026-11-15"
  }
 }
