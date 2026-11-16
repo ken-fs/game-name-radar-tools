@@ -4013,8 +4013,20 @@
   "prerelease": true,
   "term": "drawquarium",
   "due": "2026-11-15",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-16",
+    "day": 2,
+    "base": 61.7,
+    "now": 89,
+    "ratio": 1.44,
+    "last": "2026-11-16",
+    "sites": [
+     "drawquariumgame.wiki"
+    ]
+   }
+  ]
  },
  "lacey s flash games": {
   "name": "Lacey's Flash Games",
@@ -6515,6 +6527,17 @@
     "sites": [
      "state-connect.wiki"
     ]
+   },
+   {
+    "date": "2026-11-16",
+    "day": 4,
+    "base": 57.7,
+    "now": 41.3,
+    "ratio": 0.72,
+    "last": "2026-11-16",
+    "sites": [
+     "state-connect.wiki"
+    ]
    }
   ]
  },
@@ -6563,6 +6586,15 @@
     "now": 0,
     "ratio": 0,
     "last": "2026-11-15",
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 5,
+    "base": 61.3,
+    "now": 6.7,
+    "ratio": 0.11,
+    "last": "2026-11-16",
     "sites": []
    }
   ]
@@ -6637,6 +6669,17 @@
     "now": 49.3,
     "ratio": 1.06,
     "last": "2026-11-15",
+    "sites": [
+     "boosterpackheroes.org"
+    ]
+   },
+   {
+    "date": "2026-11-16",
+    "day": 5,
+    "base": 52,
+    "now": 59.3,
+    "ratio": 1.14,
+    "last": "2026-11-16",
     "sites": [
      "boosterpackheroes.org"
     ]
@@ -6736,6 +6779,15 @@
     "ratio": 1.18,
     "last": "2026-11-15",
     "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 5,
+    "base": 17,
+    "now": 24,
+    "ratio": 1.41,
+    "last": "2026-11-16",
+    "sites": []
    }
   ]
  },
@@ -6775,6 +6827,15 @@
     "now": 65.7,
     "ratio": 1.07,
     "last": "2026-11-15",
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 4,
+    "base": 57.3,
+    "now": 83.7,
+    "ratio": 1.46,
+    "last": "2026-11-16",
     "sites": []
    }
   ]
@@ -6817,6 +6878,15 @@
     "ratio": 0.41,
     "last": "2026-11-15",
     "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 4,
+    "base": 50.7,
+    "now": 9.3,
+    "ratio": 0.18,
+    "last": "2026-11-16",
+    "sites": []
    }
   ]
  },
@@ -6838,6 +6908,15 @@
     "now": 14,
     "ratio": 0.59,
     "last": "2026-11-15",
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 3,
+    "base": 11.3,
+    "now": 12,
+    "ratio": 1.06,
+    "last": "2026-11-16",
     "sites": []
    }
   ]
@@ -6866,6 +6945,14 @@
     "ratio": 0,
     "last": "2026-11-15",
     "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 3,
+    "sites": [
+     "umadashgame.wiki",
+     "umadash.wiki"
+    ]
    }
   ]
  },
@@ -6878,7 +6965,7 @@
   "prerelease": false,
   "term": "cultivation unbound",
   "due": "2026-11-14",
-  "status": "watch",
+  "status": "taken",
   "checks": [
    {
     "date": "2026-11-14",
@@ -6898,6 +6985,18 @@
     "now": 53.7,
     "ratio": 0.82,
     "last": "2026-11-15",
+    "sites": [
+     "cultivationunbound.wiki",
+     "cultivationunbound.site"
+    ]
+   },
+   {
+    "date": "2026-11-16",
+    "day": 3,
+    "base": 44.7,
+    "now": 86,
+    "ratio": 1.93,
+    "last": "2026-11-16",
     "sites": [
      "cultivationunbound.wiki",
      "cultivationunbound.site"
@@ -6942,6 +7041,19 @@
      "farflunggame.fun",
      "farflung.live"
     ]
+   },
+   {
+    "date": "2026-11-16",
+    "day": 3,
+    "base": 91.3,
+    "now": 63.7,
+    "ratio": 0.7,
+    "last": "2026-11-16",
+    "sites": [
+     "playfarflunggame.com",
+     "farflunggame.fun",
+     "farflung.live"
+    ]
    }
   ]
  },
@@ -6963,6 +7075,15 @@
     "now": 28,
     "ratio": 0.63,
     "last": "2026-11-15",
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 2,
+    "base": 86,
+    "now": 35.7,
+    "ratio": 0.41,
+    "last": "2026-11-16",
     "sites": []
    }
   ]
@@ -6986,6 +7107,11 @@
    {
     "date": "2026-11-15",
     "day": 2,
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 3,
     "sites": []
    }
   ]
@@ -7014,6 +7140,11 @@
     "ratio": 0,
     "last": "2026-11-15",
     "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 3,
+    "sites": []
    }
   ]
  },
@@ -7038,6 +7169,17 @@
     "sites": [
      "donotstop.wiki"
     ]
+   },
+   {
+    "date": "2026-11-16",
+    "day": 2,
+    "base": 73.3,
+    "now": 63,
+    "ratio": 0.86,
+    "last": "2026-11-16",
+    "sites": [
+     "donotstop.wiki"
+    ]
    }
   ]
  },
@@ -7050,7 +7192,7 @@
   "prerelease": false,
   "term": "jail game",
   "due": "2026-11-15",
-  "status": "watch",
+  "status": "go",
   "checks": [
    {
     "date": "2026-11-15",
@@ -7059,6 +7201,15 @@
     "now": 48.7,
     "ratio": 1.28,
     "last": "2026-11-15",
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 2,
+    "base": 39,
+    "now": 62,
+    "ratio": 1.59,
+    "last": "2026-11-16",
     "sites": []
    }
   ]
@@ -7093,6 +7244,15 @@
     "now": 33.3,
     "ratio": 1,
     "last": "2026-11-15",
+    "sites": []
+   },
+   {
+    "date": "2026-11-16",
+    "day": 2,
+    "base": 30.7,
+    "now": 33.3,
+    "ratio": 1.09,
+    "last": "2026-11-16",
     "sites": []
    }
   ]
@@ -7131,6 +7291,30 @@
   "license": null,
   "term": "stratego",
   "due": "2026-11-17",
+  "status": "pending",
+  "checks": []
+ },
+ "exterminauts": {
+  "name": "Exterminauts",
+  "type": "Steam 关注者",
+  "kind": "steam",
+  "firstSeen": "2026-11-16",
+  "release": null,
+  "prerelease": true,
+  "term": "exterminauts",
+  "due": "2026-11-18",
+  "status": "pending",
+  "checks": []
+ },
+ "ride an egg": {
+  "name": "ride an egg",
+  "type": "联想新词",
+  "kind": "roblox",
+  "firstSeen": "2026-11-16",
+  "release": null,
+  "prerelease": false,
+  "term": "ride an egg",
+  "due": "2026-11-18",
   "status": "pending",
   "checks": []
  }

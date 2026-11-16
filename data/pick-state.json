@@ -2,7 +2,7 @@
  "_usage": {
   "month": "2026-11",
   "ddg": 34,
-  "tavily": 49
+  "tavily": 53
  },
  "10766468833": {
   "name": "Cut a Rock",
@@ -91,7 +91,13 @@
  "10771765137": {
   "name": "Pixel Blue Lock",
   "firstPicked": "2026-11-15",
-  "lastPicked": "2026-11-15",
+  "lastPicked": "2026-11-16",
   "buy": "pixelbluelock.com"
+ },
+ "10767808614": {
+  "name": "Ride An Egg",
+  "firstPicked": "2026-11-16",
+  "lastPicked": "2026-11-16",
+  "buy": "rideanegg.com"
  }
 }
