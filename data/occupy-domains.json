@@ -3493,19 +3493,19 @@
   "available": false,
   "registered": "2026-09-25",
   "ns": "launch1.spaceship.net,launch2.spaceship.net",
-  "checkedAt": "2026-11-10"
+  "checkedAt": "2026-11-17"
  },
  "terriblelizardsgame.com": {
   "available": false,
   "registered": "2023-11-25",
   "ns": "DNS1.P08.NSONE.NET,DNS2.P08.NSONE.NET,DNS3.P08.NSONE.NET,DNS4.P08.NSONE.NET,NS01.SQUARESPACEDNS.COM,NS02.SQUARESPACEDNS.COM,NS03.SQUARESPACEDNS.COM,NS04.SQUARESPACEDNS.COM",
-  "checkedAt": "2026-11-10"
+  "checkedAt": "2026-11-17"
  },
  "terriblelizardswiki.com": {
   "available": false,
   "registered": "2026-11-02",
   "ns": "GABRIELLA.NS.CLOUDFLARE.COM,PIERS.NS.CLOUDFLARE.COM",
-  "checkedAt": "2026-11-10"
+  "checkedAt": "2026-11-17"
  },
  "queensdomain.wiki": {
   "available": false,
@@ -3743,15 +3743,15 @@
  },
  "gravhounds.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "gravhoundsgame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "gravhoundswiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "huntingsimulator3.wiki": {
   "available": false,
@@ -3809,7 +3809,7 @@
  },
  "sushiamowiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "lightyearfrontier.wiki": {
   "available": false,
@@ -3874,12 +3874,12 @@
   "checkedAt": "2026-11-08"
  },
  "horsesofhoofprintbaywiki.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "horsesofhoofprintbaygame.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "dummylab.wiki": {
   "available": false,
@@ -4130,8 +4130,10 @@
   "checkedAt": "2026-11-16"
  },
  "whatthebuck.wiki": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": false,
+  "registered": "2026-11-10",
+  "ns": "chelsea.ns.cloudflare.com,memphis.ns.cloudflare.com",
+  "checkedAt": "2026-11-17"
  },
  "whatthebuckgame.com": {
   "available": true,
@@ -4273,11 +4275,11 @@
  },
  "neversortbycolor.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "neversortbycolorgame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "footballmanager27.wiki": {
   "available": false,
@@ -4287,7 +4289,7 @@
  },
  "neversortbycolorwiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "footballmanager27game.com": {
   "available": true,
@@ -4307,7 +4309,7 @@
  },
  "westealfromoldpeoplethe.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "hillthornwiki.com": {
   "available": true,
@@ -4370,36 +4372,40 @@
   "checkedAt": "2026-11-15"
  },
  "johngleepgame.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "johngleepwiki.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "annihilated.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "annihilatedgame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "annihilatedwiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "9kings.wiki": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": false,
+  "registered": "2026-10-12",
+  "ns": "clyde.ns.cloudflare.com,maleah.ns.cloudflare.com",
+  "checkedAt": "2026-11-17"
  },
  "9kingsgame.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": false,
+  "registered": "2025-01-18",
+  "ns": "NS-CLOUD-E1.GOOGLEDOMAINS.COM,NS-CLOUD-E2.GOOGLEDOMAINS.COM,NS-CLOUD-E3.GOOGLEDOMAINS.COM,NS-CLOUD-E4.GOOGLEDOMAINS.COM",
+  "checkedAt": "2026-11-17"
  },
  "9kingswiki.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "monomoon.wiki": {
   "available": false,
@@ -4430,28 +4436,30 @@
   "checkedAt": "2026-11-16"
  },
  "skieoskiresorttycoon.wiki": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "skieoskiresorttycoongame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "skieoskiresorttycoonwiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-17"
  },
  "farmfeast.wiki": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": false,
+  "registered": "2026-09-12",
+  "ns": "jillian.ns.cloudflare.com,agustin.ns.cloudflare.com",
+  "checkedAt": "2026-11-17"
  },
  "farmfeastgame.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "farmfeastwiki.com": {
-  "available": null,
-  "checkedAt": "2026-11-16"
+  "available": true,
+  "checkedAt": "2026-11-17"
  },
  "onemorelawn.wiki": {
   "available": false,
@@ -4469,38 +4477,130 @@
  },
  "mainsequence.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "mainsequencegame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "mainsequencewiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "neojunkcity.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "neojunkcitygame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "neojunkcitywiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "noblefates.wiki": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "noblefatesgame.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
  },
  "noblefateswiki.com": {
   "available": null,
-  "checkedAt": "2026-11-16"
+  "checkedAt": "2026-11-09"
+ },
+ "aviassembly.wiki": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "aviassemblygame.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "aviassemblywiki.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "boosterpackheroes.wiki": {
+  "available": false,
+  "registered": "2026-11-06",
+  "ns": "launch1.spaceship.net,launch2.spaceship.net",
+  "checkedAt": "2026-11-17"
+ },
+ "derelikt.wiki": {
+  "available": false,
+  "registered": "2026-10-31",
+  "ns": "teagan.ns.cloudflare.com,anderson.ns.cloudflare.com",
+  "checkedAt": "2026-11-17"
+ },
+ "boosterpackheroesgame.com": {
+  "available": false,
+  "registered": "2026-09-19",
+  "ns": "ELLIOTT.NS.CLOUDFLARE.COM,MELINDA.NS.CLOUDFLARE.COM",
+  "checkedAt": "2026-11-17"
+ },
+ "boosterpackheroeswiki.com": {
+  "available": true,
+  "checkedAt": "2026-11-17"
+ },
+ "dereliktgame.com": {
+  "available": true,
+  "checkedAt": "2026-11-17"
+ },
+ "dereliktwiki.com": {
+  "available": true,
+  "checkedAt": "2026-11-17"
+ },
+ "zombiesarentreal.wiki": {
+  "available": false,
+  "registered": "2026-11-14",
+  "ns": "elisabeth.ns.cloudflare.com,trace.ns.cloudflare.com",
+  "checkedAt": "2026-11-17"
+ },
+ "zombiesarentrealgame.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "zombiesarentrealwiki.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "tanukiponssummer.wiki": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "tanukiponssummergame.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "tanukiponssummerwiki.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "ponssummer.wiki": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "ponssummergame.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "ponssummerwiki.com": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "safaritv.wiki": {
+  "available": null,
+  "checkedAt": "2026-11-17"
+ },
+ "safaritvgame.com": {
+  "available": true,
+  "checkedAt": "2026-11-17"
+ },
+ "safaritvwiki.com": {
+  "available": true,
+  "checkedAt": "2026-11-17"
  }
 }

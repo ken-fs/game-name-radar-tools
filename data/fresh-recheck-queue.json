@@ -4025,6 +4025,17 @@
     "sites": [
      "drawquariumgame.wiki"
     ]
+   },
+   {
+    "date": "2026-11-17",
+    "day": 3,
+    "base": 71,
+    "now": 62.7,
+    "ratio": 0.88,
+    "last": "2026-11-17",
+    "sites": [
+     "drawquariumgame.wiki"
+    ]
    }
   ]
  },
@@ -6538,6 +6549,17 @@
     "sites": [
      "state-connect.wiki"
     ]
+   },
+   {
+    "date": "2026-11-17",
+    "day": 5,
+    "base": 46.7,
+    "now": 40.3,
+    "ratio": 0.86,
+    "last": "2026-11-17",
+    "sites": [
+     "state-connect.wiki"
+    ]
    }
   ]
  },
@@ -6837,6 +6859,15 @@
     "ratio": 1.46,
     "last": "2026-11-16",
     "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 5,
+    "base": 61.3,
+    "now": 68.7,
+    "ratio": 1.12,
+    "last": "2026-11-17",
+    "sites": []
    }
   ]
  },
@@ -6887,6 +6918,15 @@
     "ratio": 0.18,
     "last": "2026-11-16",
     "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 5,
+    "base": 59,
+    "now": 24.7,
+    "ratio": 0.42,
+    "last": "2026-11-17",
+    "sites": []
    }
   ]
  },
@@ -6917,6 +6957,15 @@
     "now": 12,
     "ratio": 1.06,
     "last": "2026-11-16",
+    "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 4,
+    "base": 49,
+    "now": 46.3,
+    "ratio": 0.95,
+    "last": "2026-11-17",
     "sites": []
    }
   ]
@@ -6949,6 +6998,14 @@
    {
     "date": "2026-11-16",
     "day": 3,
+    "sites": [
+     "umadashgame.wiki",
+     "umadash.wiki"
+    ]
+   },
+   {
+    "date": "2026-11-17",
+    "day": 4,
     "sites": [
      "umadashgame.wiki",
      "umadash.wiki"
@@ -7054,6 +7111,19 @@
      "farflunggame.fun",
      "farflung.live"
     ]
+   },
+   {
+    "date": "2026-11-17",
+    "day": 4,
+    "base": 92,
+    "now": 76,
+    "ratio": 0.83,
+    "last": "2026-11-17",
+    "sites": [
+     "playfarflunggame.com",
+     "farflunggame.fun",
+     "farflung.live"
+    ]
    }
   ]
  },
@@ -7085,6 +7155,15 @@
     "ratio": 0.41,
     "last": "2026-11-16",
     "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 3,
+    "base": 38.7,
+    "now": 17.3,
+    "ratio": 0.45,
+    "last": "2026-11-17",
+    "sites": []
    }
   ]
  },
@@ -7112,6 +7191,11 @@
    {
     "date": "2026-11-16",
     "day": 3,
+    "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 4,
     "sites": []
    }
   ]
@@ -7145,6 +7229,11 @@
     "date": "2026-11-16",
     "day": 3,
     "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 4,
+    "sites": []
    }
   ]
  },
@@ -7177,6 +7266,17 @@
     "now": 63,
     "ratio": 0.86,
     "last": "2026-11-16",
+    "sites": [
+     "donotstop.wiki"
+    ]
+   },
+   {
+    "date": "2026-11-17",
+    "day": 3,
+    "base": 74.7,
+    "now": 68,
+    "ratio": 0.91,
+    "last": "2026-11-17",
     "sites": [
      "donotstop.wiki"
     ]
@@ -7223,8 +7323,22 @@
   "prerelease": false,
   "term": "a bizarre run",
   "due": "2026-11-16",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-17",
+    "day": 2,
+    "base": 58.3,
+    "now": 32.7,
+    "ratio": 0.56,
+    "last": "2026-11-17",
+    "sites": [
+     "a-bizarre-run.wiki",
+     "abizarrerun-wiki.wiki",
+     "abizarrerun.site"
+    ]
+   }
+  ]
  },
  "zombies aren t real": {
   "name": "Zombies Aren't Real",
@@ -7254,6 +7368,13 @@
     "ratio": 1.09,
     "last": "2026-11-16",
     "sites": []
+   },
+   {
+    "date": "2026-11-17",
+    "day": 3,
+    "sites": [
+     "zombiesarentreal.wiki"
+    ]
    }
   ]
  },
@@ -7266,8 +7387,18 @@
   "prerelease": false,
   "term": "aviassembly",
   "due": "2026-11-17",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-17",
+    "day": 1,
+    "base": 74.7,
+    "now": 90,
+    "ratio": 1.21,
+    "last": "2026-11-17",
+    "sites": []
+   }
+  ]
  },
  "pixel blue lock": {
   "name": "pixel blue lock",
@@ -7278,8 +7409,18 @@
   "prerelease": false,
   "term": "pixel blue lock",
   "due": "2026-11-17",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-17",
+    "day": 1,
+    "base": 73,
+    "now": 49.3,
+    "ratio": 0.68,
+    "last": "2026-11-17",
+    "sites": []
+   }
+  ]
  },
  "stratego": {
   "name": "stratego",
@@ -7291,8 +7432,20 @@
   "license": null,
   "term": "stratego",
   "due": "2026-11-17",
-  "status": "pending",
-  "checks": []
+  "status": "watch",
+  "checks": [
+   {
+    "date": "2026-11-17",
+    "day": 1,
+    "base": 42.7,
+    "now": 10,
+    "ratio": 0.23,
+    "last": "2026-11-17",
+    "sites": [
+     "stratego.media"
+    ]
+   }
+  ]
  },
  "exterminauts": {
   "name": "Exterminauts",
@@ -7315,6 +7468,90 @@
   "prerelease": false,
   "term": "ride an egg",
   "due": "2026-11-18",
+  "status": "pending",
+  "checks": []
+ },
+ "ragdoll soccer": {
+  "name": "Ragdoll Soccer",
+  "type": "Roblox",
+  "kind": "roblox",
+  "firstSeen": "2026-11-17",
+  "release": null,
+  "prerelease": false,
+  "term": "ragdoll soccer",
+  "due": "2026-11-19",
+  "status": "pending",
+  "checks": []
+ },
+ "tavern town": {
+  "name": "Tavern Town",
+  "type": "Roblox",
+  "kind": "roblox",
+  "firstSeen": "2026-11-17",
+  "release": null,
+  "prerelease": false,
+  "term": "tavern town",
+  "due": "2026-11-19",
+  "status": "pending",
+  "checks": []
+ },
+ "throw food for baddies": {
+  "name": "Throw Food For Baddies",
+  "type": "Roblox",
+  "kind": "roblox",
+  "firstSeen": "2026-11-17",
+  "release": null,
+  "prerelease": false,
+  "term": "throw food for baddies",
+  "due": "2026-11-19",
+  "status": "pending",
+  "checks": []
+ },
+ "jyoka castle town": {
+  "name": "Jyoka -Castle town-",
+  "type": "Steam 畅销榜",
+  "kind": "steam",
+  "firstSeen": "2026-11-17",
+  "release": "2026-11-16",
+  "prerelease": false,
+  "term": "jyoka castle town",
+  "due": "2026-11-18",
+  "status": "pending",
+  "checks": []
+ },
+ "pull a dino": {
+  "name": "pull a dino",
+  "type": "联想新词",
+  "kind": "roblox",
+  "firstSeen": "2026-11-17",
+  "release": null,
+  "prerelease": false,
+  "term": "pull a dino",
+  "due": "2026-11-19",
+  "status": "pending",
+  "checks": []
+ },
+ "stand out": {
+  "name": "stand out",
+  "type": "联想新词",
+  "kind": "roblox",
+  "firstSeen": "2026-11-17",
+  "release": null,
+  "prerelease": false,
+  "term": "stand out",
+  "due": "2026-11-19",
+  "status": "pending",
+  "checks": []
+ },
+ "throw food for animals": {
+  "name": "throw food for animals",
+  "type": "联想新词",
+  "kind": "roblox",
+  "firstSeen": "2026-11-17",
+  "release": null,
+  "prerelease": false,
+  "term": "throw food for animals",
+  "due": "2026-11-19",
   "status": "pending",
   "checks": []
  }
